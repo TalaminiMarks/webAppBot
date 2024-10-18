@@ -1,15 +1,10 @@
 import fastify from "fastify";
 
+import home from "./routes/home";
+
 const app = fastify();
 
-/**
- * @type {import('fastify').FastifyInstance} 
- * Instance of fastify
- */
-
-app.get("/", ()=>{
-    return "hello";
-});
+app.register(home);
 
 app.listen({
     port: 3333
