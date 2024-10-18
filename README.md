@@ -1,0 +1,1 @@
+Web app pra se comunicar com o bot do discord
