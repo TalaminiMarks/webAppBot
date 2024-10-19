@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 
 export default async function route(fastify: FastifyInstance){
-    fastify.get("/", (req, res)=>{
-        res.send({ hello: "world" });
+    fastify.get("/personagem", (req, res)=>{
+        res.send({ rota: "personagens" });
     });
 }
