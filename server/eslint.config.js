@@ -9,7 +9,7 @@ export default [
         languageOptions: { globals: { ...globals.browser } },
         rules: {
             "eqeqeq": "error",
-            "no-magic-numbers": ["error", { "ignoreArrayIndexes": true }],
+            "no-magic-numbers": ["error", { "ignoreArrayIndexes": true, "ignore": 1 }],
             semi: ["error", "always"],
             quotes: ["error", "double"],
             "object-curly-spacing": ["error", "always"]
