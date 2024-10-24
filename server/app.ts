@@ -20,5 +20,6 @@ app.listen({
 }, (err)=>{
     if (err){
         app.log.error(err);
+        process.exit(1);
     }
 });
