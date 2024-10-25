@@ -5,7 +5,7 @@ import { prisma } from "../utils/prisma";
 
 export default async function route (fastify: FastifyInstance){
     const schema = z.object({
-        id: z.number(),
+        id: z.string(),
         name: z.string()
     });
 
