@@ -11,7 +11,7 @@ datasource db {
 }
 
 model character {
-  id         Int      @id @unique
+  id         String   @id @unique
   name       String
   created_at DateTime @default(now())
 }
