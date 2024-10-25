@@ -19,6 +19,6 @@ export default async function route (fastify: FastifyInstance){
             }
         })
 
-        res.send("Deu certo")
+        res.send(JSON.stringify({message: 'Deu certo'}))
     });
 }
