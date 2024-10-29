@@ -13,5 +13,7 @@ datasource db {
 model character {
   id         String   @id @unique
   name       String
+  role       String
+  initial    String
   created_at DateTime @default(now())
 }
