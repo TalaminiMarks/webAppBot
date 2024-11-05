@@ -14,9 +14,6 @@ export default async function route (fastify: FastifyInstance){
     });
     // Declaração da rota
     fastify.post("/personagem/criar", async (req, res)=>{
-        // Deleta os registros na tabela character
-        await prisma.character.deleteMany();
-
         // Recupera as info que foram passados na requisição e valida com o schema
         const data = schema.parse(req.body);
 
