@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt">
-      <body className="w-full flex flex-col items-center justify-center">
+      <body className="w-full px-[10%] flex flex-col items-center justify-cente">
         {children}
       </body>
     </html>
