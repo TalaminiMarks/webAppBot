@@ -20,7 +20,7 @@ export default function Header({name, role, userName, exp}: characterInfo){
             <section className="w-1/3 bg-red-300">
                 <Field value={name} description="nome do personagem"/>
             </section>
-
+        
             <section className="w-2/3 grid grid-cols-3 justify-center items-center bg-blue-200">
                 <Field description="classe e nível" value={role}/>
                 <Field description="Antecedente"/>
