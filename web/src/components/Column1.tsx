@@ -1,5 +1,5 @@
 import AttrField from "./column1/AttrField"
-import Inspiration from "./column1/Inspiration"
+import SingleField from "./column1/SingleField"
 
 export default function Column1(){
     return (
@@ -12,10 +12,11 @@ export default function Column1(){
                 <AttrField attribute="sabedoria"/>
                 <AttrField attribute="carisma"/>
             </div>
-            <div className="w-2/3 flex flex-col items-center bg-slate-200">
-                <Inspiration />
+            <div className="w-2/3 flex flex-col items-center bg-slate-200 gap-2">
+                <SingleField description="Inspiração"/>
+                <SingleField description="Bônus de proeficiência"/>
                 <div>
-                    asd
+                    
                 </div>
             </div>
         </div>
