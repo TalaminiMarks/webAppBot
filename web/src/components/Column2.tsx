@@ -1,5 +1,6 @@
 import { Health, HealthDice, TemporaryHealth, Death } from "./column2/Health";
 import SingleField from "./column2/SingleField";
+import Hits from "./column2/Hits";
 
 export default function Column2(){
     return(
@@ -15,6 +16,7 @@ export default function Column2(){
                 <HealthDice />
                 <Death />
             </div>
+            <Hits />
         </div>
     )
 }
