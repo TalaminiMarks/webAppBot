@@ -1,5 +1,6 @@
 import Column1 from "@/components/Column1";
 import Column2 from "@/components/Column2";
+import Column3 from "@/components/Column3";
 import Header from "@/components/Header";
 
 export default async function Home() {
@@ -13,7 +14,9 @@ export default async function Home() {
                 <section className="w-full bg-blue-400">
                     <Column2 />
                 </section>
-                <section className="w-full"></section>
+                <section className="w-full bg-blue-500">
+                    <Column3 />
+                </section>
             </div>
         </main>
     )
