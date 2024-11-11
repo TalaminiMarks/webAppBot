@@ -25,7 +25,7 @@ export default function Equipament(){
                     </div>
                 </div>
                 <div className="w-3/4 flex justify-center">
-                    <textarea name="equipament" id="equipament" rows={10} cols={45} className="resize-none p-2"></textarea>
+                    <textarea name="equipament" id="equipament" rows={10} className="resize-none p-2 w-full"></textarea>
                 </div>
             </div>
             <span className="w-full text-center uppercase">equipamento</span>
