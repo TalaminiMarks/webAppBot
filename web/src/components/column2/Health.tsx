@@ -34,14 +34,15 @@ export function TemporaryHealth({temporaryHealth}: {temporaryHealth?: number}){
 interface HealthDice {
     totalDice?: number
     healthDice?: string
+    disabled?: boolean
 }
 
-export function HealthDice({totalDice, healthDice}: HealthDice){
+export function HealthDice({totalDice, healthDice, disabled}: HealthDice){
     return (
         <div className="w-1/2 flex flex-col bg-rose-300">
             <div className="px-4 flex justify-between items-center gap-4">
                 <label htmlFor="totalDice">Total</label>
-                <input type="text" id="totalDice" className="w-full text-center" defaultValue={totalDice ? totalDice : 0}/>
+                <input type="text" id="totalDice" className="w-full text-center" defaultValue={totalDice ? totalDice : 0} disabled={disabled ? disabled : false}/>
             </div>
             <div className="w-full h-[50px] flex justify-between items-center">
                 <span className="w-full text-center">{healthDice ? healthDice : 0}</span>
