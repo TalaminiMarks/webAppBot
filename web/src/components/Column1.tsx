@@ -1,6 +1,6 @@
 import AttrField from "./column1/AttrField"
 import SingleField from "./column1/SingleField"
-import { Field, Status } from "./column1/Status" 
+import { Field, BoxWithText } from "./column1/Status" 
 
 export default function Column1(){
     const ATTRIBUTES = ["força", "destreza", "constituição", "inteligencia", "sabedoria", "carisma"]
@@ -23,7 +23,7 @@ export default function Column1(){
                 <div className="w-2/3 flex flex-col items-center bg-slate-200 gap-2">
                     <SingleField description="Inspiração"/>
                     <SingleField description="Bônus de proeficiência"/>
-                    <Status description="Testes de Resistência">
+                    <BoxWithText description="Testes de Resistência">
                     {
                         ATTRIBUTES.map(attr => {
                             return (
@@ -31,8 +31,8 @@ export default function Column1(){
                             )
                         })
                     }
-                    </Status>
-                    <Status description="perícias">
+                    </BoxWithText>
+                    <BoxWithText description="perícias">
                     {
                         EXPERTISE.map(attr => {
                             return (
@@ -40,13 +40,13 @@ export default function Column1(){
                             )
                         })
                     }
-                    </Status>
+                    </BoxWithText>
                 </div>
             </div>
             <SingleField description="sabedoria passiva (percepção)"/>
-            <Status description="idiomas e outra proficiências">
+            <BoxWithText description="idiomas e outra proficiências">
                 <textarea name="languages" id="languages" rows={10} className="resize-none outline-none p-2 w-full"></textarea>
-            </Status>
+            </BoxWithText>
         </div>
     )
 }

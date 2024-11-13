@@ -15,7 +15,7 @@ export function Field({attribute, value}: FieldProps){
     )
 }
 
-export function Status({children, description}: {children: ReactNode, description: string}){
+export function BoxWithText({children, description}: {children: ReactNode, description: string}){
     return(
         <div className="w-full flex flex-col px-4 py-2 gap-2 bg-red-300">
             {children}
