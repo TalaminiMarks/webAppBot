@@ -1,5 +1,4 @@
-import { Health, HealthDice, TemporaryHealth, Death } from "./column2/Health";
-import SingleField from "./column2/SingleField";
+import { Health, HealthDice, TemporaryHealth, Death, BasicInfo } from "./column2/Health";
 import Hits from "./column2/Hits";
 import Equipament from "./column2/Equipament";
 
@@ -7,11 +6,11 @@ export default function Column2(){
     return(
         <div className="w-full flex flex-col justify-center items-center px-8 gap-4">
             <div className="w-full flex justify-between items-center">
-                <SingleField description="classe armd"/>
-                <SingleField description="iniciativa"/>
-                <SingleField description="desloc."/>
+                <BasicInfo description="classe armd"/>
+                <BasicInfo description="iniciativa"/>
+                <BasicInfo description="desloc."/>
             </div>
-            <Health />
+            <Health totalHealth={0}/>
             <TemporaryHealth />
             <div className="w-full flex justify-center items-center gap-4">
                 <HealthDice />
