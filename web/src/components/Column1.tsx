@@ -1,6 +1,6 @@
 import AttrField from "./column1/AttrField"
 import SingleField from "./column1/SingleField"
-import { Field, BoxWithText } from "./column1/Status" 
+import { Field, BoxWithText } from "./column1/BoxWithText" 
 
 export default function Column1(){
     const ATTRIBUTES = ["força", "destreza", "constituição", "inteligencia", "sabedoria", "carisma"]
