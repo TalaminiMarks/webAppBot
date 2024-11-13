@@ -1,5 +1,9 @@
+interface SingleFieldProps {
+    description: string
+    value?: number
+}
 
-export default function SingleField({value, description}:{value?: number, description: string}){
+export default function SingleField({value, description}: SingleFieldProps){
     return (
         <div className="w-full py-2 flex items-center bg-blue-200">
             <div className="py-2 px-4 ml-8 bg-yellow-200">
