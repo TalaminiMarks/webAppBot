@@ -1,4 +1,10 @@
-export default function AttrField({attribute, value, proeficience}: {attribute: string, value?: number, proeficience?: number}){
+interface AttrField {
+    attribute: string
+    value?: number
+    proeficience?: number
+}
+
+export default function AttrField({attribute, value, proeficience}: AttrField){
     return (
         <div className="w-[90%] flex justify-center items-center flex-col gap-[2px] bg-white">
             <p className="text-lg font-bold uppercase">{attribute}</p>

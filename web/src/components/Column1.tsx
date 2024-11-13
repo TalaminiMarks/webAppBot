@@ -45,7 +45,7 @@ export default function Column1(){
             </div>
             <SingleField description="sabedoria passiva (percepção)"/>
             <Status description="idiomas e outra proficiências">
-                <textarea name="languages" id="languages" rows={10} className="resize-none outline-none p-2"></textarea>
+                <textarea name="languages" id="languages" rows={10} className="resize-none outline-none p-2 w-full"></textarea>
             </Status>
         </div>
     )
