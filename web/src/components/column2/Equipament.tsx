@@ -11,7 +11,7 @@ function Field({name, value}: FieldProps){
                 type="text" 
                 name={name.toLowerCase()} 
                 value={value}
-                className="w-[70%]"
+                className="w-[70%] text-center py-1"
             />
         </div>
     )
