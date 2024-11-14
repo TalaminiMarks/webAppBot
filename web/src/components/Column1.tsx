@@ -46,9 +46,6 @@ export default function Column1(){
             </div>
             <SingleField description="sabedoria passiva (percepção)"/>
             <TextAreaField description="idiomas e outras proficiências" id="languages" rows={10}/>
-            {/* <BoxWithText description="idiomas e outra proficiências">
-                <textarea name="languages" id="languages" rows={10} className="resize-none outline-none p-2 w-full"></textarea>
-            </BoxWithText> */}
         </div>
     )
 }
