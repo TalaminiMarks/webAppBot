@@ -1,28 +1,32 @@
+interface FieldProps {
+    name: string
+    value?: number
+}
+
+function Field({name, value}: FieldProps){
+    return (
+        <div className="w-full flex justify-between items-center pr-4">
+            <span>{name}</span>
+            <input 
+                type="text" 
+                name={name.toLowerCase()} 
+                value={value}
+                className="w-[70%]"
+            />
+        </div>
+    )
+}
+
 export default function Equipament(){
     return (
         <div className="w-full flex flex-col p-2 bg-purple-300 gap-2">
             <div className="w-full flex">
-                <div className="w-1/4 flex flex-col">
-                    <div className="flex justify-around items-center">
-                        <span>PC</span>
-                        <p>0</p>
-                    </div>
-                    <div className="flex justify-around items-center">
-                        <span>PP</span>
-                        <p>0</p>
-                    </div>
-                    <div className="flex justify-around items-center">
-                        <span>PE</span>
-                        <p>0</p>
-                    </div>
-                    <div className="flex justify-around items-center">
-                        <span>PO</span>
-                        <p>0</p>
-                    </div>
-                    <div className="flex justify-around items-center">
-                        <span>PL</span>
-                        <p>0</p>
-                    </div>
+                <div className="w-1/4 flex flex-col gap-4 py-2">
+                    <Field name="PC" />
+                    <Field name="PP" />
+                    <Field name="PE" />
+                    <Field name="PO" />
+                    <Field name="PL" />
                 </div>
                 <div className="w-3/4 flex justify-center">
                     <textarea name="equipament" id="equipament" rows={10} className="resize-none p-2 w-full"></textarea>
