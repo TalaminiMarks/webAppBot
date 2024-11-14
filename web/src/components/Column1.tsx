@@ -1,6 +1,7 @@
 import AttrField from "./column1/AttrField"
 import SingleField from "./column1/SingleField"
 import { Field, BoxWithText } from "./column1/BoxWithText" 
+import TextAreaField from "./column3/TextAreaField"
 
 export default function Column1(){
     const ATTRIBUTES = ["força", "destreza", "constituição", "inteligencia", "sabedoria", "carisma"]
@@ -44,9 +45,10 @@ export default function Column1(){
                 </div>
             </div>
             <SingleField description="sabedoria passiva (percepção)"/>
-            <BoxWithText description="idiomas e outra proficiências">
+            <TextAreaField description="idiomas e outras proficiências" id="languages" rows={10}/>
+            {/* <BoxWithText description="idiomas e outra proficiências">
                 <textarea name="languages" id="languages" rows={10} className="resize-none outline-none p-2 w-full"></textarea>
-            </BoxWithText>
+            </BoxWithText> */}
         </div>
     )
 }

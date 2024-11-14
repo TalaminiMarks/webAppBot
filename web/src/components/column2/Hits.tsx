@@ -26,7 +26,7 @@ export default function Hits(){
                 <Field numericPosition={3} />
             </div>
             <div>
-                <textarea name="obs" id="attackObs" rows={10} className="resize-none w-full p-2"></textarea>
+                <textarea name="attackObs" id="attackObs" rows={10} className="resize-none w-full p-2"></textarea>
                 <p className="w-full text-center uppercase">ataques e magias</p>
             </div>
         </div>
