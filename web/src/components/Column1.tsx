@@ -10,7 +10,7 @@ export default function Column1(){
         "persuasão", "prestidigitação", "religião", "sobrevivência"
     ]
     return (
-        <div className="w-full flex flex-col gap-4">
+        <div className="w-full flex flex-col justify-center items-center px-8 gap-4">
             <div className="w-full flex">
                 <div className="w-1/3 flex items-center flex-col gap-4 bg-yellow-200">
                 {
