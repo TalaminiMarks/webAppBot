@@ -78,20 +78,24 @@ export function HealthDice({totalDice, healthDice, disabled}: HealthDice){
     )
 }
 
-export function Death(){
+interface DeathProps {
+    checked?: boolean
+}
+
+export function Death({checked}: DeathProps){
     return(
         <div className="w-1/2 p-2 flex flex-col bg-rose-300 gap-3">
             <div className="w-full flex justify-center items-center gap-4">
                 <span>sucessos</span>
-                <input type="checkbox" name="" id="" />
-                <input type="checkbox" name="" id="" />
-                <input type="checkbox" name="" id="" />
+                <input type="checkbox" name="success1" id="success1" />
+                <input type="checkbox" name="success2" id="success2" />
+                <input type="checkbox" name="success3" id="success3" />
             </div>
             <div className="w-full flex justify-center items-center gap-4">
                 <span>fracassos</span>
-                <input type="checkbox" name="" id="" />
-                <input type="checkbox" name="" id="" />
-                <input type="checkbox" name="" id="" />
+                <input type="checkbox" name="fail1" id="fail1" />
+                <input type="checkbox" name="fail2" id="fail2" />
+                <input type="checkbox" name="fail3" id="fail3" />
             </div>
             <p className="w-full text-center uppercase">teste contra a morte</p>
         </div>
@@ -105,8 +109,14 @@ interface BasicInfoProps {
 
 export function BasicInfo({value, description}: BasicInfoProps){
     return(
-        <div className="flex flex-col justify-center items-center px-2 h-24 gap-4 bg-pink-300">
-            <span>{value ? value : 0}</span>
+        <div className="flex flex-col justify-center items-center px-2 h-32 gap-4 bg-pink-300">
+            <input 
+                type="text" 
+                name={description} 
+                id={description} 
+                className="w-1/2 text-center p-2 text-lg" 
+                defaultValue={value ? value : 0}
+            />
             <span className="uppercase w-20 text-clip text-center text-sm">{description}</span>
         </div>
     )
