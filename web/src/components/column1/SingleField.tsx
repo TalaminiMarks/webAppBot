@@ -1,15 +1,22 @@
 interface SingleFieldProps {
+    id: string
     description: string
     value?: number
 }
 
-export default function SingleField({value, description}: SingleFieldProps){
+export default function SingleField({value, description, id}: SingleFieldProps){
     return (
         <div className="w-full py-2 flex items-center bg-blue-200">
-            <div className="py-2 px-4 ml-8 bg-yellow-200">
-                <span>{value ? value : 0}</span>
+            <div className="p-2 ml-8 bg-yellow-200">
+                <input 
+                    type="text" 
+                    name={id} 
+                    id={id} 
+                    className="w-8 text-center" 
+                    defaultValue={value ? value : 0}
+                />
             </div>
-            <p className="w-full uppercase text-center">{description}</p>
+            <label htmlFor={id} className="w-full uppercase text-center">{description}</label>
         </div>
     )
 }

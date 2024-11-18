@@ -22,8 +22,8 @@ export default function Column1(){
                 }
                 </div>
                 <div className="w-2/3 flex flex-col items-center bg-slate-200 gap-2">
-                    <SingleField description="Inspiração"/>
-                    <SingleField description="Bônus de proeficiência"/>
+                    <SingleField description="Inspiração" id="inspiration"/>
+                    <SingleField description="Bônus de proeficiência" id="proeficienceBonus"/>
                     <BoxWithText description="Testes de Resistência">
                     {
                         ATTRIBUTES.map(attr => {
@@ -44,7 +44,7 @@ export default function Column1(){
                     </BoxWithText>
                 </div>
             </div>
-            <SingleField description="sabedoria passiva (percepção)"/>
+            <SingleField description="sabedoria passiva (percepção)" id="perception"/>
             <TextAreaField description="idiomas e outras proficiências" id="languages" rows={10}/>
         </div>
     )
