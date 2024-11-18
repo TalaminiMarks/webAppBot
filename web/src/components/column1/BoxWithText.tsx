@@ -19,7 +19,7 @@ export function Field({attribute, attributeChecked, value}: FieldProps){
                 type="text" 
                 name={attribute}
                 id={attribute + "proef"} 
-                className="w-8 bg-purple-300 text-center" 
+                className="w-8 text-center" 
                 defaultValue={value ? value : 0} 
             />
             <label htmlFor={attribute + "proef"} className="capitalize text-sm">{attribute}</label>
