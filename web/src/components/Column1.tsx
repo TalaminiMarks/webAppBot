@@ -12,7 +12,7 @@ export default function Column1(){
     return (
         <div className="w-full flex flex-col justify-center items-center px-8 gap-4">
             <div className="w-full flex">
-                <div className="w-1/3 flex items-center flex-col gap-4 bg-yellow-200">
+                <div className="w-1/3 flex justify-between items-center flex-col">
                 {
                     ATTRIBUTES.map(attr => {
                         return (
@@ -21,7 +21,7 @@ export default function Column1(){
                     })
                 }
                 </div>
-                <div className="w-2/3 flex flex-col items-center bg-slate-200 gap-2">
+                <div className="w-2/3 flex flex-col items-center gap-2">
                     <SingleField description="Inspiração" id="inspiration"/>
                     <SingleField description="Bônus de proeficiência" id="proeficienceBonus"/>
                     <BoxWithText description="Testes de Resistência">
