@@ -10,6 +10,9 @@
     "migrate": "npx prisma migrate dev",
     "deleteRecords": "tsx utils/deleteRecords"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "keywords": [],
   "author": "Marico",
   "license": "ISC",
