@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt" className={mulish.className}>
-      <body className="w-full px-[10%] flex flex-col items-center justify-cente">
+      <body className="w-full px-[10%] flex flex-col items-center justify-center">
         {children}
       </body>
     </html>
