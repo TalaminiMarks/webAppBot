@@ -1,7 +1,7 @@
 import fastify from "fastify";
 
-import character from "./routes/character";
-import create_character from "./routes/create-character";
+import character from "./src/routes/character";
+import create_character from "./src/routes/create-character";
 
 // Raiz do servidor com o parâmetro de logger usando o pino-pretty
 const app = fastify({
