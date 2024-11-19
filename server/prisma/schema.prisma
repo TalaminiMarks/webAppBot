@@ -13,16 +13,16 @@ datasource db {
 model character {
   id          String   @id @unique
   name        String
-  health      Int?     @default(30)
+  health      Int      @default(30)
   age         String
   race        String
-  laguages    String?  @default("Nehum Registro")
-  affiliation String?  @default("Nehum Registro")
-  previous    String?  @default("Nehum Registro")
-  defect      String?  @default("Nehum Registro")
-  ideas       String?  @default("Nehum Registro")
-  personality String?  @default("Nehum Registro")
-  history     String?  @default("Nehum Registro")
+  laguages    String   @default("Nehum Registro")
+  affiliation String   @default("Nehum Registro")
+  previous    String   @default("Nehum Registro")
+  defect      String   @default("Nehum Registro")
+  ideas       String   @default("Nehum Registro")
+  personality String   @default("Nehum Registro")
+  history     String   @default("Nehum Registro")
   xp          Int      @default(0)
   gold        Int      @default(50)
   created_at  DateTime @default(now())
@@ -30,8 +30,8 @@ model character {
 
 model Items {
   id          Int      @id @unique @default(autoincrement())
+  name        String
   description String
-  usage       String
   created_at  DateTime @default(now())
 }
 
