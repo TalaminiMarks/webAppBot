@@ -6,8 +6,9 @@
   "type": "module",
   "main": "app.ts",
   "scripts": {
-    "dev": "tsx watch ./app.ts",
-    "migrate": "npx prisma migrate dev"
+    "dev": "tsx watch app.ts",
+    "migrate": "npx prisma migrate dev",
+    "deleteRecords": "tsx utils/deleteRecords"
   },
   "keywords": [],
   "author": "Marico",
