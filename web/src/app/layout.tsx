@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { mulish } from "@/utils/fonts";
 
 export const metadata: Metadata = {
   title: "aglo",
@@ -15,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt">
+    <html lang="pt" className={mulish.className}>
       <body className="w-full px-[10%] flex flex-col items-center justify-cente">
         {children}
       </body>
