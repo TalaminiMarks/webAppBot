@@ -58,7 +58,7 @@ model CharacterAttributes {
   id           String @id @default(uuid())
   characterId  String
   attributesId Int
-  value        Int
+  value        Int    @default(0)
 
   character Character  @relation(fields: [characterId], references: [id])
   attribute Attributes @relation(fields: [attributesId], references: [id])
@@ -68,7 +68,7 @@ model CharacterExpertise {
   id          String @id @default(uuid())
   characterId String
   expertiseId Int
-  value       Int
+  value       Int    @default(0)
 
   character Character @relation(fields: [characterId], references: [id])
   expertise Expertise @relation(fields: [expertiseId], references: [id])
