@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model character {
+model Character {
   id          String   @id @unique
   name        String
   health      Int      @default(30)
@@ -26,6 +26,9 @@ model character {
   xp          Int      @default(0)
   gold        Int      @default(50)
   created_at  DateTime @default(now())
+
+  CharacterAttributes CharacterAttributes[]
+  CharacterExpertise  CharacterExpertise[]
 }
 
 model Items {
@@ -39,10 +42,34 @@ model Attributes {
   id         Int      @id @unique @default(autoincrement())
   name       String
   created_at DateTime @default(now())
+
+  CharacterAttributes CharacterAttributes[]
 }
 
 model Expertise {
   id         Int      @id @unique @default(autoincrement())
   name       String
   created_at DateTime @default(now())
+
+  CharacterExpertise CharacterExpertise[]
+}
+
+model CharacterAttributes {
+  id           String @id @default(uuid())
+  characterId  String
+  attributesId Int
+  value        Int
+
+  character Character  @relation(fields: [characterId], references: [id])
+  attribute Attributes @relation(fields: [attributesId], references: [id])
+}
+
+model CharacterExpertise {
+  id          String @id @default(uuid())
+  characterId String
+  expertiseId Int
+  value       Int
+
+  character Character @relation(fields: [characterId], references: [id])
+  expertise Expertise @relation(fields: [expertiseId], references: [id])
 }
