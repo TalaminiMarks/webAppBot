@@ -1,9 +1,5 @@
 import { prisma } from "./prisma";
 
-/**
- * TODO: Criar script pra popular o DB
-*/ 
-
 async function attributes(){
     await prisma.attributes.createMany({
         data: [
@@ -43,14 +39,54 @@ async function expertise(){
 }
 
 async function character(){
-    await prisma.character.create({
+    const Attributes = await prisma.attributes.findMany();
+
+    const Character = await prisma.character.create({
         data: {
-            id: '123123',
-            name: 'Mariko',
-            age: '20',
-            race: 'humano',
+            id: "123123",
+            name: "Mariko",
+            age: "20",
+            race: "humano",
+            CharacterAttributes: {
+                createMany: {
+                    data: [
+                        {attributesId: Attributes[0].id, value: 5},                 
+                        {attributesId: Attributes[1].id},                 
+                        {attributesId: Attributes[2].id, value: 3},                 
+                        {attributesId: Attributes[3].id},                 
+                        {attributesId: Attributes[4].id},                 
+                        {attributesId: Attributes[5].id, value: 7}                 
+                    ]
+                }
+            }
         }
     })
+
+    const Expertise = await prisma.expertise.findMany();
+
+    await prisma.characterExpertise.createMany({
+        data: [
+            {characterId: Character.id, expertiseId: Expertise[0].id, value: 1},
+            {characterId: Character.id, expertiseId: Expertise[1].id},
+            {characterId: Character.id, expertiseId: Expertise[2].id},
+            {characterId: Character.id, expertiseId: Expertise[3].id},
+            {characterId: Character.id, expertiseId: Expertise[4].id},
+            {characterId: Character.id, expertiseId: Expertise[5].id, value: 2},
+            {characterId: Character.id, expertiseId: Expertise[6].id},
+            {characterId: Character.id, expertiseId: Expertise[7].id},
+            {characterId: Character.id, expertiseId: Expertise[8].id},
+            {characterId: Character.id, expertiseId: Expertise[9].id},
+            {characterId: Character.id, expertiseId: Expertise[10].id},
+            {characterId: Character.id, expertiseId: Expertise[11].id},
+            {characterId: Character.id, expertiseId: Expertise[12].id, value: 3},
+            {characterId: Character.id, expertiseId: Expertise[13].id},
+            {characterId: Character.id, expertiseId: Expertise[14].id},
+            {characterId: Character.id, expertiseId: Expertise[15].id},
+            {characterId: Character.id, expertiseId: Expertise[16].id},
+            {characterId: Character.id, expertiseId: Expertise[17].id}
+        ]
+    })
+    
 }
 
 async function items(){
@@ -62,5 +98,9 @@ async function items(){
     })
 }
 
-Promise.all([attributes(), expertise(), character(), items()])
- 
+async function main(){
+    await Promise.all([attributes(), expertise(), items()])
+    await character()
+}
+
+ main()
