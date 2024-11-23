@@ -7,6 +7,9 @@ export default async function attributes(fastify: FastifyInstance){
             select: {
                 id: true,
                 name: true
+            },
+            orderBy: {
+                id: 'asc'
             }
         })
 
