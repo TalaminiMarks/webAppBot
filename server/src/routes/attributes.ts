@@ -6,7 +6,14 @@ export default async function attributes(fastify: FastifyInstance){
         const attributes = await prisma.attributes.findMany({
             select: {
                 id: true,
-                name: true
+                name: true,
+                CharacterAttributes: {
+                    select: {
+                        value: true,
+                        attributesId: true,
+                        characterId: true,
+                    }
+                }
             },
             orderBy: {
                 id: 'asc'
