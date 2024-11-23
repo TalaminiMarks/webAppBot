@@ -1,14 +1,25 @@
+import {axiosInstance} from "@/utils/utils"
+
 import AttrField from "./column1/AttrField"
 import SingleField from "./column1/SingleField"
 import { Field, BoxWithText } from "./column1/BoxWithText" 
 import TextAreaField from "./column3/TextAreaField"
 
-export default function Column1(){
-    const ATTRIBUTES = ["força", "destreza", "constituição", "inteligencia", "sabedoria", "carisma"]
-    const EXPERTISE = [
-        "acrobacia", "arcanismo", "atletismo", "atuação", "blefar", "furtividade", "história", "intimidação", "intuição", "investigação", "lidar com animais", "medicina", "natureza", "percepção",
-        "persuasão", "prestidigitação", "religião", "sobrevivência"
-    ]
+interface dataField {
+    id: number,
+    name: string,
+    CharacterAttributes: [{
+        value: number,
+    }]
+}
+
+export default async function Column1(){
+    const attributeData = await axiosInstance.get("/atributos");
+    const ATTRIBUTES: dataField[] = attributeData.data;
+
+    const expertiseData = await axiosInstance.get("/pericias");
+    const EXPERTISE:dataField[] = expertiseData.data;
+
     return (
         <div className="w-full flex flex-col justify-center items-center px-8 gap-4">
             <div className="w-full flex">
@@ -16,7 +27,7 @@ export default function Column1(){
                 {
                     ATTRIBUTES.map(attr => {
                         return (
-                            <AttrField key={attr} attribute={attr}/>
+                            <AttrField key={attr.id} attribute={attr.name} value={attr.CharacterAttributes[0].value}/>
                         )
                     })
                 }
@@ -28,7 +39,7 @@ export default function Column1(){
                     {
                         ATTRIBUTES.map(attr => {
                             return (
-                                <Field key={attr} attribute={attr}/>
+                                <Field key={attr.id} attribute={attr.name}/>
                             )
                         })
                     }
@@ -37,7 +48,7 @@ export default function Column1(){
                     {
                         EXPERTISE.map(attr => {
                             return (
-                                <Field key={attr} attribute={attr}/>
+                                <Field key={attr.id} attribute={attr.name}/>
                             )
                         })
                     }
