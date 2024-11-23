@@ -28,7 +28,7 @@ export function Field({attribute, attributeChecked, value}: FieldProps){
 }
 
 interface BoxWithTextProps {
-    children: ReactNode
+    children?: ReactNode
     description: string
 }
 
