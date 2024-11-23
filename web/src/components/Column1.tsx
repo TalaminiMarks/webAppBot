@@ -9,7 +9,10 @@ interface dataField {
     id: number,
     name: string,
     CharacterAttributes: [{
-        value: number,
+        value: number
+    }]
+    CharacterExpertise: [{
+        value: number
     }]
 }
 
@@ -48,7 +51,7 @@ export default async function Column1(){
                     {
                         EXPERTISE.map(attr => {
                             return (
-                                <Field key={attr.id} attribute={attr.name}/>
+                                <Field key={attr.id} attribute={attr.name} value={attr.CharacterExpertise[0].value}/>
                             )
                         })
                     }
