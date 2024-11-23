@@ -12,5 +12,6 @@ export default async function expertise(fastify: FastifyInstance) {
                 id: 'asc'
             }
         })
+        res.send(expertise)
     })
 }
