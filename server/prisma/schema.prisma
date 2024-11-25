@@ -16,7 +16,7 @@ model Character {
   health      Int      @default(30)
   age         String
   race        String
-  laguages    String   @default("Nehum Registro")
+  languages   String   @default("Nehum Registro")
   affiliation String   @default("Nehum Registro")
   previous    String   @default("Nehum Registro")
   defect      String   @default("Nehum Registro")
