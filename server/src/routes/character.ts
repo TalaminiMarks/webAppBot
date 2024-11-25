@@ -12,6 +12,21 @@ export default async function route(fastify: FastifyInstance){
 
         const params = schema.parse(req.params)
         const data = await prisma.character.findUniqueOrThrow({
+            select: {
+                name: true,
+                health: true,
+                age: true,
+                race: true,
+                languages: true,
+                affiliation: true,
+                previous: true,
+                defect: true,
+                ideas: true,
+                personality: true,
+                history: true,
+                xp: true,
+                gold: true
+            },
             where: {
                 id: params.id
             }
