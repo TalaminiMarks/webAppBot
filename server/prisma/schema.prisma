@@ -13,6 +13,7 @@ datasource db {
 model Character {
   id          String   @id @unique
   name        String
+  role        String
   health      Int      @default(30)
   age         String
   race        String

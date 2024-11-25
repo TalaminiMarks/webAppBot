@@ -17,6 +17,7 @@ export default async function route(fastify: FastifyInstance){
                 health: true,
                 age: true,
                 race: true,
+                role: true,
                 languages: true,
                 affiliation: true,
                 previous: true,

@@ -47,6 +47,7 @@ async function character(){
             name: "Mariko",
             age: "20",
             race: "humano",
+            role: "Pyromante",
             CharacterAttributes: {
                 createMany: {
                     data: [
