@@ -2,12 +2,20 @@ interface TextAreaField {
     description: string
     rows?: number
     id?: string
+    value: string
 }
 
-export default function TextAreaField({description, rows, id}: TextAreaField){
+export default function TextAreaField({description, rows, id, value}: TextAreaField){
     return(
         <div className="w-full p-2 flex flex-col justify-center items-center gap-2 bg-zinc-400">
-            <textarea name={id ? id : description.toLowerCase()} id={id ? id : description.toLowerCase()} rows={rows ? rows : 5} className="resize-none w-full"></textarea>
+            <textarea 
+                name={id ? id : description.toLowerCase()} 
+                id={id ? id : description.toLowerCase()} 
+                rows={rows ? rows : 5} 
+                className="resize-none w-full p-2"
+                defaultValue={value}
+            >
+            </textarea>
             <span className="w-full text-center">{description.toUpperCase()}</span>
         </div>
     )
