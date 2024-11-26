@@ -46,7 +46,13 @@ export default async function Home() {
                     <Column2 />
                 </section>
                 <section className="w-full bg-blue-500">
-                    <Column3 />
+                    <Column3 
+                        affiliation={data.affiliation}
+                        defect={data.defect}
+                        ideas={data.ideas}
+                        personality={data.personality}
+                        particulars="falto"
+                    />
                 </section>
             </div>
         </main>
