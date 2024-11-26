@@ -43,7 +43,7 @@ export default async function Home() {
                     <Column1 />
                 </section>
                 <section className="w-full bg-blue-400">
-                    <Column2 />
+                    <Column2 totalHealth={data.health}/>
                 </section>
                 <section className="w-full bg-blue-500">
                     <Column3 
