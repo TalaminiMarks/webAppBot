@@ -2,7 +2,7 @@ interface TextAreaField {
     description: string
     rows?: number
     id?: string
-    value: string
+    value?: string
 }
 
 export default function TextAreaField({description, rows, id, value}: TextAreaField){
