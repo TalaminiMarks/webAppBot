@@ -17,19 +17,21 @@ model Character {
   health      Int      @default(30)
   age         String
   race        String
-  languages   String   @default("Nehum Registro")
-  affiliation String   @default("Nehum Registro")
-  previous    String   @default("Nehum Registro")
-  defect      String   @default("Nehum Registro")
-  ideas       String   @default("Nehum Registro")
-  personality String   @default("Nehum Registro")
-  history     String   @default("Nehum Registro")
+  languages   String   @default("Nenhum Registro")
+  affiliation String   @default("Nenhum Registro")
+  previous    String   @default("Nenhum Registro")
+  defect      String   @default("Nenhum Registro")
+  ideas       String   @default("Nenhum Registro")
+  personality String   @default("Nenhum Registro")
+  history     String   @default("Nenhum Registro")
+  skills      String   @default("Nenhum Registro")
   xp          Int      @default(0)
   gold        Int      @default(50)
   created_at  DateTime @default(now())
 
   CharacterAttributes CharacterAttributes[]
   CharacterExpertise  CharacterExpertise[]
+  CharacterItens      CharacterItens[]
 }
 
 model Items {
@@ -37,6 +39,17 @@ model Items {
   name        String
   description String
   created_at  DateTime @default(now())
+
+  CharacterItens CharacterItens[]
+}
+
+model CharacterItens {
+  id          String @id @default(uuid())
+  characterId String
+  itemsId     Int
+
+  character Character @relation(fields: [characterId], references: [id])
+  item      Items     @relation(fields: [itemsId], references: [id])
 }
 
 model Attributes {
