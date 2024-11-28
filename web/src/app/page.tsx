@@ -23,7 +23,7 @@ interface CharacterInfo {
 
 export default async function Home() {
     const id = 123123;
-    const character = await axiosInstance.get(`/personagens/${id}`)
+    const character = await axiosInstance.get(`/personagem/${id}`)
 
     const data: CharacterInfo = character.data;
 
