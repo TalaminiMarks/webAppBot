@@ -87,6 +87,15 @@ async function character(){
             {characterId: Character.id, expertiseId: Expertise[17].id}
         ]
     })
+
+    const Items = await prisma.items.findMany();
+
+    await prisma.characterItens.create({
+        data: { 
+            characterId: Character.id,
+            itemsId: Items[0].id
+        }
+    })
     
 }
 
