@@ -16,7 +16,7 @@ interface dataField {
     }]
 }
 
-export default async function Column1(){
+export default async function Column1({languages}: {languages: string}){
     const attributeData = await axiosInstance.get("/atributos");
     const ATTRIBUTES: dataField[] = attributeData.data;
 
@@ -59,7 +59,7 @@ export default async function Column1(){
                 </div>
             </div>
             <SingleField description="sabedoria passiva (percepção)" id="perception"/>
-            <TextAreaField description="idiomas e outras proficiências" id="languages" rows={10}/>
+            <TextAreaField description="idiomas e outras proficiências" id="languages" rows={10} defaultValue={languages}/>
         </div>
     )
 }

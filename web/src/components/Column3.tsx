@@ -11,11 +11,11 @@ interface CharacterInfo{
 export default function Column3({affiliation, defect, ideas, particulars, personality}: CharacterInfo){
     return (
         <div className="w-full flex flex-col items-center justify-center px-8 gap-2">
-            <TextAreaField description="traços de personalidade" id="personality" value={personality}/>
-            <TextAreaField description="ideais" id="ideas" value={ideas}/>
-            <TextAreaField description="ligaçoes" id="affiliation" value={affiliation}/>
-            <TextAreaField description="defeitos" id="defect" value={defect}/>
-            <TextAreaField description="características e habilidades" id="particulars" rows={25} value={particulars}/>
+            <TextAreaField description="traços de personalidade" id="personality" defaultValue={personality}/>
+            <TextAreaField description="ideais" id="ideas" defaultValue={ideas}/>
+            <TextAreaField description="ligaçoes" id="affiliation" defaultValue={affiliation}/>
+            <TextAreaField description="defeitos" id="defect" defaultValue={defect}/>
+            <TextAreaField description="características e habilidades" id="particulars" rows={25} defaultValue={particulars}/>
         </div>
     )
 }

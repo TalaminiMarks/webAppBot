@@ -40,7 +40,7 @@ export default async function Home() {
             />
             <div className="grid grid-cols-3 py-4">
                 <section className="w-full bg-blue-300">
-                    <Column1 />
+                    <Column1 languages={data.languages}/>
                 </section>
                 <section className="w-full bg-blue-400">
                     <Column2 totalHealth={data.health}/>
