@@ -14,6 +14,11 @@ export default async function route(fastify: FastifyInstance){
         const data = await prisma.character.findUniqueOrThrow({
             where: {
                 id: params.id
+            },
+            include: {
+                CharacterAttributes: true,
+                CharacterExpertise: true,
+                CharacterItens: true
             }
         });
 
