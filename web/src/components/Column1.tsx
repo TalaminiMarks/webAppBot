@@ -29,7 +29,7 @@ export default async function Column1({languages, CharacterAttributes, Character
     const ATTRIBUTES: dataField[] = attributeData.data;
 
     const expertiseData = await axiosInstance.get("/pericias");
-    const EXPERTISE:dataField[] = expertiseData.data;
+    const EXPERTISE: dataField[] = expertiseData.data;
 
     return (
         <div className="w-full flex flex-col justify-center items-center px-8 gap-4">
