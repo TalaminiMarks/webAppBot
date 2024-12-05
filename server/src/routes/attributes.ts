@@ -7,13 +7,6 @@ export default async function attributes(fastify: FastifyInstance){
             select: {
                 id: true,
                 name: true,
-                CharacterAttributes: {
-                    select: {
-                        value: true,
-                        attributesId: true,
-                        characterId: true,
-                    }
-                }
             },
             orderBy: {
                 id: 'asc'

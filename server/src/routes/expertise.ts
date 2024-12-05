@@ -7,13 +7,6 @@ export default async function expertise(fastify: FastifyInstance) {
             select: {
                 id: true,
                 name: true,
-                CharacterExpertise: {
-                    select: {
-                        value: true,
-                        characterId: true,
-                        expertiseId: true
-                    }
-                }
             },
             orderBy: {
                 id: 'asc'
