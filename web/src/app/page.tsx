@@ -18,7 +18,21 @@ interface CharacterInfo {
     personality: string,
     history: string,
     xp: number,
-    gold: number
+    gold: number,
+    CharacterAttributes: [{
+        id: string,
+        attributesId: number,
+        value: number
+    }],
+    CharacterExpertise: [{
+        id: string,
+        expertiseId: number,
+        value: number
+    }],
+    CharacterItens: [{
+        id: string,
+        itemsId: number
+    }]
 }
 
 export default async function Home() {
@@ -40,10 +54,16 @@ export default async function Home() {
             />
             <div className="grid grid-cols-3 py-4">
                 <section className="w-full bg-blue-300">
-                    <Column1 languages={data.languages}/>
+                    <Column1 
+                        languages={data.languages}
+                        CharacterAttributes={data.CharacterAttributes}
+                        CharacterExpertise={data.CharacterExpertise}
+                    />
                 </section>
                 <section className="w-full bg-blue-400">
-                    <Column2 totalHealth={data.health}/>
+                    <Column2 
+                        totalHealth={data.health}
+                    />
                 </section>
                 <section className="w-full bg-blue-500">
                     <Column3 
