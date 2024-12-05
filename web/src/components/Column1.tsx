@@ -8,15 +8,23 @@ import TextAreaField from "./column3/TextAreaField"
 interface dataField {
     id: number,
     name: string,
+}
+
+interface Column1Props{
+    languages: string,
     CharacterAttributes: [{
+        id: string,
+        attributesId: number,
         value: number
-    }]
+    }],
     CharacterExpertise: [{
+        id: string,
+        expertiseId: number,
         value: number
     }]
 }
 
-export default async function Column1({languages}: {languages: string}){
+export default async function Column1({languages, CharacterAttributes, CharacterExpertise}: Column1Props){
     const attributeData = await axiosInstance.get("/atributos");
     const ATTRIBUTES: dataField[] = attributeData.data;
 
@@ -29,8 +37,9 @@ export default async function Column1({languages}: {languages: string}){
                 <div className="w-1/3 flex justify-between items-center flex-col">
                 {
                     ATTRIBUTES.map(attr => {
+                        const [{ value }] = CharacterAttributes.filter((i)=>{return i.attributesId === attr.id})
                         return (
-                            <AttrField key={attr.id} attribute={attr.name} value={attr.CharacterAttributes[0].value}/>
+                            <AttrField key={attr.id} attribute={attr.name} value={value}/>
                         )
                     })
                 }
@@ -50,8 +59,9 @@ export default async function Column1({languages}: {languages: string}){
                     <BoxWithText description="perícias">
                     {
                         EXPERTISE.map(attr => {
+                            const [{ value }] = CharacterExpertise.filter((i)=>{return i.expertiseId === attr.id})
                             return (
-                                <Field key={attr.id} attribute={attr.name} value={attr.CharacterExpertise[0].value}/>
+                                <Field key={attr.id} attribute={attr.name} value={value}/>
                             )
                         })
                     }
