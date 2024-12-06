@@ -10,14 +10,14 @@ function Field({name, value}: FieldProps){
             <input 
                 type="text" 
                 name={name.toLowerCase()} 
-                value={value}
+                defaultValue={value}
                 className="w-[70%] text-center py-1"
             />
         </div>
     )
 }
 
-export default function Equipament(){
+export default function Equipament({gold}: {gold: number}){
     return (
         <div className="w-full flex flex-col p-2 bg-purple-300 gap-2">
             <div className="w-full flex">
@@ -25,7 +25,7 @@ export default function Equipament(){
                     <Field name="PC" />
                     <Field name="PP" />
                     <Field name="PE" />
-                    <Field name="PO" />
+                    <Field name="PO" value={gold}/>
                     <Field name="PL" />
                 </div>
                 <div className="w-3/4 flex justify-center">

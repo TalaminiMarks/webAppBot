@@ -5,9 +5,10 @@ import Equipament from "./column2/Equipament";
 interface CharacterInfo{
     totalHealth: number,
     currentHealth?: number
+    gold: number
 }
 
-export default function Column2({totalHealth, currentHealth}: CharacterInfo){
+export default function Column2({totalHealth, currentHealth, gold}: CharacterInfo){
     return(
         <div className="w-full flex flex-col justify-center items-center px-8 gap-4">
             <div className="w-full flex justify-between items-center">
@@ -22,7 +23,7 @@ export default function Column2({totalHealth, currentHealth}: CharacterInfo){
                 <Death />
             </div>
             <Hits />
-            <Equipament />
+            <Equipament gold={gold}/>
         </div>
     )
 }
