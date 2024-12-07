@@ -64,6 +64,7 @@ export default async function Home() {
                     <Column2 
                         totalHealth={data.health}
                         gold={data.gold}
+                        CharacterItens={data.CharacterItens}
                     />
                 </section>
                 <section className="w-full bg-blue-500">
