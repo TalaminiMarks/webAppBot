@@ -5,11 +5,6 @@ import SingleField from "./column1/SingleField"
 import { Field, BoxWithText } from "./column1/BoxWithText" 
 import TextAreaField from "./column3/TextAreaField"
 
-interface dataField {
-    id: number,
-    name: string,
-}
-
 interface Column1Props{
     languages: string,
     CharacterAttributes: [{
@@ -22,6 +17,11 @@ interface Column1Props{
         expertiseId: number,
         value: number
     }]
+}
+
+interface dataField {
+    id: number,
+    name: string,
 }
 
 export default async function Column1({languages, CharacterAttributes, CharacterExpertise}: Column1Props){
