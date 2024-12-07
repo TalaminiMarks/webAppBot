@@ -6,9 +6,13 @@ interface CharacterInfo{
     totalHealth: number,
     currentHealth?: number
     gold: number
+    CharacterItens: [{
+        id: string,
+        itemsId: number
+    }]
 }
 
-export default function Column2({totalHealth, currentHealth, gold}: CharacterInfo){
+export default function Column2({totalHealth, currentHealth, gold, CharacterItens}: CharacterInfo){
     return(
         <div className="w-full flex flex-col justify-center items-center px-8 gap-4">
             <div className="w-full flex justify-between items-center">
@@ -23,7 +27,7 @@ export default function Column2({totalHealth, currentHealth, gold}: CharacterInf
                 <Death />
             </div>
             <Hits />
-            <Equipament gold={gold}/>
+            <Equipament gold={gold} CharacterItens={CharacterItens}/>
         </div>
     )
 }
