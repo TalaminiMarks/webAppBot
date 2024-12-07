@@ -1,7 +1,6 @@
-interface FieldProps {
-    name: string
-    value?: number
-}
+import { axiosInstance } from "@/utils/utils"
+import { FieldProps, EquipamentProps, ItemFieldProps, DataItemFieldProps } from "./types";
+
 
 function Field({name, value}: FieldProps){
     return (
@@ -17,7 +16,16 @@ function Field({name, value}: FieldProps){
     )
 }
 
-export default function Equipament({gold}: {gold: number}){
+function ItemField({name, description}: ItemFieldProps){
+    return (
+        <div className="p-2 bg-pink-300">
+            <span>{name}</span>
+            <span>{description}</span>
+        </div>
+    )
+}
+
+export default function Equipament({gold, CharacterItens}: EquipamentProps){
     return (
         <div className="w-full flex flex-col p-2 bg-purple-300 gap-2">
             <div className="w-full flex">
@@ -28,8 +36,15 @@ export default function Equipament({gold}: {gold: number}){
                     <Field name="PO" value={gold}/>
                     <Field name="PL" />
                 </div>
-                <div className="w-3/4 flex justify-center">
-                    <textarea name="equipament" id="equipament" rows={10} className="resize-none p-2 w-full"></textarea>
+                <div className="w-3/4 h-72 flex flex-col items-center bg-slate-400 overflow-auto">
+                    {
+                        CharacterItens.map(async item => {
+                            const { data }: { data: DataItemFieldProps } = await axiosInstance.get(`/equipamentos/${item.itemsId}`);
+                            return(
+                                <ItemField key={data.id} description={data.description} name={data.name}/>
+                            )
+                        })
+                    }
                 </div>
             </div>
             <span className="w-full text-center uppercase">equipamento</span>
