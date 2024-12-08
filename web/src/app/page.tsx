@@ -37,9 +37,7 @@ interface CharacterInfo {
 
 export default async function Home() {
     const id = 123123;
-    const character = await axiosInstance.get(`/personagem/${id}`)
-
-    const data: CharacterInfo = character.data;
+    const { data }: { data: CharacterInfo } = await axiosInstance.get(`/personagem/${id}`)
 
     return (
         <main className="w-full bg-slate-300">
