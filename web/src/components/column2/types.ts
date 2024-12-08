@@ -14,7 +14,7 @@ export interface EquipamentProps{
 
 export interface ItemFieldProps {
     name: string,
-    description: string
+    description?: string
 }
 
 export interface FieldProps {

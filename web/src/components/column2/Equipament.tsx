@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/utils/utils"
 import { FieldProps, EquipamentProps, ItemFieldProps, DataItemFieldProps } from "./types";
+import { PlusIcon, MinusIcon } from "@heroicons/react/24/solid";
 
 
 function Field({name, value}: FieldProps){
@@ -18,9 +19,12 @@ function Field({name, value}: FieldProps){
 
 function ItemField({name, description}: ItemFieldProps){
     return (
-        <div className="p-2 bg-pink-300">
+        <div className="w-full flex justify-between items-center p-2">
             <span>{name}</span>
-            <span>{description}</span>
+            <a href="#" className="w-6 h-6 rounded bg-black text-white">
+                <MinusIcon />
+            </a>
+            <span className="hidden">{description}</span>
         </div>
     )
 }
@@ -36,7 +40,7 @@ export default function Equipament({gold, CharacterItens}: EquipamentProps){
                     <Field name="PO" value={gold}/>
                     <Field name="PL" />
                 </div>
-                <div className="w-3/4 h-72 flex flex-col items-center bg-slate-400 overflow-auto">
+                <div className="w-3/4 h-72 p-2 flex flex-col items-center gap-2 bg-slate-400 overflow-auto">
                     {
                         CharacterItens.map(async item => {
                             const { data }: { data: DataItemFieldProps } = await axiosInstance.get(`/equipamentos/${item.itemsId}`);
@@ -45,6 +49,9 @@ export default function Equipament({gold, CharacterItens}: EquipamentProps){
                             )
                         })
                     }
+                    <button className="w-8 shadow rounded-full bg-black text-white">
+                        <PlusIcon/>
+                    </button>
                 </div>
             </div>
             <span className="w-full text-center uppercase">equipamento</span>
