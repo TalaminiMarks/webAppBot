@@ -1,6 +1,7 @@
 import { axiosInstance } from "@/utils/utils"
-import { FieldProps, EquipamentProps, ItemFieldProps, DataItemFieldProps } from "./types";
-import { PlusIcon, MinusIcon } from "@heroicons/react/24/solid";
+import { FieldProps, EquipamentProps, DataItemFieldProps } from "./types";
+import { PlusIcon } from "@heroicons/react/24/solid";
+import ItemField from "@/components/column2/equipamentComponents/ItemField";
 
 
 function Field({name, value}: FieldProps){
@@ -13,18 +14,6 @@ function Field({name, value}: FieldProps){
                 defaultValue={value}
                 className="w-[70%] text-center py-1"
             />
-        </div>
-    )
-}
-
-function ItemField({name, description}: ItemFieldProps){
-    return (
-        <div className="w-full flex justify-between items-center p-2">
-            <span>{name}</span>
-            <a href="#" className="w-6 h-6 rounded bg-black text-white">
-                <MinusIcon />
-            </a>
-            <span className="hidden">{description}</span>
         </div>
     )
 }
@@ -49,8 +38,8 @@ export default function Equipament({gold, CharacterItens}: EquipamentProps){
                             )
                         })
                     }
-                    <button className="w-8 shadow rounded-full bg-black text-white">
-                        <PlusIcon/>
+                    <button className="w-8 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition">
+                        <PlusIcon />
                     </button>
                 </div>
             </div>
