@@ -1,3 +1,23 @@
+interface BasicInfoProps {
+    description: string
+    value?: number
+}
+
+export function BasicInfo({value, description}: BasicInfoProps){
+    return(
+        <div className="flex flex-col justify-center items-center px-2 h-32 gap-4 bg-pink-300">
+            <input 
+                type="text" 
+                name={description} 
+                id={description} 
+                className="w-1/2 text-center p-2 text-lg" 
+                defaultValue={value ? value : 0}
+            />
+            <span className="uppercase w-20 text-clip text-center text-sm">{description}</span>
+        </div>
+    )
+}
+
 interface HealthProps {
     totalHealth: number
     currentHealth?: number
@@ -98,26 +118,6 @@ export function Death({checked}: DeathProps){
                 <input type="checkbox" name="fail3" id="fail3" />
             </div>
             <p className="w-full text-center uppercase">teste contra a morte</p>
-        </div>
-    )
-}
-
-interface BasicInfoProps {
-    description: string
-    value?: number
-}
-
-export function BasicInfo({value, description}: BasicInfoProps){
-    return(
-        <div className="flex flex-col justify-center items-center px-2 h-32 gap-4 bg-pink-300">
-            <input 
-                type="text" 
-                name={description} 
-                id={description} 
-                className="w-1/2 text-center p-2 text-lg" 
-                defaultValue={value ? value : 0}
-            />
-            <span className="uppercase w-20 text-clip text-center text-sm">{description}</span>
         </div>
     )
 }
