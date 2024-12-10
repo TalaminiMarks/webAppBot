@@ -7,6 +7,7 @@ Promise.all([
     prisma.attributes.deleteMany(),
     prisma.expertise.deleteMany(),
     prisma.items.deleteMany(),
+    prisma.characterItens.deleteMany()
 ])
 .then(console.log)
 .catch(console.error)
