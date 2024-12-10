@@ -26,7 +26,7 @@ export default function Column2({totalHealth, currentHealth, gold, CharacterIten
                 <HealthDice />
                 <Death />
             </div>
-            <Hits />
+            <Hits CharacterItens={CharacterItens}/>
             <Equipament gold={gold} CharacterItens={CharacterItens}/>
         </div>
     )
