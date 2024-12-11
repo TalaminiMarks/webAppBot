@@ -137,7 +137,7 @@ model CharacterItens {
   characterId String
   itemsId     Int
   value       String
-  bonusValue  String
+  bonusValue  String?
   typeDamage  String?
   created_at  DateTime @default(now())
 
