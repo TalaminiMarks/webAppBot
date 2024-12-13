@@ -4,7 +4,7 @@ import z from 'zod';
 import { prisma } from "../utils/prisma";
 
 // Rota para recuperar todos os personagens do DB
-export default async function route(fastify: FastifyInstance){
+export default function route(fastify: FastifyInstance){
     fastify.get("/personagem/:id", async (req, res)=>{
         const schema = z.object({
             id: z.string()

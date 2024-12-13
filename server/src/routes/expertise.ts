@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { prisma } from "../utils/prisma";
 
-export default async function expertise(fastify: FastifyInstance) {
+export default function expertise(fastify: FastifyInstance) {
     fastify.get('/pericias', async (req, res)=>{
         const expertise = await prisma.expertise.findMany({
             select: {

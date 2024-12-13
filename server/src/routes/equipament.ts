@@ -2,7 +2,7 @@ import { FastifyInstance } from "fastify";
 import { prisma } from "../utils/prisma";
 import z from "zod";
 
-export default async function equipament(fastify: FastifyInstance){
+export default function equipament(fastify: FastifyInstance){
     fastify.get("/equipamentos/:id", async (req, res)=>{
         const schema = z.object({
             id: z.string().transform(val => Number(val))
