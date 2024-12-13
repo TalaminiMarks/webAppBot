@@ -38,7 +38,7 @@ model Character {
   characterItens      CharacterItens[]
   characterSkills     CharacterSkills[]
   characterSpells     CharacterSpells[]
-  CharacterDeath      CharacterDeath[]
+  characterDeath      CharacterDeath[]
 }
 
 model Items {
