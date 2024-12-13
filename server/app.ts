@@ -5,6 +5,7 @@ import create_character from "./src/routes/create-character";
 import attributes from "./src/routes/attributes";
 import expertise from "./src/routes/expertise";
 import equipament from "./src/routes/equipament";
+import skills from "./src/routes/skills";
 
 // Raiz do servidor com o parâmetro de logger usando o pino-pretty
 const app = fastify({
@@ -22,6 +23,7 @@ app.register(create_character);
 app.register(attributes);
 app.register(expertise);
 app.register(equipament);
+app.register(skills);
 
 // Ouve uma porta para rodar o servidor
 app.listen({
