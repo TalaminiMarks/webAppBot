@@ -6,6 +6,7 @@ import attributes from "./src/routes/attributes";
 import expertise from "./src/routes/expertise";
 import equipament from "./src/routes/equipament";
 import skills from "./src/routes/skills";
+import spells from "./src/routes/spells";
 
 // Raiz do servidor com o parâmetro de logger usando o pino-pretty
 const app = fastify({
@@ -24,6 +25,7 @@ app.register(attributes);
 app.register(expertise);
 app.register(equipament);
 app.register(skills);
+app.register(spells);
 
 // Ouve uma porta para rodar o servidor
 app.listen({
