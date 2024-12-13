@@ -18,7 +18,9 @@ export default async function route(fastify: FastifyInstance){
             include: {
                 characterAttributes: true,
                 characterExpertise: true,
-                characterItens: true
+                characterItens: true,
+                characterSkills: true,
+                characterSpells: true
             }
         });
 
