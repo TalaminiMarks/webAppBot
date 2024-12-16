@@ -9,7 +9,7 @@ function Field({numericPosition, CharacterItens}: FieldProps){
     return (
         <div className="w-full flex justify-between items-center gap-2">
             <select name={"weapon" + numericPosition} className="w-1/3">
-                <option value="nada" selected></option>
+                <option value="nada" defaultValue={0}></option>
                 {
                     CharacterItens.map(async item => {
                         const { data }: { data: DataItemFieldProps } = await axiosInstance.get(`/equipamentos/${item.itemsId}`)
