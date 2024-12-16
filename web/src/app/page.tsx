@@ -17,22 +17,44 @@ interface CharacterInfo {
     ideas: string,
     personality: string,
     history: string,
+    perception: number,
+    displacement: number,
+    initiative: number,
+    inspiration: number,
     xp: number,
     gold: number,
-    CharacterAttributes: [{
+    characterAttributes: [{
         id: string,
         attributesId: number,
         value: number
     }],
-    CharacterExpertise: [{
+    characterExpertise: [{
         id: string,
         expertiseId: number,
         value: number
     }],
-    CharacterItens: [{
+    characterItens: [{
         id: string,
-        itemsId: number
+        itemsId: number,
+        value: string,
+        bonusDamage: string,
+        typeDamage: string
+    }],
+    characterSkills: [{
+        id: string,
+        skillsId: number,
+        value: string,
+        bonusDamage: string,
+        typeDamage: string
+    }],
+    characterSpells: [{
+        id: string,
+        spellsId: number,
+        value: string,
+        bonusDamage: string,
+        typeDamage: string
     }]
+
 }
 
 export default async function Home() {
@@ -54,15 +76,15 @@ export default async function Home() {
                 <section className="w-full bg-blue-300">
                     <Column1 
                         languages={data.languages}
-                        CharacterAttributes={data.CharacterAttributes}
-                        CharacterExpertise={data.CharacterExpertise}
+                        CharacterAttributes={data.characterAttributes}
+                        CharacterExpertise={data.characterExpertise}
                     />
                 </section>
                 <section className="w-full bg-blue-400">
                     <Column2 
                         totalHealth={data.health}
                         gold={data.gold}
-                        CharacterItens={data.CharacterItens}
+                        CharacterItens={data.characterItens}
                     />
                 </section>
                 <section className="w-full bg-blue-500">
