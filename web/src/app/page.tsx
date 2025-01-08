@@ -93,7 +93,7 @@ export default async function Home() {
                         defect={data.defect}
                         ideas={data.ideas}
                         personality={data.personality}
-                        particulars="falto"
+                        particulars="vo muda aba"
                     />
                 </section>
             </div>

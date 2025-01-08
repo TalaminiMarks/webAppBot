@@ -11,27 +11,26 @@ datasource db {
 }
 
 model Character {
-  id           String @id @unique
+  id           String   @id @unique
   name         String
   role         String
-  health       Int    @default(30)
+  health       Int      @default(30)
   age          String
   race         String
-  languages    String @default("Nenhum Registro")
-  affiliation  String @default("Nenhum Registro")
-  previous     String @default("Nenhum Registro")
-  defect       String @default("Nenhum Registro")
-  ideas        String @default("Nenhum Registro")
-  personality  String @default("Nenhum Registro")
-  history      String @default("Nenhum Registro")
-  perception   Int    @default(0)
-  displacement Int    @default(0)
-  iniviative   Int    @default(0)
-  inspiration  Int    @default(0)
-
-  xp         Int      @default(0)
-  gold       Int      @default(50)
-  created_at DateTime @default(now())
+  languages    String   @default("Nenhum Registro")
+  affiliation  String   @default("Nenhum Registro")
+  previous     String   @default("Nenhum Registro")
+  defect       String   @default("Nenhum Registro")
+  ideas        String   @default("Nenhum Registro")
+  personality  String   @default("Nenhum Registro")
+  history      String   @default("Nenhum Registro")
+  perception   Int      @default(0)
+  displacement Int      @default(0)
+  initiaitve   Int      @default(0)
+  inspiration  Int      @default(0)
+  xp           Int      @default(0)
+  gold         Int      @default(50)
+  created_at   DateTime @default(now())
 
   characterAttributes CharacterAttributes[]
   characterExpertise  CharacterExpertise[]

@@ -33,7 +33,7 @@ export default async function Column1({languages, CharacterAttributes, Character
 
     return (
         <div className="w-full flex flex-col justify-center items-center px-8 gap-4">
-            <div className="w-full flex">
+            <div className="w-full flex gap-4">
                 <div className="w-1/3 flex justify-between items-center flex-col">
                 {
                     ATTRIBUTES.map(attr => {
