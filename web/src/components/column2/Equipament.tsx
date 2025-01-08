@@ -34,7 +34,7 @@ export default function Equipament({gold, CharacterItens}: EquipamentProps){
                         CharacterItens.map(async item => {
                             const { data }: { data: DataItemFieldProps } = await axiosInstance.get(`/equipamentos/${item.itemsId}`);
                             return(
-                                <ItemField key={data.id} description={data.description} name={data.name}/>
+                                <ItemField key={item.id} id={item.id} description={data.description} name={data.name}/>
                             )
                         })
                     }
