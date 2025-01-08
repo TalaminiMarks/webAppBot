@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import cors from "@fastify/cors"
 
 import character from "./src/routes/character";
 import create_character from "./src/routes/create-character";
@@ -7,6 +8,7 @@ import expertise from "./src/routes/expertise";
 import equipament from "./src/routes/equipament";
 import skills from "./src/routes/skills";
 import spells from "./src/routes/spells";
+import deleteItems from "./src/routes/deleteItems";
 
 // Raiz do servidor com o parâmetro de logger usando o pino-pretty
 const app = fastify({
@@ -19,6 +21,9 @@ const app = fastify({
 });
 
 // Registra as rotas na aplicação ou plugins. 
+app.register(cors, {
+    origin: "http://localhost:3000/"
+})
 app.register(character);
 app.register(create_character);
 app.register(attributes);
@@ -26,6 +31,7 @@ app.register(expertise);
 app.register(equipament);
 app.register(skills);
 app.register(spells);
+app.register(deleteItems);
 
 // Ouve uma porta para rodar o servidor
 app.listen({
