@@ -1,5 +1,4 @@
 export interface DataItemFieldProps {
-    id: number,
     name: string,
     description: string
 }
@@ -13,6 +12,7 @@ export interface EquipamentProps{
 }
 
 export interface ItemFieldProps {
+    id: string,
     name: string,
     description?: string
 }
