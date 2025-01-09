@@ -16,6 +16,6 @@ export default function deleteItems(fastify: FastifyInstance){
             }
         })
 
-        res.send("Item deletado com sucesso")
+        res.send({message: "Item deletado com sucesso"})
     })
 }
