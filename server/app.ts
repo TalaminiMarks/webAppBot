@@ -22,7 +22,8 @@ const app = fastify({
 
 // Registra as rotas na aplicação ou plugins. 
 app.register(cors, {
-    origin: "http://localhost:3000/"
+    origin: true,
+    methods: ["GET", "POST", "DELETE", "PUT"]
 })
 app.register(character);
 app.register(create_character);
