@@ -1,7 +1,7 @@
 import { axiosInstance } from "@/utils/utils"
 import { FieldProps, EquipamentProps, DataItemFieldProps } from "./types";
-import { PlusIcon } from "@heroicons/react/24/solid";
 import ItemField from "@/components/column2/equipamentComponents/ItemField";
+import AddItem from "./equipamentComponents/addItem";
 
 
 function Field({name, value}: FieldProps){
@@ -38,9 +38,7 @@ export default function Equipament({gold, CharacterItens}: EquipamentProps){
                             )
                         })
                     }
-                    <button className="w-8 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition">
-                        <PlusIcon />
-                    </button>
+                    <AddItem />
                 </div>
             </div>
             <span className="w-full text-center uppercase">equipamento</span>
