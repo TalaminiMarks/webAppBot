@@ -25,7 +25,7 @@ export default function ItemField({id, name, description}: ItemFieldProps){
     async function deleteRecord(){
         if(itemRef.current !== null){
             const { data } = await axiosInstance.delete(`/deletar-item/${id}`);
-            alert(data);
+            alert(data.message);
             itemRef.current.remove();
         }
     }
