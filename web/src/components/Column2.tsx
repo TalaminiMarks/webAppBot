@@ -1,18 +1,9 @@
 import { Health, HealthDice, TemporaryHealth, Death, BasicInfo } from "./column2/Health";
 import Hits from "./column2/Hits";
 import Equipament from "./column2/Equipament";
+import { Column2Props } from "@/utils/types";
 
-interface CharacterInfo{
-    totalHealth: number,
-    currentHealth?: number
-    gold: number
-    CharacterItens: [{
-        id: string,
-        itemsId: number
-    }]
-}
-
-export default function Column2({totalHealth, currentHealth, gold, CharacterItens}: CharacterInfo){
+export default function Column2({totalHealth, currentHealth, gold, CharacterItens}: Column2Props){
     return(
         <div className="w-full flex flex-col justify-center items-center px-8 gap-4">
             <div className="w-full flex justify-between items-center">
