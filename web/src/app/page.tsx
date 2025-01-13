@@ -2,12 +2,12 @@ import Column1 from "@/components/Column1";
 import Column2 from "@/components/Column2";
 import Column3 from "@/components/Column3";
 import Header from "@/components/Header";
-import { CharacterInfo } from "@/utils/types";
+import { MainCharacterInfo } from "@/utils/types";
 import { api } from "@/utils/utils";
 
 export default async function Home() {
     const id = 123123;
-    const { data }: { data: CharacterInfo } = await api.get(`/personagem/${id}`)
+    const { data }: { data: MainCharacterInfo } = await api.get(`/personagem/${id}`)
 
     return (
         <main className="w-full bg-slate-300">
