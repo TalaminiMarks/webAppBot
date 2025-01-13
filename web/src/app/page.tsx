@@ -2,7 +2,7 @@ import Column1 from "@/components/Column1";
 import Column2 from "@/components/Column2";
 import Column3 from "@/components/Column3";
 import Header from "@/components/Header";
-import { axiosInstance } from "@/utils/utils";
+import { api } from "@/utils/utils";
 
 interface CharacterInfo {
     name: string,
@@ -59,7 +59,7 @@ interface CharacterInfo {
 
 export default async function Home() {
     const id = 123123;
-    const { data }: { data: CharacterInfo } = await axiosInstance.get(`/personagem/${id}`)
+    const { data }: { data: CharacterInfo } = await api.get(`/personagem/${id}`)
 
     return (
         <main className="w-full bg-slate-300">
