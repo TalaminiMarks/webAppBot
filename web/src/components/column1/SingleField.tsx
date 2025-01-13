@@ -1,8 +1,4 @@
-interface SingleFieldProps {
-    id: string
-    description: string
-    value?: number
-}
+import { SingleFieldProps } from "@/utils/types";
 
 export default function SingleField({value, description, id}: SingleFieldProps){
     return (

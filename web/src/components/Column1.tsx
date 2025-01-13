@@ -1,35 +1,16 @@
 import { api } from "@/utils/utils"
-
+import { Column1Props, DataFieldColumn1 } from "@/utils/types"
 import AttrField from "./column1/AttrField"
 import SingleField from "./column1/SingleField"
 import { Field, BoxWithText } from "./column1/BoxWithText" 
-import TextAreaField from "./column3/TextAreaField"
-
-interface Column1Props{
-    languages: string,
-    CharacterAttributes: [{
-        id: string,
-        attributesId: number,
-        value: number
-    }],
-    CharacterExpertise: [{
-        id: string,
-        expertiseId: number,
-        value: number
-    }]
-}
-
-interface dataField {
-    id: number,
-    name: string,
-}
+import TextAreaField from "./geral/TextAreaField"
 
 export default async function Column1({languages, CharacterAttributes, CharacterExpertise}: Column1Props){
     const attributeData = await api.get("/atributos");
-    const ATTRIBUTES: dataField[] = attributeData.data;
+    const ATTRIBUTES: DataFieldColumn1[] = attributeData.data;
 
     const expertiseData = await api.get("/pericias");
-    const EXPERTISE: dataField[] = expertiseData.data;
+    const EXPERTISE: DataFieldColumn1[] = expertiseData.data;
 
     return (
         <div className="w-full flex flex-col justify-center items-center px-8 gap-4">

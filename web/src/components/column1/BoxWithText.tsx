@@ -1,10 +1,4 @@
-import { ReactNode } from "react";
-
-interface FieldProps {
-    attribute: string
-    attributeChecked?: boolean
-    value?: number
-}
+import { BoxWithTextProps, FieldProps } from "@/utils/types";
 
 export function Field({attribute, attributeChecked, value}: FieldProps){
     return (
@@ -25,11 +19,6 @@ export function Field({attribute, attributeChecked, value}: FieldProps){
             <label htmlFor={attribute + "proef"} className="capitalize text-sm">{attribute}</label>
         </div>
     )
-}
-
-interface BoxWithTextProps {
-    children?: ReactNode
-    description: string
 }
 
 export function BoxWithText({children, description}: BoxWithTextProps){
