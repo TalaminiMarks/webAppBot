@@ -2,7 +2,7 @@ import { FastifyInstance } from "fastify";
 import { prisma } from "../utils/prisma";
 import z from "zod";
 
-export default function equipament(fastify: FastifyInstance){
+export default function route(fastify: FastifyInstance){
     fastify.get("/equipamentos", async (req, res)=>{
         const data = await prisma.items.findMany({
             select: {

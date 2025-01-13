@@ -10,10 +10,10 @@ export default function route(fastify: FastifyInstance){
             id: z.string()
         })
 
-        const params = schema.parse(req.params)
+        const { id } = schema.parse(req.params)
         const data = await prisma.character.findUniqueOrThrow({
             where: {
-                id: params.id
+                id: id
             },
             include: {
                 characterAttributes: true,

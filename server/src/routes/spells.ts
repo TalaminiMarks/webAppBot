@@ -2,7 +2,7 @@ import { FastifyInstance } from "fastify";
 import { z } from "zod";
 import { prisma } from "../utils/prisma";
 
-export default function spells(fastify: FastifyInstance){
+export default function route(fastify: FastifyInstance){
     fastify.get("/magias/:id", async (req, res)=>{
         const schema = z.object({
             id: z.string().transform(val => Number(val))
