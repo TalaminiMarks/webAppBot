@@ -3,6 +3,18 @@ import { prisma } from "../utils/prisma";
 import z from "zod";
 
 export default function equipament(fastify: FastifyInstance){
+    fastify.get("/equipamentos", async (req, res)=>{
+        const data = await prisma.items.findMany({
+            select: {
+                id: true,
+                name: true,
+                description: true
+            }
+        });
+
+        res.send(data);
+    });
+
     fastify.get("/equipamentos/:id", async (req, res)=>{
         const schema = z.object({
             id: z.string().transform(val => Number(val))
@@ -22,5 +34,5 @@ export default function equipament(fastify: FastifyInstance){
         });
 
         res.send(data);
-    })
+    });
 }
