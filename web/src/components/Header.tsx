@@ -1,12 +1,4 @@
-interface characterInfo {
-    name: string,
-    role: string,
-    race: string,
-    previous: string,
-    xp: number,
-    tendency: string,
-    userName: string
-}
+import { HeaderCharacterInfo } from "@/utils/types"
 
 function Field({value, description}: {value?: string | number, description: string}){
     return (
@@ -17,7 +9,7 @@ function Field({value, description}: {value?: string | number, description: stri
     )
 }
 
-export default function Header({name, role, previous, race, userName, tendency, xp}: characterInfo){
+export default function Header({name, role, previous, race, userName, tendency, xp}: HeaderCharacterInfo){
     return (
         <header className="py-6 flex justify-between items-center">
             <section className="w-1/3 bg-red-300">
