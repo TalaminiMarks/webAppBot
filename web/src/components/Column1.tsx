@@ -1,4 +1,4 @@
-import {axiosInstance} from "@/utils/utils"
+import { api } from "@/utils/utils"
 
 import AttrField from "./column1/AttrField"
 import SingleField from "./column1/SingleField"
@@ -25,10 +25,10 @@ interface dataField {
 }
 
 export default async function Column1({languages, CharacterAttributes, CharacterExpertise}: Column1Props){
-    const attributeData = await axiosInstance.get("/atributos");
+    const attributeData = await api.get("/atributos");
     const ATTRIBUTES: dataField[] = attributeData.data;
 
-    const expertiseData = await axiosInstance.get("/pericias");
+    const expertiseData = await api.get("/pericias");
     const EXPERTISE: dataField[] = expertiseData.data;
 
     return (
