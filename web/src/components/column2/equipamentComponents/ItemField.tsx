@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { MinusIcon } from "@heroicons/react/24/solid";
-import { axiosInstance } from "@/utils/utils";
+import { api } from "@/utils/utils";
 
 import { ItemFieldProps } from "../types";
 
@@ -24,7 +24,7 @@ export default function ItemField({id, name, description}: ItemFieldProps){
 
     async function deleteRecord(){
         if(itemRef.current !== null){
-            const { data } = await axiosInstance.delete(`/deletar-item/${id}`);
+            const { data } = await api.delete(`/deletar-item/${id}`);
             alert(data.message);
             itemRef.current.remove();
         }
