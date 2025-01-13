@@ -1,4 +1,4 @@
-import { HeaderCharacterInfo } from "@/utils/types"
+import { HeaderCharacterInfoProps } from "@/utils/types"
 
 function Field({value, description}: {value?: string | number, description: string}){
     return (
@@ -9,7 +9,7 @@ function Field({value, description}: {value?: string | number, description: stri
     )
 }
 
-export default function Header({name, role, previous, race, userName, tendency, xp}: HeaderCharacterInfo){
+export default function Header({name, role, previous, race, userName, tendency, xp}: HeaderCharacterInfoProps){
     return (
         <header className="py-6 flex justify-between items-center">
             <section className="w-1/3 bg-red-300">
