@@ -2,7 +2,6 @@ import fastify from "fastify";
 import cors from "@fastify/cors"
 
 import character from "./src/routes/character";
-import createCharacter from "./src/routes/createCharacter";
 import attributes from "./src/routes/attributes";
 import expertise from "./src/routes/expertise";
 import equipament from "./src/routes/equipament";
@@ -24,15 +23,13 @@ app.register(cors, {
     origin: true,
     methods: ["GET", "POST", "DELETE", "PUT"]
 })
-app.register(character);
-app.register(createCharacter);
 app.register(attributes);
 app.register(expertise);
-app.register(equipament);
 app.register(skills);
 app.register(spells);
+app.register(equipament);
+app.register(character);
 app.register(deleteItems);
-
 
 app.listen({
     port: 3333
