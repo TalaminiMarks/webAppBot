@@ -137,3 +137,50 @@ export interface HealthDiceProps {
     healthDice?: string
     disabled?: boolean
 }
+
+export interface EquipamentsInfo {
+    id: number;
+    name: string;
+    description: string;
+}
+
+export interface DataItemFieldProps {
+    name: string,
+    description: string
+}
+
+export interface EquipamentProps{
+    gold: number
+    CharacterItens: [{
+        id: string,
+        itemsId: number
+    }]
+}
+
+export interface ItemFieldProps {
+    id: string,
+    name: string,
+    description?: string
+}
+
+export interface EquipamentsFieldProps {
+    name: string
+    value?: number
+}
+
+// Column3.tsx interfaces
+
+export interface Column3Props{
+    personality: string,
+    ideas: string,
+    affiliation: string,
+    defect: string,
+    particulars: string
+}
+
+export interface TextAreaFieldProps {
+    description: string
+    rows?: number
+    id?: string
+    defaultValue?: string
+}
