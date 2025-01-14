@@ -1,7 +1,4 @@
-interface BasicInfoProps {
-    description: string
-    value?: number
-}
+import { BasicInfoProps, HealthProps, HealthDiceProps } from "@/utils/types"
 
 export function BasicInfo({value, description}: BasicInfoProps){
     return(
@@ -16,12 +13,6 @@ export function BasicInfo({value, description}: BasicInfoProps){
             <span className="uppercase w-20 text-clip text-center text-sm">{description}</span>
         </div>
     )
-}
-
-interface HealthProps {
-    totalHealth: number
-    currentHealth?: number
-    disabled?: boolean
 }
 
 export function Health({totalHealth, currentHealth, disabled}: HealthProps){
@@ -65,13 +56,7 @@ export function TemporaryHealth({temporaryHealth, disabled}: {temporaryHealth?: 
     )
 }
 
-interface HealthDice {
-    totalDice?: number
-    healthDice?: string
-    disabled?: boolean
-}
-
-export function HealthDice({totalDice, healthDice, disabled}: HealthDice){
+export function HealthDice({totalDice, healthDice, disabled}: HealthDiceProps){
     return (
         <div className="w-1/2 p-2 flex flex-col bg-rose-300">
             <div className="pl-4 flex justify-between items-center gap-4">
@@ -98,11 +83,7 @@ export function HealthDice({totalDice, healthDice, disabled}: HealthDice){
     )
 }
 
-interface DeathProps {
-    checked?: boolean
-}
-
-export function Death({checked}: DeathProps){
+export function Death({checked}: {checked?: boolean}){
     return(
         <div className="w-1/2 p-2 flex flex-col bg-rose-300 gap-3">
             <div className="w-full flex justify-center items-center gap-4">

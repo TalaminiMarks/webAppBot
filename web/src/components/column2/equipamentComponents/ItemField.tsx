@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { MinusIcon } from "@heroicons/react/24/solid";
 import { api } from "@/utils/utils";
 
-import { ItemFieldProps } from "../types";
+import { ItemFieldProps } from "@/utils/types";
 
 export default function ItemField({id, name, description}: ItemFieldProps){
     const descriptionRef = useRef<HTMLDivElement>(null);

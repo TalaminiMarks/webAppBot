@@ -1,14 +1,7 @@
-import TextAreaField from "./column3/TextAreaField";
+import { Column3Props } from "@/utils/types";
+import TextAreaField from "./geral/TextAreaField";
 
-interface CharacterInfo{
-    personality: string,
-    ideas: string,
-    affiliation: string,
-    defect: string,
-    particulars: string
-}
-
-export default function Column3({affiliation, defect, ideas, particulars, personality}: CharacterInfo){
+export default function Column3({affiliation, defect, ideas, particulars, personality}: Column3Props){
     return (
         <div className="w-full flex flex-col items-center justify-center px-8 gap-2">
             <TextAreaField description="traços de personalidade" id="personality" defaultValue={personality}/>

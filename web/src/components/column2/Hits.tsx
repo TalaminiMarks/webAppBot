@@ -1,5 +1,5 @@
-import { axiosInstance } from "@/utils/utils"
-import { DataItemFieldProps } from "./types"
+import { api } from "@/utils/utils"
+import { DataItemFieldProps } from "@/utils/types";
 
 interface FieldProps extends HitsProps {
     numericPosition: number
@@ -9,10 +9,10 @@ function Field({numericPosition, CharacterItens}: FieldProps){
     return (
         <div className="w-full flex justify-between items-center gap-2">
             <select name={"weapon" + numericPosition} className="w-1/3">
-                <option value="nada" defaultValue={0}></option>
+                <option disabled value="#">Selecione</option>
                 {
                     CharacterItens.map(async item => {
-                        const { data }: { data: DataItemFieldProps } = await axiosInstance.get(`/equipamentos/${item.itemsId}`)
+                        const { data }: { data: DataItemFieldProps } = await api.get(`/equipamentos/${item.itemsId}`)
                         return(
                             <option key={data.id} value={data.name}>{data.name}</option>
                         )
