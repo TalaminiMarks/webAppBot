@@ -1,8 +1,11 @@
 import { api } from "@/utils/utils"
 import ItemField from "@/components/column2/equipamentComponents/ItemField";
 import AddItem from "./equipamentComponents/addItem";
-import { EquipamentsInfo, EquipamentsFieldProps, EquipamentProps, DataItemFieldProps } from "@/utils/types";
 
+interface EquipamentsFieldProps {
+    name: string
+    value?: number
+}
 
 function Field({name, value}: EquipamentsFieldProps){
     return (
@@ -18,7 +21,29 @@ function Field({name, value}: EquipamentsFieldProps){
     )
 }
 
-export default async function Equipament({gold, CharacterItens}: EquipamentProps){
+interface EquipamentProps {
+    gold: number,
+    characterItens: [{
+        id: string,
+        itemsId: number,
+        value: string,
+        bonusDamage: string,
+        typeDamage: string
+    }]
+}
+
+interface EquipamentsInfo {
+    id: number;
+    name: string;
+    description: string;
+}
+
+interface DataItemFieldinfo {
+    name: string,
+    description: string
+}
+
+export default async function Equipament({gold, characterItens}: EquipamentProps){
     const { data } = await api.get("/equipamentos");
     const equipaments: EquipamentsInfo[] = data;
     return (
@@ -33,8 +58,8 @@ export default async function Equipament({gold, CharacterItens}: EquipamentProps
                 </div>
                 <div className="w-3/4 h-72 p-2 flex flex-col items-center gap-2 bg-slate-400 overflow-auto">
                     {
-                        CharacterItens.map(async item => {
-                            const { data }: { data: DataItemFieldProps } = await api.get(`/equipamentos/${item.itemsId}`);
+                        characterItens.map(async item => {
+                            const { data }: { data: DataItemFieldinfo } = await api.get(`/equipamentos/${item.itemsId}`);
                             return(
                                 <ItemField key={item.id} id={item.id} description={data.description} name={data.name}/>
                             )

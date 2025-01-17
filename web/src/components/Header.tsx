@@ -1,5 +1,3 @@
-import { HeaderCharacterInfoProps } from "@/utils/types"
-
 function Field({value, description}: {value?: string | number, description: string}){
     return (
         <div>
@@ -7,6 +5,16 @@ function Field({value, description}: {value?: string | number, description: stri
             <p className="uppercase text-header-field">{description}</p>
         </div>
     )
+}
+
+interface HeaderCharacterInfoProps {
+    name: string,
+    role: string,
+    race: string,
+    previous: string,
+    xp: number,
+    tendency: string,
+    userName: string
 }
 
 export default function Header({name, role, previous, race, userName, tendency, xp}: HeaderCharacterInfoProps){

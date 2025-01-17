@@ -1,6 +1,12 @@
-import { BoxWithTextProps, FieldProps } from "@/utils/types";
+import { ReactNode } from "react";
 
-export function Field({attribute, attributeChecked, value}: FieldProps){
+interface FieldProps {
+    attribute: string
+    attributeChecked?: boolean
+    value?: number
+}
+
+export function Field({ attribute, attributeChecked, value }: FieldProps){
     return (
         <div className="flex items-center gap-2">
             <input 
@@ -21,7 +27,12 @@ export function Field({attribute, attributeChecked, value}: FieldProps){
     )
 }
 
-export function BoxWithText({children, description}: BoxWithTextProps){
+interface BoxWithTextProps {
+    children?: ReactNode
+    description: string
+}
+
+export function BoxWithText({ children, description }: BoxWithTextProps){
     return(
         <div className="w-full flex flex-col px-4 py-2 gap-2 bg-red-300">
             {children}

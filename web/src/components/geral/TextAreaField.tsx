@@ -1,4 +1,9 @@
-import { TextAreaFieldProps } from "@/utils/types";
+interface TextAreaFieldProps {
+    description: string
+    rows?: number
+    id?: string
+    defaultValue?: string
+}
 
 export default function TextAreaField({description, rows, id, defaultValue}: TextAreaFieldProps){
     return(

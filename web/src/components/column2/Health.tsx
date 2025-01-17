@@ -1,4 +1,7 @@
-import { BasicInfoProps, HealthProps, HealthDiceProps } from "@/utils/types"
+interface BasicInfoProps {
+    description: string
+    value?: number
+}
 
 export function BasicInfo({value, description}: BasicInfoProps){
     return(
@@ -13,6 +16,12 @@ export function BasicInfo({value, description}: BasicInfoProps){
             <span className="uppercase w-20 text-clip text-center text-sm">{description}</span>
         </div>
     )
+}
+
+interface HealthProps {
+    totalHealth: number
+    currentHealth?: number
+    disabled?: boolean
 }
 
 export function Health({totalHealth, currentHealth, disabled}: HealthProps){
@@ -54,6 +63,12 @@ export function TemporaryHealth({temporaryHealth, disabled}: {temporaryHealth?: 
             <label htmlFor="temporaryHealth" className="w-full text-center uppercase">pontos de vida temporários</label>
         </div>
     )
+}
+
+interface HealthDiceProps {
+    totalDice?: number
+    healthDice?: string
+    disabled?: boolean
 }
 
 export function HealthDice({totalDice, healthDice, disabled}: HealthDiceProps){

@@ -1,5 +1,12 @@
-import { Column3Props } from "@/utils/types";
 import TextAreaField from "./geral/TextAreaField";
+
+interface Column3Props{
+    personality: string,
+    ideas: string,
+    affiliation: string,
+    defect: string,
+    particulars: string
+}
 
 export default function Column3({affiliation, defect, ideas, particulars, personality}: Column3Props){
     return (

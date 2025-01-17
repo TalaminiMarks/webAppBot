@@ -1,17 +1,21 @@
 import { api } from "@/utils/utils"
-import { DataItemFieldProps } from "@/utils/types";
 
 interface FieldProps extends HitsProps {
     numericPosition: number
 }
 
-function Field({numericPosition, CharacterItens}: FieldProps){
+interface DataItemFieldProps {
+    name: string,
+    description: string
+}
+
+function Field({numericPosition, characterItens}: FieldProps){
     return (
         <div className="w-full flex justify-between items-center gap-2">
             <select name={"weapon" + numericPosition} className="w-1/3">
                 <option disabled value="#">Selecione</option>
                 {
-                    CharacterItens.map(async item => {
+                    characterItens.map(async item => {
                         const { data }: { data: DataItemFieldProps } = await api.get(`/equipamentos/${item.itemsId}`)
                         return(
                             <option key={data.id} value={data.name}>{data.name}</option>
@@ -26,13 +30,16 @@ function Field({numericPosition, CharacterItens}: FieldProps){
 }
 
 interface HitsProps{
-    CharacterItens: [{
+    characterItens: [{
         id: string,
-        itemsId: number
-    }]
+        itemsId: number,
+        value: string,
+        bonusDamage: string,
+        typeDamage: string
+    }],
 }
 
-export default function Hits({CharacterItens}: HitsProps){
+export default function Hits({characterItens}: HitsProps){
     return (
         <div className="w-full p-2 flex flex-col bg-yellow-300 gap-2">
             <div className="w-full flex flex-col gap-2">
@@ -41,9 +48,9 @@ export default function Hits({CharacterItens}: HitsProps){
                     <p className="w-1/3 text-center">bonus</p>
                     <p className="w-1/3 text-center">dano/tipo</p>
                 </div>
-                <Field numericPosition={1} CharacterItens={CharacterItens}/>
-                <Field numericPosition={2} CharacterItens={CharacterItens}/>
-                <Field numericPosition={3} CharacterItens={CharacterItens}/>
+                <Field numericPosition={1} characterItens={characterItens}/>
+                <Field numericPosition={2} characterItens={characterItens}/>
+                <Field numericPosition={3} characterItens={characterItens}/>
             </div>
             <div>
                 <textarea name="attackObs" id="attackObs" rows={10} className="resize-none w-full p-2"></textarea>

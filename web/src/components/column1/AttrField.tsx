@@ -1,6 +1,10 @@
-import { AttrFieldProps } from "@/utils/types";
+interface AttrFieldProps {
+    attribute: string
+    value?: number
+    proeficience?: number
+}
 
-export default function AttrField({attribute, value, proeficience}: AttrFieldProps){
+export default function AttrField({ attribute, value, proeficience }: AttrFieldProps){
     return (
         <div className="w-full p-2 flex justify-center items-center flex-col gap-1 bg-white">
             <label htmlFor={attribute} className="text-lg font-bold uppercase">{attribute}</label>
