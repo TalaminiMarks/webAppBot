@@ -1,6 +1,6 @@
+import AddItem from "./equipamentComponents/addItem";
 import { api } from "@/utils/utils"
 import ItemField from "@/components/column2/equipamentComponents/ItemField";
-import AddItem from "./equipamentComponents/addItem";
 
 interface EquipamentsFieldProps {
     name: string
@@ -46,6 +46,7 @@ interface DataItemFieldinfo {
 export default async function Equipament({gold, characterItens}: EquipamentProps){
     const { data } = await api.get("/equipamentos");
     const equipaments: EquipamentsInfo[] = data;
+
     return (
         <div className="w-full flex flex-col p-2 bg-purple-300 gap-2">
             <div className="w-full flex">
@@ -65,15 +66,8 @@ export default async function Equipament({gold, characterItens}: EquipamentProps
                             )
                         })
                     }
-                    <AddItem>
-                        {
-                            equipaments.map(equipament => {
-                                return (
-                                    <option key={equipament.id} value={equipament.id}>{equipament.name}</option>
-                                )
-                            })
-                        }
-                    </AddItem>
+
+                    <AddItem equipaments={equipaments} />
                 </div>
             </div>
             <span className="w-full text-center uppercase">equipamento</span>
