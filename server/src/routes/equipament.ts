@@ -35,4 +35,31 @@ export default function route(fastify: FastifyInstance){
 
         res.send(data);
     });
+
+    fastify.post("/adicionar-item", async (req, res)=>{
+        const schema = z.object({
+            characterId: z.string(),
+            itemId: z.string().transform(val => Number(val)),
+            damage: z.string(),
+            typeDamage: z.string()
+        })
+
+        const { characterId, itemId, damage, typeDamage } = schema.parse(req.body);
+
+        const data = await prisma.characterItens.create({
+            data: {
+                characterId: characterId,
+                itemsId: itemId,
+                value: damage,
+                typeDamage: typeDamage
+            }
+        })
+
+        if(data){
+            res.send({message: "Item adicionado com sucesso!"});
+        }
+        else{
+            res.send({message: "Erro ao adicionar item!"});
+        }
+    });
 }
