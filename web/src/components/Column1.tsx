@@ -20,10 +20,9 @@ interface Column1Props {
 }
 
 interface DataInfo {
-    id: number | string,
+    id: number,
     name: string,
-    description: string,
-    value: number | string
+    value: number
 }
 
 export default async function Column1({languages, characterAttributes, characterExpertise}: Column1Props){
@@ -39,12 +38,10 @@ export default async function Column1({languages, characterAttributes, character
                 <div className="w-1/3 flex justify-between items-center flex-col">
                 {
                     ATTRIBUTES.map(attr => {
-                        if (characterAttributes !== undefined){
-                            const [{ value }] = characterAttributes.filter((i)=>{return i.attributesId === attr.id})
-                            return (
-                                <AttrField key={attr.id} attribute={attr.name} value={value}/>
-                            )
-                        }
+                        const [{ value }] = characterAttributes.filter((i)=>{return i.attributesId === attr.id})
+                        return (
+                            <AttrField key={attr.id} attribute={attr.name} value={value}/>
+                        )
                     })
                 }
                 </div>
@@ -63,12 +60,10 @@ export default async function Column1({languages, characterAttributes, character
                     <BoxWithText description="perícias">
                     {
                         EXPERTISE.map(attr => {
-                            if (characterExpertise !== undefined) {
-                                const [{ value }] = characterExpertise.filter((i)=>{return i.expertiseId === attr.id})
-                                return (
-                                    <Field key={attr.id} attribute={attr.name} value={value}/>
-                                )
-                            }
+                            const [{ value }] = characterExpertise.filter((i)=>{return i.expertiseId === attr.id})
+                            return (
+                                <Field key={attr.id} attribute={attr.name} value={value}/>
+                            )
                         })
                     }
                     </BoxWithText>
