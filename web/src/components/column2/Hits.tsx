@@ -1,12 +1,14 @@
 import { api } from "@/utils/utils"
+import { characterItens } from "@/utils/interfaces"
 
 interface FieldProps extends HitsProps {
-    numericPosition: number
+    numericPosition: number;
 }
 
 interface DataItemFieldProps {
-    name: string,
-    description: string
+    id: string;
+    name: string;
+    description: string;
 }
 
 function Field({numericPosition, characterItens}: FieldProps){
@@ -30,13 +32,7 @@ function Field({numericPosition, characterItens}: FieldProps){
 }
 
 interface HitsProps{
-    characterItens: [{
-        id: string,
-        itemsId: number,
-        value: string,
-        bonusDamage: string,
-        typeDamage: string
-    }],
+    characterItens: characterItens[];
 }
 
 export default function Hits({characterItens}: HitsProps){

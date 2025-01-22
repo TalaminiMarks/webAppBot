@@ -1,6 +1,6 @@
 interface BasicInfoProps {
-    description: string
-    value?: number
+    description: string;
+    value?: number;
 }
 
 export function BasicInfo({value, description}: BasicInfoProps){
@@ -19,9 +19,9 @@ export function BasicInfo({value, description}: BasicInfoProps){
 }
 
 interface HealthProps {
-    totalHealth: number
-    currentHealth?: number
-    disabled?: boolean
+    totalHealth: number;
+    currentHealth?: number;
+    disabled?: boolean;
 }
 
 export function Health({totalHealth, currentHealth, disabled}: HealthProps){
@@ -47,7 +47,12 @@ export function Health({totalHealth, currentHealth, disabled}: HealthProps){
     )
 }
 
-export function TemporaryHealth({temporaryHealth, disabled}: {temporaryHealth?: number, disabled?: boolean}){
+interface TemporaryHealthProps {
+    temporaryHealth?: number;
+    disabled?: boolean;
+}
+
+export function TemporaryHealth({temporaryHealth, disabled}: TemporaryHealthProps){
     return (
         <div className="w-full flex flex-col bg-orange-200 p-2">
             <div className="w-full flex justify-center items-center h-[100px]">
@@ -66,9 +71,9 @@ export function TemporaryHealth({temporaryHealth, disabled}: {temporaryHealth?: 
 }
 
 interface HealthDiceProps {
-    totalDice?: number
-    healthDice?: string
-    disabled?: boolean
+    totalDice?: number;
+    healthDice?: string;
+    disabled?: boolean;
 }
 
 export function HealthDice({totalDice, healthDice, disabled}: HealthDiceProps){

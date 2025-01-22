@@ -1,9 +1,10 @@
 import { api } from "@/utils/utils"
+import { characterItens } from "@/utils/interfaces"
 import Equipaments from "./equipamentComponents/Equipament";
 
 interface InventoryFieldProps {
-    name: string
-    value?: number
+    name: string;
+    value?: number;
 }
 
 function Field({name, value}: InventoryFieldProps){
@@ -21,14 +22,8 @@ function Field({name, value}: InventoryFieldProps){
 }
 
 interface InventoryProps {
-    gold: number,
-    characterItens: [{
-        id: string,
-        itemsId: number,
-        value: string,
-        bonusDamage: string,
-        typeDamage: string
-    }]
+    gold: number;
+    characterItens: characterItens[];
 }
 
 interface ItensInfo {

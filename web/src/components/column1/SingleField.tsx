@@ -1,7 +1,7 @@
 interface SingleFieldProps {
-    id: string
-    description: string
-    value?: number
+    id: string;
+    description: string;
+    value?: number;
 }
 
 export default function SingleField({value, description, id}: SingleFieldProps){

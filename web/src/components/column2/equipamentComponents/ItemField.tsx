@@ -5,9 +5,9 @@ import { MinusIcon } from "@heroicons/react/24/solid";
 import { api } from "@/utils/utils";
 
 interface ItemFieldProps {
-    id: string,
-    name: string,
-    description?: string
+    id: string;
+    name: string;
+    description?: string;
 }
 
 export default function ItemField({id, name, description}: ItemFieldProps){

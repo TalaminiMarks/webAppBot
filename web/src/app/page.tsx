@@ -3,57 +3,38 @@ import Column2 from "@/components/Column2";
 import Column3 from "@/components/Column3";
 import Header from "@/components/Header";
 import { api } from "@/utils/utils";
+import { 
+    characterAttributes, 
+    characterExpertise, 
+    characterItens, 
+    characterSkills, 
+    characterSpells 
+} from "@/utils/interfaces";
 
 interface MainCharacterInfo {
-    name: string,
-    role: string,
-    health: number,
-    age: number,
-    race: string,
-    languages: string,
-    affiliation: string,
-    previous: string,
-    defect: string,
-    ideas: string,
-    personality: string,
-    history: string,
-    perception: number,
-    displacement: number,
-    initiative: number,
-    inspiration: number,
-    xp: number,
-    gold: number,
-    characterAttributes: [{
-        id: string,
-        attributesId: number,
-        value: number
-    }],
-    characterExpertise: [{
-        id: string,
-        expertiseId: number,
-        value: number
-    }],
-    characterItens: [{
-        id: string,
-        itemsId: number,
-        value: string,
-        bonusDamage: string,
-        typeDamage: string
-    }],
-    characterSkills: [{
-        id: string,
-        skillsId: number,
-        value: string,
-        bonusDamage: string,
-        typeDamage: string
-    }],
-    characterSpells: [{
-        id: string,
-        spellsId: number,
-        value: string,
-        bonusDamage: string,
-        typeDamage: string
-    }] 
+    name: string;
+    role: string;
+    health: number;
+    age: number;
+    race: string;
+    languages: string;
+    affiliation: string;
+    previous: string;
+    defect: string;
+    ideas: string;
+    personality: string;
+    history: string;
+    perception: number;
+    displacement: number;
+    initiative: number;
+    inspiration: number;
+    xp: number;
+    gold: number;
+    characterAttributes: characterAttributes[];
+    characterExpertise: characterExpertise[];
+    characterItens: characterItens[];
+    characterSkills: characterSkills[];
+    characterSpells: characterSpells[];
 }
 
 export default async function Home() {

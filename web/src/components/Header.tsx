@@ -1,4 +1,9 @@
-function Field({value, description}: {value?: string | number, description: string}){
+interface FieldProps {
+    value?: string | number;
+    description: string;
+}
+
+function Field({value, description}: FieldProps){
     return (
         <div>
             <span className="text-xl font-bold">{value}</span>
@@ -8,13 +13,13 @@ function Field({value, description}: {value?: string | number, description: stri
 }
 
 interface HeaderCharacterInfoProps {
-    name: string,
-    role: string,
-    race: string,
-    previous: string,
-    xp: number,
-    tendency: string,
-    userName: string
+    name: string;
+    role: string;
+    race: string;
+    previous: string;
+    xp: number;
+    tendency: string;
+    userName: string;
 }
 
 export default function Header({name, role, previous, race, userName, tendency, xp}: HeaderCharacterInfoProps){

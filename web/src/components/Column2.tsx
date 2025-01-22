@@ -1,18 +1,13 @@
 import { Health, HealthDice, TemporaryHealth, Death, BasicInfo } from "./column2/Health";
 import Hits from "./column2/Hits";
 import Inventory from "./column2/Inventory";
+import { characterItens } from "@/utils/interfaces"
 
 interface Column2Props {
-    totalHealth: number,
-    currentHealth?: number,
-    gold: number,
-    characterItens: [{
-        id: string,
-        itemsId: number,
-        value: string,
-        bonusDamage: string,
-        typeDamage: string
-    }]
+    totalHealth: number;
+    currentHealth?: number;
+    gold: number;
+    characterItens: characterItens[];
 }
 
 export default function Column2({totalHealth, currentHealth, gold, characterItens}: Column2Props){

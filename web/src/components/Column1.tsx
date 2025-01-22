@@ -1,4 +1,5 @@
 import { api } from "@/utils/utils"
+import { characterAttributes, characterExpertise } from "@/utils/interfaces"
 
 import AttrField from "./column1/AttrField"
 import SingleField from "./column1/SingleField"
@@ -6,23 +7,15 @@ import { Field, BoxWithText } from "./column1/BoxWithText"
 import TextAreaField from "./geral/TextAreaField"
 
 interface Column1Props {
-    languages: string,
-    characterAttributes: [{
-        id: string,
-        attributesId: number,
-        value: number
-    }],
-    characterExpertise: [{
-        id: string,
-        expertiseId: number,
-        value: number
-    }]
+    languages: string;
+    characterAttributes: characterAttributes[];
+    characterExpertise: characterExpertise[];
 }
 
 interface DataInfo {
-    id: number,
-    name: string,
-    value: number
+    id: number;
+    name: string;
+    value: number;
 }
 
 export default async function Column1({languages, characterAttributes, characterExpertise}: Column1Props){

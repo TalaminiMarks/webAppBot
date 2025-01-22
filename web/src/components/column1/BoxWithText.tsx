@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
 
 interface FieldProps {
-    attribute: string
-    attributeChecked?: boolean
-    value?: number
+    attribute: string;
+    attributeChecked?: boolean;
+    value?: number;
 }
 
 export function Field({ attribute, attributeChecked, value }: FieldProps){
@@ -28,8 +28,8 @@ export function Field({ attribute, attributeChecked, value }: FieldProps){
 }
 
 interface BoxWithTextProps {
-    children?: ReactNode
-    description: string
+    children?: ReactNode;
+    description: string;
 }
 
 export function BoxWithText({ children, description }: BoxWithTextProps){

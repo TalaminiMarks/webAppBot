@@ -1,7 +1,7 @@
 interface AttrFieldProps {
-    attribute: string
-    value?: number
-    proeficience?: number
+    attribute: string;
+    value?: number;
+    proeficience?: number;
 }
 
 export default function AttrField({ attribute, value, proeficience }: AttrFieldProps){
