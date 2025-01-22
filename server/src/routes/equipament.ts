@@ -56,7 +56,10 @@ export default function route(fastify: FastifyInstance){
         })
 
         if(data){
-            res.send({message: "Item adicionado com sucesso!"});
+            res.send({
+                message: "Item adicionado com sucesso!",
+                item: data
+            });
         }
         else{
             res.send({message: "Erro ao adicionar item!"});
