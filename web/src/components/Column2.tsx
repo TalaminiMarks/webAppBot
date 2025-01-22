@@ -1,6 +1,6 @@
 import { Health, HealthDice, TemporaryHealth, Death, BasicInfo } from "./column2/Health";
 import Hits from "./column2/Hits";
-import Equipament from "./column2/Equipament";
+import Inventory from "./column2/Inventory";
 
 interface Column2Props {
     totalHealth: number,
@@ -30,7 +30,7 @@ export default function Column2({totalHealth, currentHealth, gold, characterIten
                 <Death />
             </div>
             <Hits characterItens={characterItens}/>
-            <Equipament gold={gold} characterItens={characterItens}/>
+            <Inventory gold={gold} characterItens={characterItens}/>
         </div>
     )
 }

@@ -1,19 +1,48 @@
 "use client"
 
-import { api } from "@/utils/utils";
-
-import { useRef, MouseEvent, KeyboardEvent, FormEvent } from "react";
+import { useRef, useState, useEffect, MouseEvent, KeyboardEvent, FormEvent } from "react";
 import { PlusIcon } from "@heroicons/react/24/solid";
 
-interface EquipamentsProps {
+import { api } from "@/utils/utils";
+import ItemField from "./ItemField";
+
+interface EquipamentItem {
+    id: string;
+    itemsId: number;
+    value: string;
+    bonusDamage: string;
+    typeDamage: string;
+}
+
+interface ItensInfo {
     id: number;
     name: string;
     description: string;
 }
 
-export default function AddItem({equipaments}: {equipaments: EquipamentsProps[]}){
+interface EquipamentProps {
+    characterItens: EquipamentItem[];
+    itens: ItensInfo[];
+}
+
+export default function Equipament({characterItens, itens}: EquipamentProps ){
     const modalRef = useRef<HTMLDivElement>(null);
     const firstInputRef = useRef<HTMLSelectElement>(null);
+
+    const [newItem, setNewItem] = useState<EquipamentItem>({
+        id: "", 
+        itemsId: 0, 
+        value: "", 
+        bonusDamage: "", 
+        typeDamage: ""
+    });
+    const [characterItensList, setCharacterItensList] = useState<EquipamentItem[]>(characterItens);
+
+    useEffect(()=>{
+        if(newItem.id !== ""){
+            setCharacterItensList(prev => [...prev, newItem]);
+        }
+    }, [newItem])
     
     function openModal(){
         if (modalRef.current !== null){
@@ -40,26 +69,36 @@ export default function AddItem({equipaments}: {equipaments: EquipamentsProps[]}
         }
     }
 
-    async function handleFormData(event: FormEvent<HTMLFormElement>){
-        event.preventDefault();
-        const form = event.currentTarget;
-        const formData = new FormData(form);
+    function handleFormData(e: FormEvent<HTMLFormElement>){
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
         formData.append("characterId", "123123");
-        const data = Object.fromEntries(formData);
-
-        try {
-            const res = await api.post("/adicionar-item", data);
-            if(res.status === 200){
-                alert("Item adicionado com sucesso");
+        const data = Object.fromEntries(formData.entries());
+        api.post("adicionar-item", data).then(response => {
+            if(response.status === 200){
+                alert(response.data.message);
+                setNewItem(response.data.item);
                 closeModal();
             }
-        } catch (error) {
-            console.error(error);
-        }
+            else{
+                alert("Erro ao adicionar item");
+            }
+        })
     }
+
     
     return (
-        <>
+
+        <div className="w-3/4 h-72 p-2 flex flex-col items-center gap-2 bg-slate-400 overflow-auto">
+            {
+                characterItensList.map(item => {
+                    const filter = itens.filter(i => i.id === item.itemsId)
+                    return (
+                        <ItemField id={item.id} key={item.id} name={filter[0].name} description={filter[0].description}/>
+                    )
+                })
+            }
+            
             <button className="w-8 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={openModal}>
                 <PlusIcon />
             </button>
@@ -70,9 +109,9 @@ export default function AddItem({equipaments}: {equipaments: EquipamentsProps[]}
                     <select name="itemId" id="itemId" className="w-full rounded p-2" ref={firstInputRef} defaultValue="#">
                         <option disabled value="#">Selecione um item...</option>
                         {
-                            equipaments.map(equipament => {
+                            itens.map(item => {
                                 return (
-                                    <option key={equipament.id} value={equipament.id}>{equipament.name}</option>
+                                    <option key={item.id} value={item.id}>{item.name}</option>
                                 )
                             })
                         }
@@ -90,15 +129,11 @@ export default function AddItem({equipaments}: {equipaments: EquipamentsProps[]}
                             <label htmlFor="bonusDamage">Dano bônus?</label>
                             <input type="text" name="bonusDamage" id="bonusDamage" />
                         </div>
-                        {/* <div className="w-1/4 flex flex-col">
-                            <label htmlFor="damage">Tipo do bônus?</label>
-                            <input type="text" name="damage" id="damage" />
-                        </div> */}
                     </div>
                     
                     <button type="submit" className="bg-zinc-400 p-4">Adicionar</button>
                 </form>
             </div>
-        </>
+        </div>
     )
 }
