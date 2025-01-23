@@ -31,7 +31,7 @@ function Field({numericPosition, characterItens}: FieldProps){
     )
 }
 
-interface HitsProps{
+interface HitsProps {
     characterItens: characterItens[];
 }
 
