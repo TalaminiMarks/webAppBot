@@ -41,8 +41,18 @@ async function expertise(){
 async function items(){
     await prisma.items.createMany({
         data: [
-            {name: 'espada larga', description: 'Usada como arma'},
-            {name: 'espada longa', description: 'Usada como arma'}
+            {
+                name: "Espada Longa", 
+                description: "Usada como arma", 
+                damage: "1d6", 
+                typeDamage: "Fisico"
+            },
+            {
+                name: "Adaga", 
+                description: "Usada como arma", 
+                damage: "1d6", 
+                typeDamage: "Aumento de Poder"
+            },
         ]
     })
 }
@@ -50,8 +60,18 @@ async function items(){
 async function skills(){
     await prisma.skills.createMany({
         data: [
-            {name: "Estilos de combate", description: "uma skill"},
-            {name: "retomar folego", description: "uma skill"}
+            {
+                name: "Estilos de combate", 
+                description: "Aumenta o dano da arma",
+                damage: "1d3",
+                typeDamage: "Fisico"
+            },
+            {
+                name: "retomar folego", 
+                description: "Gasta uma rodada para recuperar vida",
+                damage: "1d6",
+                typeDamage: "Suporte"
+            }
         ]
     })
 }
@@ -59,8 +79,18 @@ async function skills(){
 async function spells(){
     await prisma.spells.createMany({
         data: [
-            {name: "missel arcano", description: "uma spell"},
-            {name: "armadura arcana", description: "uma spell"}
+            {
+                name: "Missel arcano", 
+                description: "Dispara 3 projeteis",
+                damage: "1d6",
+                typeDamage: "Magico"
+            },
+            {
+                name: "Armadura arcana", 
+                description: "Reforça o corpo com magia",
+                damage: "1d6",
+                typeDamage: "Suporte"
+            }
         ]
     })
 }
@@ -121,7 +151,6 @@ async function character(){
         data: { 
             characterId: Character.id,
             itemsId: Items[0].id,
-            value: "1d6"
         }
     })
 
@@ -129,7 +158,6 @@ async function character(){
         data: {
             characterId: Character.id,
             skillsId: Skills[0].id,
-            value: "1d6"
         }
     })
 
@@ -137,10 +165,8 @@ async function character(){
         data: {
             characterId: Character.id,
             spellsId: Spells[0].id,
-            value: "1d6"
         }
-    })
-    
+    })    
 }
 
 async function main(){
