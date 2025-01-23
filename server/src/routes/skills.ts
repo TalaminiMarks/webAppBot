@@ -3,6 +3,20 @@ import z from "zod";
 import { prisma } from "../utils/prisma";
 
 export default function route(fastify: FastifyInstance){
+    fastify.get("/habilidades", async (req, res)=> {
+        const data = await prisma.skills.findMany({
+            select: {
+                id: true,
+                name: true,
+                description: true,
+                damage: true,
+                typeDamage: true
+            }
+        })
+
+        res.send(data);
+    })
+
     fastify.get("/habilidades/:id", async (req, res)=>{
         const schema = z.object({
             id: z.string().transform(val => Number(val))
@@ -17,10 +31,12 @@ export default function route(fastify: FastifyInstance){
             select: {
                 id: true,
                 name: true,
-                description: true
+                description: true,
+                damage: true,
+                typeDamage: true
             }
         })
 
-        res.send(data)
+        res.send(data);
     })
 }

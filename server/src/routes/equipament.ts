@@ -8,7 +8,9 @@ export default function route(fastify: FastifyInstance){
             select: {
                 id: true,
                 name: true,
-                description: true
+                description: true,
+                damage: true,
+                typeDamage: true
             }
         });
 
@@ -29,7 +31,9 @@ export default function route(fastify: FastifyInstance){
             select: {
                 id: true,
                 name: true,
-                description: true
+                description: true,
+                damage: true,
+                typeDamage: true
             }
         });
 
@@ -50,8 +54,9 @@ export default function route(fastify: FastifyInstance){
             data: {
                 characterId: characterId,
                 itemsId: itemId,
-                value: damage,
-                typeDamage: typeDamage
+                bonusDamage: damage,
+                typeBonusDamage: typeDamage,
+                additionalDescription: "Nenhuma"
             }
         })
 
