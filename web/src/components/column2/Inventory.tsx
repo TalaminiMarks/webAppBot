@@ -1,5 +1,5 @@
 import { api } from "@/utils/utils"
-import { characterItens } from "@/utils/interfaces"
+import { characterItens, ItensTable } from "@/utils/interfaces"
 import Equipaments from "./equipamentComponents/Equipament";
 
 interface InventoryFieldProps {
@@ -26,16 +26,9 @@ interface InventoryProps {
     characterItens: characterItens[];
 }
 
-interface ItensInfo {
-    id: number;
-    name: string;
-    description: string;
-
-}
-
 export default async function Inventory({gold, characterItens}: InventoryProps){
     const { data } = await api.get("/equipamentos");
-    const itens: ItensInfo[] = data;
+    const itens: ItensTable[] = data;
 
     return (
         <div className="w-full flex flex-col p-2 bg-purple-300 gap-2">

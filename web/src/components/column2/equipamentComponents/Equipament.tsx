@@ -4,39 +4,26 @@ import { useRef, useState, useEffect, MouseEvent, KeyboardEvent, FormEvent } fro
 import { PlusIcon } from "@heroicons/react/24/solid";
 
 import { api } from "@/utils/utils";
+import { ItensTable, characterItens } from "@/utils/interfaces";
 import ItemField from "./ItemField";
 
-interface EquipamentItem {
-    id: string;
-    itemsId: number;
-    value: string;
-    bonusDamage: string;
-    typeDamage: string;
-}
-
-interface ItensInfo {
-    id: number;
-    name: string;
-    description: string;
-}
-
 interface EquipamentProps {
-    characterItens: EquipamentItem[];
-    itens: ItensInfo[];
+    characterItens: characterItens[];
+    itens: ItensTable[];
 }
 
 export default function Equipament({characterItens, itens}: EquipamentProps ){
     const modalRef = useRef<HTMLDivElement>(null);
     const firstInputRef = useRef<HTMLSelectElement>(null);
 
-    const [newItem, setNewItem] = useState<EquipamentItem>({
+    const [newItem, setNewItem] = useState<characterItens>({
         id: "", 
         itemsId: 0, 
-        value: "", 
+        additionalDescription: "", 
         bonusDamage: "", 
-        typeDamage: ""
+        typeBonusDamage: "",
     });
-    const [characterItensList, setCharacterItensList] = useState<EquipamentItem[]>(characterItens);
+    const [characterItensList, setCharacterItensList] = useState<characterItens[]>(characterItens);
 
     useEffect(()=>{
         if(newItem.id !== ""){
@@ -94,7 +81,14 @@ export default function Equipament({characterItens, itens}: EquipamentProps ){
                 characterItensList.map(item => {
                     const filter = itens.filter(i => i.id === item.itemsId)
                     return (
-                        <ItemField id={item.id} key={item.id} name={filter[0].name} description={filter[0].description}/>
+                        <ItemField 
+                            id={item.id} 
+                            key={item.id} 
+                            name={filter[0].name} 
+                            description={filter[0].description}
+                            damage={filter[0].damage}
+                            typeDamage={filter[0].typeDamage}
+                        />
                     )
                 })
             }
@@ -122,12 +116,12 @@ export default function Equipament({characterItens, itens}: EquipamentProps ){
                             <input type="text" name="damage" id="damage" />
                         </div>
                         <div className="w-1/4 flex flex-col">
-                            <label htmlFor="typeDamage">Tipo do dano</label>
-                            <input type="text" name="typeDamage" id="typeDamage" />
+                            <label htmlFor="bonusTypeDamage">Tipo do dano</label>
+                            <input type="text" name="bonusTypeDamage" id="bonusTypeDamage" />
                         </div>
                         <div className="w-1/4 flex flex-col">
-                            <label htmlFor="bonusDamage">Dano bônus?</label>
-                            <input type="text" name="bonusDamage" id="bonusDamage" />
+                            <label htmlFor="additionalDescription">Complementar descrição?</label>
+                            <input type="text" name="additionalDescription" id="additionalDescription" />
                         </div>
                     </div>
                     
