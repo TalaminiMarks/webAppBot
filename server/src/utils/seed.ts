@@ -51,7 +51,7 @@ async function items(){
                 name: "Adaga", 
                 description: "Usada como arma", 
                 damage: "1d6", 
-                typeDamage: "Aumento de Poder"
+                typeDamage: "Fisico"
             },
         ]
     })
@@ -67,7 +67,7 @@ async function skills(){
                 typeDamage: "Fisico"
             },
             {
-                name: "retomar folego", 
+                name: "Retomar folego", 
                 description: "Gasta uma rodada para recuperar vida",
                 damage: "1d6",
                 typeDamage: "Suporte"
