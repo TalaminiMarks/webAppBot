@@ -1,35 +1,59 @@
+export interface ItensTable {
+    id: number | string;
+    name: string;
+    description: string;
+    damage: string;
+    typeDamage: string;
+}
+
+export interface SkillsTable {
+    id: number | string;
+    name: string;
+    description: string;
+    damage: string;
+    typeDamage: string;
+}
+
+export interface SpellsTable {
+    id: number | string;
+    name: string;
+    description: string;
+    damage: string;
+    typeDamage: string;
+}
+
 export interface characterAttributes {
-    id: string,
-    attributesId: number,
-    value: number
+    id: string | number;
+    attributesId: number;
+    value: number;
 }
 
 export interface characterExpertise {
-    id: string,
-    expertiseId: number,
-    value: number
+    id: string | number;
+    expertiseId: number;
+    value: number;
 }
 
 export interface characterItens {
-    id: string,
-    itemsId: number,
-    value: string,
-    bonusDamage: string,
-    typeDamage: string
+    id: string | number;
+    itemsId: number;
+    bonusDamage: string;
+    typeBonusDamage: string;
+    additionalDescription: string;
 }
 
 export interface characterSkills {
-    id: string,
-    skillsId: number,
-    value: string,
-    bonusDamage: string,
-    typeDamage: string
+    id: string | number;
+    skillsId: number;
+    bonusDamage: string;
+    typeBonusDamage: string;
+    additionalDescription: string;
 }
 
 export interface characterSpells {
-    id: string,
-    spellsId: number,
-    value: string,
-    bonusDamage: string,
-    typeDamage: string
+    id: string | number;
+    spellsId: number;
+    bonusDamage: string;
+    typeBonusDamage: string;
+    additionalDescription: string;
 }
