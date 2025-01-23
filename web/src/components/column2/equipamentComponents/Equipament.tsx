@@ -88,6 +88,9 @@ export default function Equipament({characterItens, itens}: EquipamentProps ){
                             description={filter[0].description}
                             damage={filter[0].damage}
                             typeDamage={filter[0].typeDamage}
+                            additionalDescription={item.additionalDescription}
+                            bonusDamage={item.bonusDamage}
+                            typeBonusDamage={item.typeBonusDamage}
                         />
                     )
                 })
@@ -112,11 +115,11 @@ export default function Equipament({characterItens, itens}: EquipamentProps ){
                     </select>
                     <div className="w-full flex justify-center items-center gap-4">
                         <div className="w-1/4 flex flex-col">
-                            <label htmlFor="damage">Dano da arma:</label>
-                            <input type="text" name="damage" id="damage" />
+                            <label htmlFor="bonusDamage">Dano Bônus?</label>
+                            <input type="text" name="bonusDamage" id="bonusDamage" />
                         </div>
                         <div className="w-1/4 flex flex-col">
-                            <label htmlFor="bonusTypeDamage">Tipo do dano</label>
+                            <label htmlFor="bonusTypeDamage">Tipo do dano Bônus?</label>
                             <input type="text" name="bonusTypeDamage" id="bonusTypeDamage" />
                         </div>
                         <div className="w-1/4 flex flex-col">

@@ -5,7 +5,15 @@ import { MinusIcon } from "@heroicons/react/24/solid";
 import { api } from "@/utils/utils";
 import { ItensTable } from "@/utils/interfaces";
 
-export default function ItemField({id, name, description, damage, typeDamage}: ItensTable){
+interface ItemFieldProps extends ItensTable {
+    bonusDamage?: string;
+    typeBonusDamage?: string;
+    additionalDescription?: string;
+}
+
+export default function ItemField({
+    id, name, description, damage, typeDamage, additionalDescription, bonusDamage, typeBonusDamage
+}: ItemFieldProps){
     const descriptionRef = useRef<HTMLDivElement>(null);
     const itemRef = useRef<HTMLDivElement>(null);
 
@@ -36,8 +44,9 @@ export default function ItemField({id, name, description, damage, typeDamage}: I
             </button>
             <div ref={descriptionRef} className="hidden absolute top-10 left-0 w-full rounded-xl p-2 bg-yellow-200 z-10">
                 <p>{description}</p>
-                <p>Dano: {damage}</p>
-                <p>Tipo: {typeDamage}</p>
+                <p className={`${additionalDescription ? "block" : "hidden"} mb-2`}>{additionalDescription}</p>
+                <p>Dano: {damage} - {typeDamage}</p>
+                <p className={`${bonusDamage && typeBonusDamage ? "block" : "hidden"}`}>Dano Bônus: {bonusDamage} - {typeBonusDamage}</p>
             </div>
         </div>
     )
