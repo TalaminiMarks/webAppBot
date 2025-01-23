@@ -14,7 +14,7 @@ interface DataItemFieldProps {
 function Field({numericPosition, characterItens}: FieldProps){
     return (
         <div className="w-full flex justify-between items-center gap-2">
-            <select name={"weapon" + numericPosition} className="w-1/3">
+            <select name={"weapon" + numericPosition} defaultValue={"#"} className="w-1/3">
                 <option disabled value="#">Selecione</option>
                 {
                     characterItens.map(async item => {
