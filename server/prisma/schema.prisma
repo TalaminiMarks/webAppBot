@@ -40,19 +40,10 @@ model Character {
   characterDeath      CharacterDeath[]
 }
 
-model Items {
-  id          Int      @id @unique @default(autoincrement())
-  name        String
-  description String
-  created_at  DateTime @default(now())
-
-  characterItens CharacterItens[]
-}
-
 model Attributes {
   id         Int      @id @unique @default(autoincrement())
   name       String   @unique
-  created_at DateTime @default(now())
+  created_at DateTime @default(now()) @ignore
 
   characterAttributes CharacterAttributes[]
 }
@@ -60,7 +51,7 @@ model Attributes {
 model Expertise {
   id         Int      @id @unique @default(autoincrement())
   name       String   @unique
-  created_at DateTime @default(now())
+  created_at DateTime @default(now()) @ignore
 
   characterExpertise CharacterExpertise[]
 }
@@ -68,8 +59,10 @@ model Expertise {
 model Skills {
   id          Int      @id @unique @default(autoincrement())
   name        String
+  damage      String?
+  typeDamage  String?
   description String
-  created_at  DateTime @default(now())
+  created_at  DateTime @default(now()) @ignore
 
   characterSkills CharacterSkills[]
 }
@@ -77,33 +70,46 @@ model Skills {
 model Spells {
   id          Int      @id @unique @default(autoincrement())
   name        String
+  damage      String?
+  typeDamage  String?
   description String
-  created_at  DateTime @default(now())
+  created_at  DateTime @default(now()) @ignore
 
   characterSpells CharacterSpells[]
 }
 
-model CharacterSkills {
-  id          String   @id @unique @default(uuid())
-  characterId String
-  skillsId    Int
-  value       String
-  bonusValue  String?
+model Items {
+  id          Int      @id @unique @default(autoincrement())
+  name        String
+  damage      String?
   typeDamage  String?
-  created_at  DateTime @default(now())
+  description String
+  created_at  DateTime @default(now()) @ignore
+
+  characterItens CharacterItens[]
+}
+
+model CharacterSkills {
+  id                    String   @id @unique @default(uuid())
+  characterId           String
+  skillsId              Int
+  bonusDamage           String?
+  typeBonusDamage       String?
+  additionalDescription String?
+  created_at            DateTime @default(now()) @ignore
 
   character Character @relation(fields: [characterId], references: [id])
   skills    Skills    @relation(fields: [skillsId], references: [id])
 }
 
 model CharacterSpells {
-  id          String   @id @unique @default(uuid())
-  characterId String
-  spellsId    Int
-  value       String
-  bonusValue  String?
-  typeDamage  String?
-  created_at  DateTime @default(now())
+  id                    String   @id @unique @default(uuid())
+  characterId           String
+  spellsId              Int
+  bonusDamage           String?
+  typeBonusDamage       String?
+  additionalDescription String?
+  created_at            DateTime @default(now()) @ignore
 
   character Character @relation(fields: [characterId], references: [id])
   spells    Spells    @relation(fields: [spellsId], references: [id])
@@ -114,7 +120,7 @@ model CharacterAttributes {
   characterId  String
   attributesId Int
   value        Int      @default(0)
-  created_at   DateTime @default(now())
+  created_at   DateTime @default(now()) @ignore
 
   character Character  @relation(fields: [characterId], references: [id])
   attribute Attributes @relation(fields: [attributesId], references: [id])
@@ -125,20 +131,20 @@ model CharacterExpertise {
   characterId String
   expertiseId Int
   value       Int      @default(0)
-  created_at  DateTime @default(now())
+  created_at  DateTime @default(now()) @ignore
 
   character Character @relation(fields: [characterId], references: [id])
   expertise Expertise @relation(fields: [expertiseId], references: [id])
 }
 
 model CharacterItens {
-  id          String   @id @default(uuid())
-  characterId String
-  itemsId     Int
-  value       String
-  bonusValue  String?
-  typeDamage  String?
-  created_at  DateTime @default(now())
+  id                    String   @id @default(uuid())
+  characterId           String
+  itemsId               Int
+  bonusDamage           String?
+  typeBonusDamage       String?
+  additionalDescription String?
+  created_at            DateTime @default(now()) @ignore
 
   character Character @relation(fields: [characterId], references: [id])
   item      Items     @relation(fields: [itemsId], references: [id])
