@@ -44,19 +44,26 @@ export default function route(fastify: FastifyInstance){
         const schema = z.object({
             characterId: z.string(),
             itemId: z.string().transform(val => Number(val)),
-            damage: z.string(),
-            typeDamage: z.string()
+            bonusDamage: z.string().optional(),
+            bonusTypeDamage: z.string().optional(),
+            additionalDescription: z.string().optional()
         })
 
-        const { characterId, itemId, damage, typeDamage } = schema.parse(req.body);
+        const { 
+            characterId, 
+            itemId, 
+            additionalDescription, 
+            bonusDamage, 
+            bonusTypeDamage 
+        } = schema.parse(req.body);
 
         const data = await prisma.characterItens.create({
             data: {
                 characterId: characterId,
                 itemsId: itemId,
-                bonusDamage: damage,
-                typeBonusDamage: typeDamage,
-                additionalDescription: "Nenhuma"
+                bonusDamage: bonusDamage,
+                typeBonusDamage: bonusTypeDamage,
+                additionalDescription: additionalDescription
             }
         })
 
