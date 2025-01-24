@@ -26,4 +26,27 @@ export default function route(fastify: FastifyInstance){
 
         res.send(data);
     });
+
+    fastify.get("/personagem/:id/itens", async (req, res)=>{
+        const schema = z.object({
+            id: z.string()
+        })
+
+        const { id } = schema.parse(req.params)
+
+        const data = await prisma.characterItens.findMany({
+            where: {
+                characterId: id
+            },
+            select: {
+                id: true,
+                itemsId: true,
+                bonusDamage: true,
+                typeBonusDamage: true,
+                additionalDescription: true
+            }
+        })
+
+        res.send(data);
+    });
 }
