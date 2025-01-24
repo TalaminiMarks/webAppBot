@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt" className={mulish.className}>
-      <body className="w-full px-24 flex flex-col items-center justify-center">
+    <html lang="pt" className={`${mulish.className} h-full`}>
+      <body className="w-full h-full px-24 flex flex-col">
         {children}
       </body>
     </html>
