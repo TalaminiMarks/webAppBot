@@ -3,7 +3,10 @@ import "./globals.css";
 import { mulish } from "@/utils/fonts";
 
 export const metadata: Metadata = {
-  title: "aglo",
+  title: {
+    default: "Mariko RPG",
+    template: "Mariko RPG - %s"
+  },
   description: "aglo pr acoloca na descricao",
   authors: [{name: "Marico", url: "Não tenho url"}],
   keywords: "algo, pra, ceo"
