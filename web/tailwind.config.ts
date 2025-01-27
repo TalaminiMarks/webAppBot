@@ -10,6 +10,9 @@ const config: Config = {
     extend: {
       fontSize: {
         "header-field": "0.75rem"
+      },
+      backgroundColor: {
+        "disc": "#5865F2"
       }
     }
   },
