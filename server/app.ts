@@ -8,6 +8,7 @@ import equipament from "./src/routes/equipament";
 import skills from "./src/routes/skills";
 import spells from "./src/routes/spells";
 import deleteItems from "./src/routes/deleteItems";
+import discord from "./src/routes/discord"
 
 const app = fastify({
     logger: {
@@ -23,6 +24,7 @@ app.register(cors, {
     origin: true,
     methods: ["GET", "POST", "DELETE", "PUT"]
 })
+app.register(discord)
 app.register(attributes);
 app.register(expertise);
 app.register(skills);
