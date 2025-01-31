@@ -2,13 +2,14 @@ import 'dotenv/config'
 import { FastifyInstance } from "fastify";
 import z from "zod"
 import axios from 'axios';
+import { prisma } from '../utils/prisma';
 
 // Pensar em como fazer um state
 const state = "algumacoisasecretaqueeunicopracadasessao"
 
 export default async function route(fastify: FastifyInstance){
     fastify.get("/auth/discord/login", (req, res)=>{
-        const url = `https://discord.com/oauth2/authorize?client_id=1291018256571695155&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3333%2Fauth%2Fdiscord%2Fcallback&scope=identify+guilds&state=${state}`
+        const url = `https://discord.com/oauth2/authorize?client_id=1291018256571695155&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3333%2Fauth%2Fdiscord%2Fcallback&scope=identify+guilds+guilds.members.read+email&state=${state}`
 
         res.redirect(url);
     })
