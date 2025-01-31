@@ -10,6 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id         String   @id @default(uuid())
+  discordId  String
+  username   String
+  globalName String
+  avatar     String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  Character Character[]
+}
+
 model Character {
   id           String   @id @unique
   name         String
@@ -30,7 +42,10 @@ model Character {
   inspiration  Int      @default(0)
   xp           Int      @default(0)
   gold         Int      @default(50)
-  created_at   DateTime @default(now())
+  createdAt    DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
   characterAttributes CharacterAttributes[]
   characterExpertise  CharacterExpertise[]
@@ -41,17 +56,17 @@ model Character {
 }
 
 model Attributes {
-  id         Int      @id @unique @default(autoincrement())
-  name       String   @unique
-  created_at DateTime @default(now()) @ignore
+  id        Int      @id @unique @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now()) @ignore
 
   characterAttributes CharacterAttributes[]
 }
 
 model Expertise {
-  id         Int      @id @unique @default(autoincrement())
-  name       String   @unique
-  created_at DateTime @default(now()) @ignore
+  id        Int      @id @unique @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now()) @ignore
 
   characterExpertise CharacterExpertise[]
 }
@@ -62,7 +77,7 @@ model Skills {
   damage      String?
   typeDamage  String?
   description String
-  created_at  DateTime @default(now()) @ignore
+  createdAt   DateTime @default(now()) @ignore
 
   characterSkills CharacterSkills[]
 }
@@ -73,7 +88,7 @@ model Spells {
   damage      String?
   typeDamage  String?
   description String
-  created_at  DateTime @default(now()) @ignore
+  createdAt   DateTime @default(now()) @ignore
 
   characterSpells CharacterSpells[]
 }
@@ -84,7 +99,7 @@ model Items {
   damage      String?
   typeDamage  String?
   description String
-  created_at  DateTime @default(now()) @ignore
+  createdAt   DateTime @default(now()) @ignore
 
   characterItens CharacterItens[]
 }
@@ -96,7 +111,7 @@ model CharacterSkills {
   bonusDamage           String?
   typeBonusDamage       String?
   additionalDescription String?
-  created_at            DateTime @default(now()) @ignore
+  createdAt             DateTime @default(now()) @ignore
 
   character Character @relation(fields: [characterId], references: [id])
   skills    Skills    @relation(fields: [skillsId], references: [id])
@@ -109,7 +124,7 @@ model CharacterSpells {
   bonusDamage           String?
   typeBonusDamage       String?
   additionalDescription String?
-  created_at            DateTime @default(now()) @ignore
+  createdAt             DateTime @default(now()) @ignore
 
   character Character @relation(fields: [characterId], references: [id])
   spells    Spells    @relation(fields: [spellsId], references: [id])
@@ -120,7 +135,7 @@ model CharacterAttributes {
   characterId  String
   attributesId Int
   value        Int      @default(0)
-  created_at   DateTime @default(now()) @ignore
+  createdAt    DateTime @default(now()) @ignore
 
   character Character  @relation(fields: [characterId], references: [id])
   attribute Attributes @relation(fields: [attributesId], references: [id])
@@ -131,7 +146,7 @@ model CharacterExpertise {
   characterId String
   expertiseId Int
   value       Int      @default(0)
-  created_at  DateTime @default(now()) @ignore
+  createdAt   DateTime @default(now()) @ignore
 
   character Character @relation(fields: [characterId], references: [id])
   expertise Expertise @relation(fields: [expertiseId], references: [id])
@@ -144,21 +159,22 @@ model CharacterItens {
   bonusDamage           String?
   typeBonusDamage       String?
   additionalDescription String?
-  created_at            DateTime @default(now()) @ignore
+  createdAt             DateTime @default(now()) @ignore
 
   character Character @relation(fields: [characterId], references: [id])
   item      Items     @relation(fields: [itemsId], references: [id])
 }
 
 model CharacterDeath {
-  id          String  @id @default(uuid())
+  id          String   @id @default(uuid())
   characterId String
-  fail1       Boolean @default(false)
-  fail2       Boolean @default(false)
-  fail3       Boolean @default(false)
-  success1    Boolean @default(false)
-  success2    Boolean @default(false)
-  success3    Boolean @default(false)
+  fail1       Boolean  @default(false)
+  fail2       Boolean  @default(false)
+  fail3       Boolean  @default(false)
+  success1    Boolean  @default(false)
+  success2    Boolean  @default(false)
+  success3    Boolean  @default(false)
+  createdAt   DateTime @default(now())
 
   character Character @relation(fields: [characterId], references: [id])
 }
