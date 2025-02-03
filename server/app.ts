@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import jwt from "@fastify/jwt";
 import cors from "@fastify/cors"
 
 import character from "./src/routes/character";
@@ -22,8 +23,16 @@ const app = fastify({
 // TODO: Need to fix origin to the correct URL
 app.register(cors, {
     origin: true,
-    methods: ["GET", "POST", "DELETE", "PUT"]
+    methods: ["GET", "POST", "DELETE", "PUT"],
 })
+if (process.env.JWT_SECRET !== undefined) {
+    app.register(jwt, {
+        secret: process.env.JWT_SECRET
+    })
+}
+else{
+    throw new Error("JWT sem palavra chave")
+}
 app.register(discord)
 app.register(attributes);
 app.register(expertise);
