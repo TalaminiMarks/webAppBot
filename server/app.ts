@@ -1,6 +1,7 @@
 import fastify from "fastify";
 import jwt from "@fastify/jwt";
 import cors from "@fastify/cors"
+import formBody from "@fastify/formbody"
 
 import character from "./src/routes/character";
 import attributes from "./src/routes/attributes";
@@ -10,6 +11,7 @@ import skills from "./src/routes/skills";
 import spells from "./src/routes/spells";
 import deleteItems from "./src/routes/deleteItems";
 import login from "./src/routes/login"
+import logout from "./src/routes/logout"
 
 const app = fastify({
     logger: {
@@ -33,7 +35,9 @@ if (process.env.JWT_SECRET !== undefined) {
 else{
     throw new Error("JWT sem palavra chave")
 }
-app.register(login)
+app.register(formBody);
+app.register(login);
+app.register(logout);
 app.register(attributes);
 app.register(expertise);
 app.register(skills);
