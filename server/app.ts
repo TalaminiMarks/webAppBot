@@ -9,7 +9,7 @@ import equipament from "./src/routes/equipament";
 import skills from "./src/routes/skills";
 import spells from "./src/routes/spells";
 import deleteItems from "./src/routes/deleteItems";
-import discord from "./src/routes/discord"
+import login from "./src/routes/login"
 
 const app = fastify({
     logger: {
@@ -33,7 +33,7 @@ if (process.env.JWT_SECRET !== undefined) {
 else{
     throw new Error("JWT sem palavra chave")
 }
-app.register(discord)
+app.register(login)
 app.register(attributes);
 app.register(expertise);
 app.register(skills);

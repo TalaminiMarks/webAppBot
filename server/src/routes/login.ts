@@ -13,7 +13,7 @@ interface userResponseInfo {
 }
 
 export default async function route(fastify: FastifyInstance){
-    fastify.post("/registrar/discord", async (req, res)=>{
+    fastify.post("/login/discord", async (req, res)=>{
         const bodySchema = z.object({
             code: z.string()
         })
@@ -43,7 +43,7 @@ export default async function route(fastify: FastifyInstance){
                 }
             )
 
-            const {access_token, refresh_token} = tokenResponse.data
+            const { access_token } = tokenResponse.data
 
             const userResponse = await axios.get(
                 "https://discord.com/api/users/@me",
@@ -68,7 +68,21 @@ export default async function route(fastify: FastifyInstance){
                         avatar: avatar,
                         globalName: global_name,
                         username: username,
-                        email: email
+                        email: email,
+                        accessToken: access_token
+                    }
+                })
+            }
+            else {
+                await prisma.user.update({
+                    where: {
+                        discordId: id
+                    },
+                    data: {
+                        accessToken: access_token,
+                        username: username,
+                        globalName: global_name,
+                        avatar: avatar
                     }
                 })
             }
