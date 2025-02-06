@@ -9,11 +9,11 @@ export async function GET(req: NextRequest) {
 
     if (!code) throw new Error("Codigo não provido");
 
-    const registerResponse = await api.post("/registrar/discord", {
+    const registerResponse = await api.post("/login/discord", {
         code
     })
     const { token } = registerResponse.data
-    const tokenExpiresInSeconds = 60 * 60
+    const tokenExpiresInSeconds = 60 * 60 * 24 * 7
 
     const redirectURL = redirectTo ?? new URL("/", req.url)
 
