@@ -4,9 +4,6 @@ import z from "zod"
 import axios from 'axios';
 import { prisma } from '../utils/prisma';
 
-// Pensar em como fazer um state
-const state = "algumacoisasecretaqueeunicopracadasessao"
-
 interface userResponseInfo {
     id: string;
     username: string;
@@ -85,7 +82,7 @@ export default async function route(fastify: FastifyInstance){
                 expiresIn: '1h',
             })
 
-            res.send({token});
+            res.send({ token });
         }
     })
 }
