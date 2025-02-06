@@ -93,7 +93,7 @@ export default async function route(fastify: FastifyInstance){
             }, 
             { 
                 sub: id,
-                expiresIn: '1h',
+                expiresIn: '7d',
             })
 
             res.send({ token });
