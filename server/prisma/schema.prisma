@@ -11,14 +11,15 @@ datasource db {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  discordId  String   @unique
-  username   String
-  globalName String
-  avatar     String
-  email      String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id          String   @id @default(uuid())
+  discordId   String   @unique
+  username    String
+  globalName  String
+  avatar      String
+  email       String
+  accessToken String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   Character Character[]
 }
