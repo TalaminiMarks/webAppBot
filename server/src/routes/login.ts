@@ -20,83 +20,76 @@ export default async function route(fastify: FastifyInstance){
 
         const { code } = bodySchema.parse(req.body)
 
-        if (process.env.DISCORD_CLIENT_ID !== undefined && 
-            process.env.DISCORD_CLIENT_SECRET !== undefined && 
-            process.env.DIRCORD_REDIRECT_URL !== undefined){
-            const params = new URLSearchParams({
+        const tokenResponse = await axios.post(
+            "https://discord.com/api/oauth2/token", 
+            {
                 client_id: process.env.DISCORD_CLIENT_ID,
                 client_secret: process.env.DISCORD_CLIENT_SECRET,
                 grant_type: "authorization_code",
                 code,
                 redirect_uri: process.env.DIRCORD_REDIRECT_URL
-            })
-
-            const headers = {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            }
-    
-            const tokenResponse = await axios.post(
-                "https://discord.com/api/oauth2/token", 
-                params, 
-                {
-                    headers
+            }, 
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 }
-            )
+            }
+        )
 
-            const { access_token } = tokenResponse.data
+        const { access_token } = tokenResponse.data
 
-            const userResponse = await axios.get(
-                "https://discord.com/api/users/@me",
-                {
-                    headers: {
-                        Authorization: `Bearer ${access_token}`,
-                    }
-                });
-            
-            const { id, username, avatar, global_name, email }: userResponseInfo = userResponse.data
+        const userResponse = await axios.get(
+            "https://discord.com/api/users/@me",
+            {
+                headers: {
+                    Authorization: `Bearer ${access_token}`,
+                }
+            });
+        
+        const { id, username, avatar, global_name, email }: userResponseInfo = userResponse.data
 
-            const userExists = await prisma.user.findUnique({
+        const userExists = await prisma.user.findUnique({
+            where: {
+                discordId: id
+            }
+        })
+
+        if (!userExists) {
+            await prisma.user.create({
+                data: {
+                    discordId: id,
+                    avatar: avatar,
+                    globalName: global_name,
+                    username: username,
+                    email: email,
+                    accessToken: access_token
+                }
+            })
+        }
+        else {
+            await prisma.user.update({
                 where: {
                     discordId: id
+                },
+                data: {
+                    accessToken: access_token,
+                    username: username,
+                    globalName: global_name,
+                    avatar: avatar
                 }
             })
-
-            if (!userExists) {
-                await prisma.user.create({
-                    data: {
-                        discordId: id,
-                        avatar: avatar,
-                        globalName: global_name,
-                        username: username,
-                        email: email,
-                        accessToken: access_token
-                    }
-                })
-            }
-            else {
-                await prisma.user.update({
-                    where: {
-                        discordId: id
-                    },
-                    data: {
-                        accessToken: access_token,
-                        username: username,
-                        globalName: global_name,
-                        avatar: avatar
-                    }
-                })
-            }
-
-            const token = fastify.jwt.sign(
-            {
-                name: global_name
-            }, 
-            { 
-                sub: id,
-                expiresIn: '7d',
-            })
-
-            res.send({ token });
         }
+
+        const token = fastify.jwt.sign(
+        {
+            name: global_name,
+            avatar: avatar
+        }, 
+        { 
+            sub: id,
+            expiresIn: '7d',
+        })
+
+        res.send({ token });
     })
 }
