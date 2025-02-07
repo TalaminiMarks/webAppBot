@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(req: NextRequest){
     const singInURL = "http://localhost:3000/login";
 
-    const token = req.cookies.get("token")
+    const token = req.cookies.get("token")?.value
 
     if(!token) {
         return NextResponse.redirect(singInURL, {
@@ -18,5 +18,5 @@ export function middleware(req: NextRequest){
 }
 
 export const config = {
-    matcher: "/"
+    matcher: ['/personagem', '/personagem/:path*']
 }
