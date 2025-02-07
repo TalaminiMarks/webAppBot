@@ -15,4 +15,18 @@ export default function route(fastify: FastifyInstance){
 
         res.send(attributes)
     })
+
+    fastify.get('/pericias', async (req, res)=>{
+        const expertise = await prisma.expertise.findMany({
+            select: {
+                id: true,
+                name: true,
+            },
+            orderBy: {
+                id: 'asc'
+            }
+        })
+        
+        res.send(expertise)
+    })
 }   

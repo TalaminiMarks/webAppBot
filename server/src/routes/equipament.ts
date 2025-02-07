@@ -40,7 +40,7 @@ export default function route(fastify: FastifyInstance){
         res.send(data);
     });
 
-    fastify.post("/adicionar-item", async (req, res)=>{
+    fastify.post("/equipamentos/adicionar", async (req, res)=>{
         const schema = z.object({
             characterId: z.string(),
             itemId: z.string().transform(val => Number(val)),
@@ -77,4 +77,20 @@ export default function route(fastify: FastifyInstance){
             res.send({message: "Erro ao adicionar item!"});
         }
     });
+
+    fastify.delete("/equipamentos/deletar/:id", async (req, res)=>{
+            const schema = z.object({
+                id: z.string()
+            })
+    
+            const { id } = schema.parse(req.params);
+    
+            await prisma.characterItens.delete({
+                where: {
+                    id: id
+                }
+            })
+    
+            res.send({ message: "Item deletado com sucesso" })
+        })
 }

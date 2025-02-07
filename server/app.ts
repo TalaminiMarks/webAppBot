@@ -5,11 +5,9 @@ import formBody from "@fastify/formbody"
 
 import character from "./src/routes/character";
 import attributes from "./src/routes/attributes";
-import expertise from "./src/routes/expertise";
 import equipament from "./src/routes/equipament";
 import skills from "./src/routes/skills";
 import spells from "./src/routes/spells";
-import deleteItems from "./src/routes/deleteItems";
 import login from "./src/routes/login"
 import logout from "./src/routes/logout"
 
@@ -39,12 +37,10 @@ app.register(formBody);
 app.register(login);
 app.register(logout);
 app.register(attributes);
-app.register(expertise);
 app.register(skills);
 app.register(spells);
 app.register(equipament);
 app.register(character);
-app.register(deleteItems);
 
 app.listen({
     port: 3333
