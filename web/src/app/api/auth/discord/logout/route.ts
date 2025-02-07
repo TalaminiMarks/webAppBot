@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { api } from "@/utils/utils";
+import { cookies } from "next/headers";
 
 export async function GET(req: NextRequest){
-    const url = new URL("/login", req.url);
+    const url = new URL("/", req.url);
 
     const token = req.cookies.get("token");
     const response = await api.post("/logout/discord", null, {
@@ -12,11 +13,8 @@ export async function GET(req: NextRequest){
     })
 
     if(response.status === 200){
-        return NextResponse.redirect(url, {
-            headers: {
-                'set-cookie': 'token=; Path=/; HttpOnly; max-age:0'
-            }
-        })
+        (await cookies()).delete("token")
+        return NextResponse.redirect(url)
     }
     else {
         throw new Error("Algo deu errado ao desconectar")
