@@ -49,4 +49,21 @@ export default function route(fastify: FastifyInstance){
 
         res.send(data);
     });
+
+    fastify.post("/personagem/criar", async (req, res)=> {
+        const schema = z.object({
+            id: z.string(),
+            name: z.string(),
+            age: z.string(),
+            baseRace: z.string(),
+            subRace: z.string(),
+            role: z.string()
+        })
+
+        const character = schema.parse(req.body)
+
+        console.log(character);
+
+        res.send({ message: "Personagem criado com sucesso" })
+    })
 }
