@@ -5,47 +5,42 @@ import { prisma } from "../utils/prisma";
 
 // Rota para recuperar todos os personagens do DB
 export default function route(fastify: FastifyInstance){
-    fastify.get("/personagem/:id", async (req, res)=>{
+    fastify.addHook('preHandler', async (req)=>{
+        await req.jwtVerify();
+    })
+
+    fastify.get("/personagem", async (req, res)=>{
         const schema = z.object({
-            id: z.string()
+            sub: z.string()
         })
 
-        const { id } = schema.parse(req.params)
-        const data = await prisma.character.findUniqueOrThrow({
+        const jwt = schema.parse(req.user)
+
+        const user = await prisma.user.findUniqueOrThrow({
             where: {
-                id: id
+                discordId: jwt.sub
             },
             include: {
-                characterAttributes: true,
-                characterExpertise: true,
-                characterItens: true,
-                characterSkills: true,
-                characterSpells: true
+                Character: true
             }
-        });
-
-        res.send(data);
-    });
-
-    fastify.get("/personagem/:id/itens", async (req, res)=>{
-        const schema = z.object({
-            id: z.string()
         })
 
-        const { id } = schema.parse(req.params)
+        if (!user) res.send("Usuário não encontrado");
 
-        const data = await prisma.characterItens.findMany({
+        const data = await prisma.character.findMany({
             where: {
-                characterId: id
+                userId: user.id
             },
             select: {
                 id: true,
-                itemsId: true,
-                bonusDamage: true,
-                typeBonusDamage: true,
-                additionalDescription: true
+                name: true,
+                baseRace: true,
+                subRace: true,
+                role: true
             }
-        })
+        });
+
+        if(!data) res.send({message: "Error: Nenhum personagem encontrado"})
 
         res.send(data);
     });
@@ -88,4 +83,53 @@ export default function route(fastify: FastifyInstance){
         }
 
     })
+
+    fastify.get("/personagem/:id", async (req, res)=>{
+        const schema = z.object({
+            id: z.string()
+        });
+
+        const { id } = schema.parse(req.params);
+
+        const data = await prisma.character.findUnique({
+            where: {
+                id: id
+            },
+            include: {
+                characterAttributes: true,
+                characterExpertise: true,
+                characterItens: true,
+                characterSkills: true,
+                characterSpells: true,
+                // characterDeath: true
+            }
+        })
+
+        res.send(data);
+    })
+
+    fastify.get("/personagem/:id/itens", async (req, res)=>{
+        const schema = z.object({
+            id: z.string()
+        })
+
+        const { id } = schema.parse(req.params)
+
+        const data = await prisma.characterItens.findMany({
+            where: {
+                characterId: id
+            },
+            select: {
+                id: true,
+                itemsId: true,
+                bonusDamage: true,
+                typeBonusDamage: true,
+                additionalDescription: true
+            }
+        })
+
+        res.send(data);
+    });
+
+    
 }
