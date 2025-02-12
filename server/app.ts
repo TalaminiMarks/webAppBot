@@ -1,15 +1,16 @@
 import fastify from "fastify";
 import jwt from "@fastify/jwt";
-import cors from "@fastify/cors"
-import formBody from "@fastify/formbody"
+import cors from "@fastify/cors";
+import formBody from "@fastify/formbody";
 
 import character from "./src/routes/character";
 import attributes from "./src/routes/attributes";
 import equipament from "./src/routes/equipament";
 import skills from "./src/routes/skills";
 import spells from "./src/routes/spells";
-import login from "./src/routes/login"
-import logout from "./src/routes/logout"
+import login from "./src/routes/login";
+import logout from "./src/routes/logout";
+import createCharacter from "./src/routes/createCharacter";
 
 const app = fastify({
     logger: {
@@ -41,6 +42,7 @@ app.register(skills);
 app.register(spells);
 app.register(equipament);
 app.register(character);
+app.register(createCharacter);
 
 app.listen({
     port: 3333
