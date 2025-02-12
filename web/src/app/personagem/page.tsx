@@ -1,82 +1,46 @@
-import Column1 from "@/components/Column1";
-import Column2 from "@/components/Column2";
-import Column3 from "@/components/Column3";
-import Header from "@/components/Header";
-import { api } from "@/utils/utils";
-import { 
-    characterAttributes, 
-    characterExpertise, 
-    characterItens, 
-    characterSkills, 
-    characterSpells 
-} from "@/utils/interfaces";
+import { cookies } from "next/headers";
 
-interface MainCharacterInfo {
+import { api } from "@/utils/utils";
+import CharacterCard from "@/components/CharacterCard";
+
+
+interface CharacterInfo {
+    id: string;
     name: string;
     role: string;
     health: number;
     age: number;
-    race: string;
-    languages: string;
-    affiliation: string;
-    previous: string;
-    defect: string;
-    ideas: string;
-    personality: string;
-    history: string;
-    perception: number;
-    displacement: number;
-    initiative: number;
-    inspiration: number;
-    xp: number;
-    gold: number;
-    characterAttributes: characterAttributes[];
-    characterExpertise: characterExpertise[];
-    characterItens: characterItens[];
-    characterSkills: characterSkills[];
-    characterSpells: characterSpells[];
+    baseRace: string;
+    subRace: string;
 }
 
 export default async function Page(){
-    const id = 123123;
-    const { data }: { data: MainCharacterInfo } = await api.get(`/personagem/${id}`)
+    const token = (await cookies()).get("token");
+    
+    if(!token) throw new Error("Algo deu errado");
+
+    const { data }: { data: CharacterInfo[] } = await api.get(`/personagem`, {
+        headers: {
+            Authorization: `Bearer ${token.value}`
+        }
+    })
 
     return (
-        <main className="w-full bg-slate-300">
-            <Header 
-                name={data.name} 
-                role={data.role} 
-                previous={data.previous}
-                race={data.race}
-                xp={data.xp}
-                tendency="algo"
-                userName="Maricock"
-            />
-            <div className="grid grid-cols-3 py-4">
-                <section className="w-full bg-blue-300">
-                    <Column1 
-                        languages={data.languages}
-                        characterAttributes={data.characterAttributes}
-                        characterExpertise={data.characterExpertise}
-                    />
-                </section>
-                <section className="w-full bg-blue-400">
-                    <Column2 
-                        totalHealth={data.health}
-                        gold={data.gold}
-                        characterItens={data.characterItens}
-                    />
-                </section>
-                <section className="w-full bg-blue-500">
-                    <Column3 
-                        affiliation={data.affiliation}
-                        defect={data.defect}
-                        ideas={data.ideas}
-                        personality={data.personality}
-                        particulars="vo muda aba"
-                    />
-                </section>
-            </div>
-        </main>
+        <div className="w-full h-full flex justify-center items-center gap-4">
+            {
+                data.map(character => {
+                    return (
+                        <CharacterCard 
+                            key={character.id}
+                            id={character.id} 
+                            name={character.name}
+                            role={character.role}
+                            baseRace={character.baseRace}
+                            subRace={character.subRace}
+                        />
+                    )
+                })
+            }
+        </div>
     )
 }
