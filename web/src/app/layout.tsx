@@ -20,9 +20,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="pt" className={`${mulish.className} h-full`}>
-        <body className="w-full h-full px-24 flex flex-col">
-            {children}
-        </body>
+            <body className="w-full h-full px-24 flex flex-col">
+                {children}
+            </body>
         </html>
     );
 }
