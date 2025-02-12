@@ -12,6 +12,7 @@ import {
     characterSkills, 
     characterSpells 
 } from "@/utils/interfaces";
+import { Metadata } from "next";
 
 interface MainCharacterInfo {
     id: string;
@@ -41,7 +42,28 @@ interface MainCharacterInfo {
     characterSpells: characterSpells[];
 }
 
-export default async function Page({ params }: {params: Promise<{ id: string }>}){
+type Props = {
+    params: Promise<{ id: string; }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const id = (await params).id;
+
+    const token = (await cookies()).get("token");
+    if (!token) throw new Error("Não foi encontrado JWT token");
+
+    const response = await api.get(`/personagem/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token.value}`
+        }
+    });
+
+    return {
+        title: response.data.name
+    }
+}
+
+export default async function Page({ params }: Props){
     const id = (await params).id
 
     const token = (await cookies()).get("token");
