@@ -1,5 +1,4 @@
 import { Health, HealthDice, TemporaryHealth, Death, BasicInfo } from "./column2/Health";
-import Hits from "./column2/Hits";
 import Inventory from "./column2/Inventory";
 import { characterItens } from "@/utils/interfaces"
 
@@ -25,7 +24,6 @@ export default function Column2({characterId, totalHealth, currentHealth, gold, 
                 <HealthDice />
                 <Death />
             </div>
-            <Hits characterItens={characterItens}/>
             <Inventory characterId={characterId} gold={gold} characterItens={characterItens}/>
         </div>
     )
