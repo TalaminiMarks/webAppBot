@@ -98,6 +98,7 @@ export default async function Page({ params }: Props){
                 </section>
                 <section className="w-full bg-blue-400">
                     <Column2 
+                        characterId={data.id}
                         totalHealth={data.health}
                         gold={data.gold}
                         characterItens={data.characterItens}

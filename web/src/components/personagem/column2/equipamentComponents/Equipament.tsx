@@ -8,11 +8,12 @@ import { ItensTable, characterItens } from "@/utils/interfaces";
 import ItemField from "./ItemField";
 
 interface EquipamentProps {
+    characterId: string;
     characterItens: characterItens[];
     itens: ItensTable[];
 }
 
-export default function Equipament({characterItens, itens}: EquipamentProps ){
+export default function Equipament({characterId, characterItens, itens}: EquipamentProps ){
     const modalRef = useRef<HTMLDivElement>(null);
     const firstInputRef = useRef<HTMLSelectElement>(null);
 
@@ -59,9 +60,9 @@ export default function Equipament({characterItens, itens}: EquipamentProps ){
     function handleFormData(e: FormEvent<HTMLFormElement>){
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        formData.append("characterId", "123123");
+        formData.append("characterId", characterId);
         const data = Object.fromEntries(formData.entries());
-        api.post("adicionar-item", data).then(response => {
+        api.post("/equipamentos/adicionar", data).then(response => {
             if(response.status === 200){
                 alert(response.data.message);
                 setNewItem(response.data.item);
@@ -73,9 +74,7 @@ export default function Equipament({characterItens, itens}: EquipamentProps ){
         })
     }
 
-    
     return (
-
         <div className="w-3/4 h-72 p-2 flex flex-col items-center gap-2 bg-slate-400 overflow-auto">
             {
                 characterItensList.map(item => {

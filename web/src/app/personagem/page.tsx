@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import { api } from "@/utils/utils";
 import CharacterCard from "@/components/CharacterCard";
 
-
 interface CharacterInfo {
     id: string;
     name: string;

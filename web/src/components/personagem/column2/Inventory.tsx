@@ -22,11 +22,12 @@ function Field({name, value}: InventoryFieldProps){
 }
 
 interface InventoryProps {
+    characterId: string;
     gold: number;
     characterItens: characterItens[];
 }
 
-export default async function Inventory({gold, characterItens}: InventoryProps){
+export default async function Inventory({characterId, gold, characterItens}: InventoryProps){
     const { data } = await api.get("/equipamentos");
     const itens: ItensTable[] = data;
 
@@ -41,7 +42,7 @@ export default async function Inventory({gold, characterItens}: InventoryProps){
                     <Field name="PL" />
                 </div>
                 
-                <Equipaments characterItens={characterItens} itens={itens}/>
+                <Equipaments characterId={characterId} characterItens={characterItens} itens={itens}/>
             </div>
             <span className="w-full text-center uppercase">Inventário</span>
         </div>
