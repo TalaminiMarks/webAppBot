@@ -31,7 +31,7 @@ export default function ItemField({
 
     async function deleteRecord(){
         if(itemRef.current !== null){
-            const { data } = await api.delete(`/deletar-item/${id}`);
+            const { data } = await api.delete(`/equipamentos/deletar/${id}`);
             alert(data.message);
             itemRef.current.remove();
         }
