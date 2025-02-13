@@ -13,7 +13,7 @@ interface EquipamentProps {
     itens: ItensTable[];
 }
 
-export default function Equipament({characterId, characterItens, itens}: EquipamentProps ){
+export default function Backpack({characterId, characterItens, itens}: EquipamentProps ){
     const modalRef = useRef<HTMLDivElement>(null);
     const firstInputRef = useRef<HTMLSelectElement>(null);
 
@@ -75,7 +75,7 @@ export default function Equipament({characterId, characterItens, itens}: Equipam
     }
 
     return (
-        <div className="w-3/4 h-72 p-2 flex flex-col items-center gap-2 bg-slate-400 overflow-auto">
+        <div className="w-full h-72 p-2 flex flex-col items-center gap-2 bg-slate-400 overflow-auto">
             {
                 characterItensList.map(item => {
                     const filter = itens.filter(i => i.id === item.itemsId)
