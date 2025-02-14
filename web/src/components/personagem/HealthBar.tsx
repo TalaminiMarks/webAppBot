@@ -3,10 +3,14 @@
 import { useState } from "react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/16/solid";
 
-export default function HealthBar(){
-    const [health, setHealth] = useState(50)
+interface HealthBarProps {
+    currentHealth: number;
+    maxHealth: number;
+}
 
-    const maxHealth = 100;
+export default function HealthBar({ currentHealth, maxHealth }: HealthBarProps){
+    const [health, setHealth] = useState(currentHealth)
+
     const currentHealthPercent = (health * 100) / maxHealth
 
     function addHealth(){
@@ -28,8 +32,7 @@ export default function HealthBar(){
             </button>
             <div className="relative bg-white w-full h-6 rounded-md">
                 <span className="absolute w-full h-4 text-center z-10 text-black">{health} / {maxHealth}</span>
-                <div className="absolute h-6 bg-red-500 rounded-md" style={{width: `${currentHealthPercent}%`}}>
-                </div>
+                <div className="absolute h-6 bg-red-500 rounded-md" style={{width: `${currentHealthPercent}%`}}></div>
             </div>
             <button onClick={addHealth} className="w-10 h-6 rounded-md flex justify-center items-center bg-zinc-300">
                 <PlusIcon width={20} height={20} />

@@ -7,6 +7,7 @@ import { api } from "@/utils/utils";
 // import Column3 from "@/components/personagem/Column3";
 import Header from "@/components/personagem/Header";
 import HealthBar from "@/components/personagem/HealthBar";
+import Attributes from "@/components/personagem/Attributes";
 import { 
     characterAttributes, 
     characterExpertise, 
@@ -95,8 +96,8 @@ export default async function Page({ params }: Props){
                     <p>Infos do personagem</p>
                 </section>
                 <section className="w-2/3 bg-pink-200">
-                    <HealthBar />
-                    <p>Atributos</p>
+                    <HealthBar currentHealth={20} maxHealth={60}/>
+                    <Attributes characterAttributes={data.characterAttributes}/>
                     <p>CA, Iniciativa, deslocament, inspiração</p>
                     <p>Pericias</p>
                     <p>Inventario e magias e dinheiro</p>
