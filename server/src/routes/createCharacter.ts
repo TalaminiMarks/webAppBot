@@ -21,6 +21,8 @@ export default function route(fastify: FastifyInstance){
                     discordId: character.userId
                 }
             })
+
+            const attributes = await prisma.attributes.findMany();
     
             if(user){
                 await prisma.character.create({
@@ -31,7 +33,19 @@ export default function route(fastify: FastifyInstance){
                         role: character.role,
                         baseRace: character.baseRace,
                         subRace: character.subRace,
-                        userId: user.id
+                        userId: user.id,
+                        characterAttributes: {
+                            createMany: {
+                                data: [
+                                    {attributesId: attributes[0].id, value: 8},
+                                    {attributesId: attributes[1].id, value: 8},
+                                    {attributesId: attributes[2].id, value: 8},
+                                    {attributesId: attributes[3].id, value: 8},
+                                    {attributesId: attributes[4].id, value: 8},
+                                    {attributesId: attributes[5].id, value: 8}
+                                ]
+                            }
+                        }
                     }
                 })
                 res.send({ message: "Personagem criado com sucesso" })
