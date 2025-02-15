@@ -18,7 +18,9 @@ export default function AttrField({ attribute, value }: AttrFieldProps){
     }, [attr])
 
     function addPoint(){
-        setAttr(val => val + 1)
+        if(attr < 30){
+            setAttr(val => val + 1)
+        }
     }
 
     function removePoint(){
