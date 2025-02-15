@@ -23,6 +23,19 @@ export default function route(fastify: FastifyInstance){
             })
 
             const attributes = await prisma.attributes.findMany();
+            const attributesData = [];
+            for(let i = 0; i < attributes.length; i++){
+                const obj = {attributesId: attributes[i].id, value: 8};
+                attributesData.push(obj);
+            }
+
+            const expertise = await prisma.expertise.findMany();
+            const expertiseData = [];
+            for(let i = 0; i < expertise.length; i++){
+                const obj = {expertiseId: expertise[i].id, value: 0};
+                expertiseData.push(obj);
+            };
+
     
             if(user){
                 await prisma.character.create({
@@ -36,14 +49,12 @@ export default function route(fastify: FastifyInstance){
                         userId: user.id,
                         characterAttributes: {
                             createMany: {
-                                data: [
-                                    {attributesId: attributes[0].id, value: 8},
-                                    {attributesId: attributes[1].id, value: 8},
-                                    {attributesId: attributes[2].id, value: 8},
-                                    {attributesId: attributes[3].id, value: 8},
-                                    {attributesId: attributes[4].id, value: 8},
-                                    {attributesId: attributes[5].id, value: 8}
-                                ]
+                                data: attributesData
+                            }
+                        },
+                        characterExpertise: {
+                            createMany: {
+                                data: expertiseData
                             }
                         }
                     }
