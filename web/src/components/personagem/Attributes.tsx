@@ -15,7 +15,6 @@ interface AttributesProps {
 export default async function Attributes({ characterAttributes }: AttributesProps){
     const attributeData = await api.get("/atributos");
     const ATTRIBUTES: DataInfo[] = attributeData.data;
-
     return (
         <div className="w-full flex justify-center items-center gap-4">
             {

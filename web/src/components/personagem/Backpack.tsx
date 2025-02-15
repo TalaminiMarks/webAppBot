@@ -7,13 +7,13 @@ import { api } from "@/utils/utils";
 import { ItensTable, characterItens } from "@/utils/interfaces";
 import ItemField from "./inventoryComponents/ItemField";
 
-interface EquipamentProps {
+interface BackpackProps {
     characterId: string;
     characterItens: characterItens[];
     itens: ItensTable[];
 }
 
-export default function Backpack({characterId, characterItens, itens}: EquipamentProps ){
+export default function Backpack({characterId, characterItens, itens}: BackpackProps ){
     const modalRef = useRef<HTMLDivElement>(null);
     const firstInputRef = useRef<HTMLSelectElement>(null);
 
