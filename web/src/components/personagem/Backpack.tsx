@@ -5,7 +5,7 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 
 import { api } from "@/utils/utils";
 import { ItensTable, characterItens } from "@/utils/interfaces";
-import ItemField from "./ItemField";
+import ItemField from "./inventoryComponents/ItemField";
 
 interface EquipamentProps {
     characterId: string;
