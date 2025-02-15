@@ -1,6 +1,6 @@
 import { api } from "@/utils/utils";
 import { characterAttributes } from "@/utils/interfaces";
-import AttrField from "./column1/AttrField";
+import AttrField from "./characterStatus/AttrField";
 
 interface DataInfo {
     id: number;
