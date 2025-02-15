@@ -2,9 +2,6 @@ import { Metadata } from "next";
 import { cookies } from "next/headers";
 
 import { api } from "@/utils/utils";
-// import Column1 from "@/components/personagem/Column1";
-// import Column2 from "@/components/personagem/Column2";
-// import Column3 from "@/components/personagem/Column3";
 import Header from "@/components/personagem/Header";
 import HealthBar from "@/components/personagem/HealthBar";
 import Attributes from "@/components/personagem/Attributes";
@@ -13,8 +10,11 @@ import {
     characterExpertise, 
     characterItens, 
     characterSkills, 
-    characterSpells 
+    characterSpells, 
+    ItensTable
 } from "@/utils/interfaces";
+import Expertise from "@/components/personagem/Expertise";
+import Backpack from "@/components/personagem/Backpack";
 
 
 interface MainCharacterInfo {
@@ -78,6 +78,8 @@ export default async function Page({ params }: Props){
         }
     });
 
+    const itens: ItensTable[] = (await api.get("/equipamentos")).data
+
     const data: MainCharacterInfo = response.data
 
     return (
@@ -95,37 +97,17 @@ export default async function Page({ params }: Props){
                 <section className="w-1/3 bg-purple-300">
                     <p>Infos do personagem</p>
                 </section>
-                <section className="w-2/3 bg-pink-200">
+                <section className="w-2/3 bg-pink-200 flex flex-col items-center">
                     <HealthBar currentHealth={20} maxHealth={60}/>
                     <Attributes characterAttributes={data.characterAttributes}/>
+                    <div className="w-full flex justify-center items-center p-2">
+                        <Backpack characterId={data.id} characterItens={data.characterItens} itens={itens}/>
+                        <Expertise />
+                    </div>
                     <p>CA, Iniciativa, deslocament, inspiração</p>
                     <p>Pericias</p>
                     <p>Inventario e magias e dinheiro</p>
                 </section>
-                {/* <section className="w-full bg-blue-300">
-                    <Column1 
-                        languages={data.languages}
-                        characterAttributes={data.characterAttributes}
-                        characterExpertise={data.characterExpertise}
-                    />
-                </section>
-                <section className="w-full bg-blue-400">
-                    <Column2 
-                        characterId={data.id}
-                        totalHealth={data.health}
-                        gold={data.gold}
-                        characterItens={data.characterItens}
-                    />
-                </section>
-                <section className="w-full bg-blue-500">
-                    <Column3 
-                        affiliation={data.affiliation}
-                        defect={data.defect}
-                        ideas={data.ideas}
-                        personality={data.personality}
-                        particulars="vo muda aba"
-                    />
-                </section> */}
             </div>
         </main>
     )
