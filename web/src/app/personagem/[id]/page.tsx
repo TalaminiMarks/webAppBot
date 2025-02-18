@@ -102,7 +102,7 @@ export default async function Page({ params }: Props){
                     <Attributes characterAttributes={data.characterAttributes}/>
                     <div className="w-full flex justify-center items-center p-2">
                         <Backpack characterId={data.id} characterItens={data.characterItens} itens={itens}/>
-                        <Expertise />
+                        <Expertise characterExpertise={data.characterExpertise}/>
                     </div>
                     <p>CA, Iniciativa, deslocament, inspiração</p>
                     <p>Pericias</p>

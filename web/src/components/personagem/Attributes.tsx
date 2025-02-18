@@ -1,20 +1,13 @@
 import { api } from "@/utils/utils";
-import { characterAttributes } from "@/utils/interfaces";
+import { characterAttributes, DataInfo } from "@/utils/interfaces";
 import AttrField from "./characterStatus/AttrField";
-
-interface DataInfo {
-    id: number;
-    name: string;
-    value: number;
-}
 
 interface AttributesProps {
     characterAttributes: characterAttributes[];
 }
 
 export default async function Attributes({ characterAttributes }: AttributesProps){
-    const attributeData = await api.get("/atributos");
-    const ATTRIBUTES: DataInfo[] = attributeData.data;
+    const ATTRIBUTES: DataInfo[] = ((await api.get("/atributos")).data);
     return (
         <div className="w-full flex justify-center items-center gap-4">
             {
