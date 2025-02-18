@@ -57,3 +57,9 @@ export interface characterSpells {
     typeBonusDamage: string;
     additionalDescription: string;
 }
+
+export interface DataInfo {
+    id: number;
+    name: string;
+    value: number;
+}
