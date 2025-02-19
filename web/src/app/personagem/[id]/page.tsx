@@ -4,13 +4,14 @@ import { cookies } from "next/headers";
 import { api } from "@/utils/utils";
 import Header from "@/components/personagem/Header";
 import HealthBar from "@/components/personagem/HealthBar";
-import CharacterStatus from "@/components/personagem/CharacterStatus";
+import CharacterStats from "@/components/personagem/CharacterStats";
 import { 
     characterAttributes, 
     characterExpertise, 
     characterItens, 
     characterSkills, 
     characterSpells, 
+    DataInfo, 
     ItensTable
 } from "@/utils/interfaces";
 import Backpack from "@/components/personagem/Backpack";
@@ -78,7 +79,11 @@ export default async function Page({ params }: Props){
     });
     const data: MainCharacterInfo = response.data;
 
-    const itens: ItensTable[] = (await api.get("/equipamentos")).data;
+    const ITENS: ItensTable[] = (await api.get("/equipamentos")).data;
+
+    const ATTRIBUTES: DataInfo[] = (await api.get("/atributos")).data;
+
+    const EXPERTISE: DataInfo[] = (await api.get("/pericias")).data;
 
 
     return (
@@ -98,9 +103,14 @@ export default async function Page({ params }: Props){
                 </section>
                 <section className="w-2/3 bg-pink-200 flex flex-col items-center">
                     <HealthBar currentHealth={20} maxHealth={60}/>
-                    <CharacterStatus characterAttributes={data.characterAttributes} characterExpertise={data.characterExpertise}/>
+                    <CharacterStats 
+                        characterAttributes={data.characterAttributes} 
+                        characterExpertise={data.characterExpertise}
+                        attributes={ATTRIBUTES}
+                        expertise={EXPERTISE}
+                    />
                     <div className="w-full flex justify-center items-center">
-                        <Backpack characterId={data.id} characterItens={data.characterItens} itens={itens}/>
+                        <Backpack characterId={data.id} characterItens={data.characterItens} itens={ITENS}/>
                     </div>
                     <p>CA, Iniciativa, deslocament, inspiração</p>
                     <p>Inventario e magias e dinheiro</p>

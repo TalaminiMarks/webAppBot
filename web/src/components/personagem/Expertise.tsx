@@ -1,6 +1,6 @@
 import { characterExpertise, DataInfo } from "@/utils/interfaces"
 import { api } from "@/utils/utils"
-import ExptField from "./characterStatus/ExptField"
+import ExptField from "./characterStatsComponents/ExptField"
 
 interface ExpertiseProps{
     characterExpertise: characterExpertise[]
