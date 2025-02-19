@@ -7,9 +7,10 @@ import { MinusBtn, PlusBtn } from "../geral/Buttons";
 interface AttrFieldProps {
     attribute: string;
     value: number;
+    levelUp: boolean;
 }
 
-export default function AttrField({ attribute, value }: AttrFieldProps){
+export default function AttrField({ attribute, value, levelUp }: AttrFieldProps){
     const [attr, setAttr] = useState(value);
     const [modAttr, setModAttr] = useState(getModAttr(value))
 
@@ -35,9 +36,9 @@ export default function AttrField({ attribute, value }: AttrFieldProps){
                 <p className="text-center text-lg font-bold uppercase">{attribute}</p>
             </div>
             <div className="w-full flex justify-between items-center">
-                <MinusBtn onClick={removePoint} levelUp />
+                <MinusBtn onClick={removePoint} levelUp={levelUp} />
                 <span className="bg-stone-300 px-4 py-2">{attr}</span>
-                <PlusBtn onClick={addPoint} levelUp />
+                <PlusBtn onClick={addPoint} levelUp={levelUp} />
             </div>
             <div className="px-2 rounded-xl border-2 border-slate-400">
                 <span>{modAttr > 0 ? "+" + modAttr : modAttr}</span>

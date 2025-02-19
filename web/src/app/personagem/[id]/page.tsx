@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { api } from "@/utils/utils";
 import Header from "@/components/personagem/Header";
 import HealthBar from "@/components/personagem/HealthBar";
-import Attributes from "@/components/personagem/Attributes";
+import CharacterStatus from "@/components/personagem/CharacterStatus";
 import { 
     characterAttributes, 
     characterExpertise, 
@@ -13,7 +13,6 @@ import {
     characterSpells, 
     ItensTable
 } from "@/utils/interfaces";
-import Expertise from "@/components/personagem/Expertise";
 import Backpack from "@/components/personagem/Backpack";
 
 
@@ -77,10 +76,10 @@ export default async function Page({ params }: Props){
             Authorization: `Bearer ${token.value}`
         }
     });
+    const data: MainCharacterInfo = response.data;
 
-    const itens: ItensTable[] = (await api.get("/equipamentos")).data
+    const itens: ItensTable[] = (await api.get("/equipamentos")).data;
 
-    const data: MainCharacterInfo = response.data
 
     return (
         <main className="w-full bg-slate-300">
@@ -99,13 +98,11 @@ export default async function Page({ params }: Props){
                 </section>
                 <section className="w-2/3 bg-pink-200 flex flex-col items-center">
                     <HealthBar currentHealth={20} maxHealth={60}/>
-                    <Attributes characterAttributes={data.characterAttributes}/>
-                    <div className="w-full flex justify-center items-center p-2">
+                    <CharacterStatus characterAttributes={data.characterAttributes} characterExpertise={data.characterExpertise}/>
+                    <div className="w-full flex justify-center items-center">
                         <Backpack characterId={data.id} characterItens={data.characterItens} itens={itens}/>
-                        <Expertise characterExpertise={data.characterExpertise}/>
                     </div>
                     <p>CA, Iniciativa, deslocament, inspiração</p>
-                    <p>Pericias</p>
                     <p>Inventario e magias e dinheiro</p>
                 </section>
             </div>
