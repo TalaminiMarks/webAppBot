@@ -21,6 +21,7 @@ export default function route(fastify: FastifyInstance){
             select: {
                 id: true,
                 name: true,
+                attributesId: true
             },
             orderBy: {
                 id: 'asc'
