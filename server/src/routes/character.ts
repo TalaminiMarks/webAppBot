@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import z from 'zod';
 
-import { prisma } from "../utils/prisma";
+import { prisma } from "../utils/utils";
 
 // Rota para recuperar todos os personagens do DB
 export default function route(fastify: FastifyInstance){

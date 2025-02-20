@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { FastifyInstance } from "fastify";
 import z from "zod"
 import axios from 'axios';
-import { prisma } from '../utils/prisma';
+import { prisma } from '../utils/utils';
 
 interface userResponseInfo {
     id: string;

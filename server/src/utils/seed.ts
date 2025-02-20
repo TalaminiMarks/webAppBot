@@ -1,4 +1,4 @@
-import { prisma } from "./prisma";
+import { prisma } from "./utils";
 
 async function attributes(){
     await prisma.attributes.createMany({

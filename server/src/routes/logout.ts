@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { prisma } from "../utils/prisma";
+import { prisma } from "../utils/utils";
 import z from "zod";
 import axios from "axios";
 

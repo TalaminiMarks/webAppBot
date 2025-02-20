@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { prisma } from "../utils/prisma";
+import { prisma } from "../utils/utils";
 
 export default function route(fastify: FastifyInstance){
     fastify.get("/atributos", async (req, res)=>{

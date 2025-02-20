@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import z from "zod";
-import { prisma } from "../utils/prisma";
+import { prisma } from "../utils/utils";
 
 export default function route(fastify: FastifyInstance){
     fastify.get("/habilidades", async (req, res)=> {

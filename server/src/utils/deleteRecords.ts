@@ -1,4 +1,4 @@
-import { prisma } from "./prisma";
+import { prisma } from "./utils";
 
 async function deleteRecords() {
     await Promise.all([

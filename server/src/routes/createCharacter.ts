@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify"
 import z from "zod"
-import { prisma } from "../utils/prisma"
+import { getModAttr, prisma } from "../utils/utils"
 
 export default function route(fastify: FastifyInstance){
     fastify.post("/personagem/criar", async (req, res)=> {
@@ -24,8 +24,9 @@ export default function route(fastify: FastifyInstance){
 
             const attributes = await prisma.attributes.findMany();
             const attributesData = [];
+            const baseValue = 8;
             for(let i = 0; i < attributes.length; i++){
-                const obj = {attributesId: attributes[i].id, value: 8};
+                const obj = {attributesId: attributes[i].id, value: baseValue, modValue: getModAttr(baseValue)};
                 attributesData.push(obj);
             }
 
