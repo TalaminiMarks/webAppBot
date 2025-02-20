@@ -64,13 +64,17 @@ model Attributes {
   name      String   @unique
   createdAt DateTime @default(now()) @ignore
 
+  Expertise           Expertise[]
   characterAttributes CharacterAttributes[]
 }
 
 model Expertise {
-  id        Int      @id @unique @default(autoincrement())
-  name      String   @unique
-  createdAt DateTime @default(now()) @ignore
+  id           Int      @id @unique @default(autoincrement())
+  name         String   @unique
+  attributesId Int
+  createdAt    DateTime @default(now()) @ignore
+
+  attributes Attributes @relation(fields: [attributesId], references: [id])
 
   characterExpertise CharacterExpertise[]
 }
