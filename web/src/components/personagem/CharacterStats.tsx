@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef, MouseEvent, KeyboardEvent, BaseSyntheticEvent } from "react";
+import { useState, useRef, MouseEvent, KeyboardEvent } from "react";
 import { XMarkIcon } from "@heroicons/react/20/solid"
 
 import { api, getModAttr } from "@/utils/utils";
@@ -25,12 +25,23 @@ export default function CharacterStats({ characterAttributes, characterExpertise
     const [originalValue, setOriginalValue] = useState(0);
     const [modAttr, setModAttr] = useState(getModAttr(8));
 
+    function checkFirstValue(target: characterAttributes, index: number){
+        setOriginalValue(characterAttributes[index].value);
+        if(target.value === originalValue){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     function addPoint(key: number){
         for(let i = 0; i < characterAttributesList.length; i++){
             if(characterAttributesList[i].attributesId === key){
                 const target = characterAttributesList[i];
                 if (target.value < 30){
                     target.value += 1;
+                    setModAttr(getModAttr(target.value));
                     setCharacterAttributesList(prev => {
                         const filter = prev.filter(i => i.attributesId !== key)
                         return [...filter, target]
@@ -44,8 +55,9 @@ export default function CharacterStats({ characterAttributes, characterExpertise
         for(let i = 0; i < characterAttributesList.length; i++){
             if(characterAttributesList[i].attributesId === key){
                 const target = characterAttributesList[i];
-                if (target.value > 0){
+                if (checkFirstValue(target, i)){
                     target.value -= 1;
+                    setModAttr(getModAttr(target.value));
                     setCharacterAttributesList(prev => {
                         const filter = prev.filter(i => i.attributesId !== key)
                         return [...filter, target]
@@ -80,10 +92,6 @@ export default function CharacterStats({ characterAttributes, characterExpertise
             closeModal();
         }
     }
-
-    // useEffect(()=>{
-    //     setModAttr(getModAttr(value))
-    // }, [value])
 
     return (
         <div>
