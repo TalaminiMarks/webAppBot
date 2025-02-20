@@ -139,6 +139,7 @@ model CharacterAttributes {
   characterId  String
   attributesId Int
   value        Int      @default(0)
+  modValue     Int
   createdAt    DateTime @default(now()) @ignore
 
   character Character  @relation(fields: [characterId], references: [id])
