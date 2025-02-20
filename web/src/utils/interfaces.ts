@@ -26,6 +26,7 @@ export interface characterAttributes {
     id: string | number;
     attributesId: number;
     value: number;
+    modValue: number;
 }
 
 export interface characterExpertise {

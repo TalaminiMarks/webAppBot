@@ -19,11 +19,9 @@ export default function CharacterStats({ characterAttributes, characterExpertise
     const modalRef = useRef<HTMLDivElement>(null);
     const focusInputRef = useRef<HTMLInputElement>(null);
 
+    const [originalValue, setOriginalValue] = useState(0);
     const [characterAttributesList, setCharacterAttributesList] = useState(characterAttributes)
     // const [characterExpertiseList, setCharacterExpertiseList] = useState(characterExpertise)
-
-    const [originalValue, setOriginalValue] = useState(0);
-    const [modAttr, setModAttr] = useState(getModAttr(8));
 
     function checkFirstValue(target: characterAttributes, index: number){
         setOriginalValue(characterAttributes[index].value);
@@ -41,7 +39,7 @@ export default function CharacterStats({ characterAttributes, characterExpertise
                 const target = characterAttributesList[i];
                 if (target.value < 30){
                     target.value += 1;
-                    setModAttr(getModAttr(target.value));
+                    target.modValue = getModAttr(target.value);
                     setCharacterAttributesList(prev => {
                         const filter = prev.filter(i => i.attributesId !== key)
                         return [...filter, target]
@@ -57,7 +55,7 @@ export default function CharacterStats({ characterAttributes, characterExpertise
                 const target = characterAttributesList[i];
                 if (checkFirstValue(target, i)){
                     target.value -= 1;
-                    setModAttr(getModAttr(target.value));
+                    target.modValue = getModAttr(target.value);
                     setCharacterAttributesList(prev => {
                         const filter = prev.filter(i => i.attributesId !== key)
                         return [...filter, target]
@@ -107,20 +105,22 @@ export default function CharacterStats({ characterAttributes, characterExpertise
                     >
                         <XMarkIcon width={32} height={32}/>
                     </button>
-                    <div>
-                        {
-                            attributes.map(attr => {
-                                const filter = characterAttributesList.find(i => i.attributesId === attr.id);
-                                if (!filter) throw new Error("Erro nos attributos");
-                                return(
-                                    <div key={attr.id} className="flex items-center">
-                                        <MinusBtn onClick={() => removePoint(attr.id)} levelUp/>
-                                        <AttrField attribute={attr.name} value={filter.value} modValue={modAttr}/>
-                                        <PlusBtn onClick={() => addPoint(attr.id)} levelUp/>
-                                    </div>
-                                )
-                            })
-                        }
+                    <div className="w-full h-full px-12 flex justify-center items-center">
+                        <div className="flex flex-col gap-2">
+                            {
+                                attributes.map(attr => {
+                                    const filter = characterAttributesList.find(i => i.attributesId === attr.id);
+                                    if (!filter) throw new Error("Erro nos attributos");
+                                    return(
+                                        <div key={attr.id} className="flex items-center gap-2">
+                                            <MinusBtn onClick={() => removePoint(attr.id)} levelUp/>
+                                            <AttrField attribute={attr.name} value={filter.value} modValue={filter.modValue}/>
+                                            <PlusBtn onClick={() => addPoint(attr.id)} levelUp/>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
