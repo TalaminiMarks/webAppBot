@@ -14,26 +14,34 @@ async function attributes(){
 }
 
 async function expertise(){
+    const attributes = await prisma.attributes.findMany();
+    const str = attributes.find(i => i.name === "Força");
+    const dex = attributes.find(i => i.name === "Destreza");
+    const con = attributes.find(i => i.name === "Constituição");
+    const int = attributes.find(i => i.name === "Inteligência");
+    const wis = attributes.find(i => i.name === "Sabedoria");
+    const char = attributes.find(i => i.name === "Carisma");
+    if(!str || !dex || !con || !int || !wis || !char) throw new Error("Algo deu errado");
     await prisma.expertise.createMany({
         data: [
-            {name: "Acrobacia"},
-            {name: "Arcanismo"},
-            {name: "Atletismo"},
-            {name: "Atuação"},
-            {name: "Blefar"},
-            {name: "Furtividade"},
-            {name: "História"},
-            {name: "Intimidação"},
-            {name: "Intuição"},
-            {name: "Investigação"},
-            {name: "Lidar com Animais"},
-            {name: "Medicina"},
-            {name: "Natureza"},
-            {name: "Percepção"},
-            {name: "Persuasão"},
-            {name: "Prestidigitação"},
-            {name: "Religião"},
-            {name: "Sobrevivência"}
+            {name: "Acrobacia", attributesId: dex.id},
+            {name: "Arcanismo", attributesId: int.id},
+            {name: "Atletismo", attributesId: str.id},
+            {name: "Atuação", attributesId: char.id},
+            {name: "Enganação", attributesId: char.id},
+            {name: "Furtividade", attributesId: dex.id},
+            {name: "História", attributesId: int.id},
+            {name: "Intimidação", attributesId: char.id},
+            {name: "Intuição", attributesId: wis.id},
+            {name: "Investigação", attributesId: int.id},
+            {name: "Adestrar Animais", attributesId: wis.id},
+            {name: "Medicina", attributesId: wis.id},
+            {name: "Natureza", attributesId: int.id},
+            {name: "Percepção", attributesId: wis.id},
+            {name: "Persuasão", attributesId: char.id},
+            {name: "Prestidigitação", attributesId: dex.id},
+            {name: "Religião", attributesId: int.id},
+            {name: "Sobrevivência", attributesId: wis.id}
         ]
     })
 }
@@ -96,7 +104,8 @@ async function spells(){
 }
 
 async function main(){
-    await Promise.all([attributes(), expertise(), items(), skills(), spells()])
+    await Promise.all([attributes(), items(), skills(), spells()])
+    await expertise();
 }
 
  main()
