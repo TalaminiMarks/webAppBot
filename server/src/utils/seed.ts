@@ -24,24 +24,24 @@ async function expertise(){
     if(!str || !dex || !con || !int || !wis || !char) throw new Error("Algo deu errado");
     await prisma.expertise.createMany({
         data: [
-            {name: "Acrobacia", attributesId: dex.id},
-            {name: "Arcanismo", attributesId: int.id},
-            {name: "Atletismo", attributesId: str.id},
-            {name: "Atuação", attributesId: char.id},
-            {name: "Enganação", attributesId: char.id},
-            {name: "Furtividade", attributesId: dex.id},
-            {name: "História", attributesId: int.id},
-            {name: "Intimidação", attributesId: char.id},
-            {name: "Intuição", attributesId: wis.id},
-            {name: "Investigação", attributesId: int.id},
-            {name: "Adestrar Animais", attributesId: wis.id},
-            {name: "Medicina", attributesId: wis.id},
-            {name: "Natureza", attributesId: int.id},
-            {name: "Percepção", attributesId: wis.id},
-            {name: "Persuasão", attributesId: char.id},
-            {name: "Prestidigitação", attributesId: dex.id},
-            {name: "Religião", attributesId: int.id},
-            {name: "Sobrevivência", attributesId: wis.id}
+            {name: "Acrobacia (des)", attributesId: dex.id},
+            {name: "Arcanismo (int)", attributesId: int.id},
+            {name: "Atletismo (for)", attributesId: str.id},
+            {name: "Atuação (car)", attributesId: char.id},
+            {name: "Enganação (car)", attributesId: char.id},
+            {name: "Furtividade (des)", attributesId: dex.id},
+            {name: "História (int)", attributesId: int.id},
+            {name: "Intimidação (car)", attributesId: char.id},
+            {name: "Intuição (sab)", attributesId: wis.id},
+            {name: "Investigação (int)", attributesId: int.id},
+            {name: "Adestrar Animais (sab)", attributesId: wis.id},
+            {name: "Medicina (sab)", attributesId: wis.id},
+            {name: "Natureza (int)", attributesId: int.id},
+            {name: "Percepção (sab)", attributesId: wis.id},
+            {name: "Persuasão (car)", attributesId: char.id},
+            {name: "Prestidigitação (des)", attributesId: dex.id},
+            {name: "Religião (int)", attributesId: int.id},
+            {name: "Sobrevivência (sab)", attributesId: wis.id}
         ]
     })
 }
