@@ -8,13 +8,15 @@ async function main(){
         prisma.characterSkills.deleteMany(),
         prisma.characterSpells.deleteMany()
     ])
+        .then(console.log)
+        .catch(console.error);
 
-    await prisma.character.deleteMany();
+    await prisma.character.deleteMany()
 }
 
-try {
+try{
     main()
 }
-catch(e) {
+catch(e){
     console.error(e)
 }
