@@ -14,9 +14,15 @@ interface CharacterStatsProps {
     characterExpertise: characterExpertise[];
     attributes: Attribute[];
     expertise: Expertise[];
+    proficiency: number;
+    initiative: number;
+    inspiration: number;
+    perception: number;
 }
 
-export default function CharacterStats({ characterAttributes, characterExpertise, attributes, expertise }: CharacterStatsProps){
+export default function CharacterStats({ 
+    characterAttributes, characterExpertise, attributes, expertise, initiative, inspiration, perception, proficiency
+}: CharacterStatsProps){
     const modalRef = useRef<HTMLDivElement>(null);
     const focusInputRef = useRef<HTMLInputElement>(null);
 
@@ -77,6 +83,7 @@ export default function CharacterStats({ characterAttributes, characterExpertise
                         const filter = prev.filter(i => i.attributesId !== key)
                         return [...filter, target]
                     });
+                    updateModAttribute(target);
                 }
             }
         }
@@ -106,7 +113,6 @@ export default function CharacterStats({ characterAttributes, characterExpertise
             closeModal();
         }
     }
-
     return (
         <div>
             <button className="px-4 py-2 bg-zinc-400 rounded-lg border-2 border-stone-500" onClick={openModal}>
@@ -147,6 +153,12 @@ export default function CharacterStats({ characterAttributes, characterExpertise
                                     )
                                 })
                             }
+                        </div>
+                        <div>
+                            <p>iniciativa: {initiative}</p>
+                            <p>proficiencia bonus: {proficiency}</p>
+                            <p>inspiração: {inspiration}</p>
+                            <p>percepção: {perception}</p>
                         </div>
                     </div>
                 </div>

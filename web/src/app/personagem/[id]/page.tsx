@@ -33,6 +33,7 @@ interface MainCharacterInfo {
     ideas: string;
     personality: string;
     history: string;
+    proficiency: number;
     perception: number;
     displacement: number;
     initiative: number;
@@ -86,7 +87,6 @@ export default async function Page({ params }: Props){
 
     const EXPERTISE: Expertise[] = (await api.get("/pericias")).data;
 
-
     return (
         <main className="w-full bg-slate-300">
             <Header 
@@ -109,6 +109,10 @@ export default async function Page({ params }: Props){
                         characterExpertise={data.characterExpertise}
                         attributes={ATTRIBUTES}
                         expertise={EXPERTISE}
+                        initiative={data.initiative}
+                        inspiration={data.inspiration}
+                        proficiency={data.proficiency}
+                        perception={data.perception}
                     />
                     <div className="w-full flex justify-center items-center">
                         <Backpack characterId={data.id} characterItens={data.characterItens} itens={ITENS}/>
