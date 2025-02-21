@@ -59,8 +59,12 @@ export interface characterSpells {
     additionalDescription: string;
 }
 
-export interface DataInfo {
+export interface Attribute {
     id: number;
     name: string;
     value: number;
+}
+
+export interface Expertise extends Attribute {
+    attributesId: number;
 }

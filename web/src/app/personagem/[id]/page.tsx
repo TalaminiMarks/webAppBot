@@ -11,7 +11,8 @@ import {
     characterItens, 
     characterSkills, 
     characterSpells, 
-    DataInfo, 
+    Attribute,
+    Expertise, 
     ItensTable
 } from "@/utils/interfaces";
 import Backpack from "@/components/personagem/Backpack";
@@ -81,9 +82,9 @@ export default async function Page({ params }: Props){
 
     const ITENS: ItensTable[] = (await api.get("/equipamentos")).data;
 
-    const ATTRIBUTES: DataInfo[] = (await api.get("/atributos")).data;
+    const ATTRIBUTES: Attribute[] = (await api.get("/atributos")).data;
 
-    const EXPERTISE: DataInfo[] = (await api.get("/pericias")).data;
+    const EXPERTISE: Expertise[] = (await api.get("/pericias")).data;
 
 
     return (
