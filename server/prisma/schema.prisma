@@ -155,6 +155,7 @@ model CharacterExpertise {
   characterId String
   expertiseId Int
   value       Int      @default(0)
+  proficiency Int      @default(0)
   createdAt   DateTime @default(now()) @ignore
 
   character Character @relation(fields: [characterId], references: [id])
