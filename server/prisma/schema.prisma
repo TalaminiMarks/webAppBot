@@ -25,29 +25,31 @@ model User {
 }
 
 model Character {
-  id           String   @id @unique
-  name         String
-  role         String
-  health       Int      @default(30)
-  age          String
-  baseRace     String
-  subRace      String
-  languages    String   @default("Nenhum Registro")
-  affiliation  String   @default("Nenhum Registro")
-  previous     String   @default("Nenhum Registro")
-  defect       String   @default("Nenhum Registro")
-  ideas        String   @default("Nenhum Registro")
-  personality  String   @default("Nenhum Registro")
-  history      String   @default("Nenhum Registro")
-  proficiency  Int      @default(0)
-  perception   Int      @default(0)
-  displacement Int      @default(0)
-  initiaitve   Int      @default(0)
-  inspiration  Int      @default(0)
-  xp           Int      @default(0)
-  gold         Int      @default(50)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id            String   @id @unique
+  name          String
+  role          String
+  maxHealth     Int      @default(30)
+  currentHealth Int      @default(10)
+  age           String
+  baseRace      String
+  subRace       String
+  armor         Int      @default(0)
+  languages     String   @default("Nenhum Registro")
+  affiliation   String   @default("Nenhum Registro")
+  previous      String   @default("Nenhum Registro")
+  defect        String   @default("Nenhum Registro")
+  ideas         String   @default("Nenhum Registro")
+  personality   String   @default("Nenhum Registro")
+  history       String   @default("Nenhum Registro")
+  proficiency   Int      @default(0)
+  perception    Int      @default(0)
+  displacement  Int      @default(0)
+  initiative    Int      @default(0)
+  inspiration   Int      @default(0)
+  xp            Int      @default(0)
+  gold          Int      @default(50)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
