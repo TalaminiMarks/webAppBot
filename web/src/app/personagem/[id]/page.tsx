@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import { cookies } from "next/headers";
 
 import { api } from "@/utils/utils";
-import Header from "@/components/personagem/Header";
-import HealthBar from "@/components/personagem/HealthBar";
-import CharacterStats from "@/components/personagem/CharacterStats";
+import Header from "@/components/character/Header";
+import HealthBar from "@/components/character/HealthBar";
+import CharacterStats from "@/components/character/CharacterStats";
 import { 
     characterAttributes, 
     characterExpertise, 
@@ -15,7 +15,7 @@ import {
     Expertise, 
     ItensTable
 } from "@/utils/interfaces";
-import Backpack from "@/components/personagem/Backpack";
+import Backpack from "@/components/character/Backpack";
 
 
 interface MainCharacterInfo {
