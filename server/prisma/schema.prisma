@@ -39,6 +39,7 @@ model Character {
   ideas        String   @default("Nenhum Registro")
   personality  String   @default("Nenhum Registro")
   history      String   @default("Nenhum Registro")
+  proficiency  Int      @default(0)
   perception   Int      @default(0)
   displacement Int      @default(0)
   initiaitve   Int      @default(0)
@@ -155,7 +156,6 @@ model CharacterExpertise {
   characterId String
   expertiseId Int
   value       Int      @default(0)
-  proficiency Int      @default(0)
   createdAt   DateTime @default(now()) @ignore
 
   character Character @relation(fields: [characterId], references: [id])
