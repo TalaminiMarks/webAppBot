@@ -14,7 +14,6 @@ async function deleteRecords() {
     
     await Promise.all([
         prisma.character.deleteMany(),
-        prisma.attributes.deleteMany(),
         prisma.expertise.deleteMany(),
         prisma.items.deleteMany(),
         prisma.skills.deleteMany(),
@@ -22,6 +21,10 @@ async function deleteRecords() {
     ])
     .then(console.log)
     .catch(console.error)
+    
+    await Promise.resolve(prisma.attributes.deleteMany())
+    .then(console.log)
+    .catch(console.error);
 }
 
 deleteRecords()
