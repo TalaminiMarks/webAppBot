@@ -16,6 +16,7 @@ import {
     ItensTable
 } from "@/utils/interfaces";
 import Backpack from "@/components/character/Backpack";
+import CharacterStory from "@/components/character/characterStory";
 
 
 interface MainCharacterInfo {
@@ -23,6 +24,7 @@ interface MainCharacterInfo {
     name: string;
     role: string;
     health: number;
+    armor: number;
     age: number;
     baseRace: string;
     subRace: string;
@@ -99,8 +101,8 @@ export default async function Page({ params }: Props){
                 userName="Maricock"
             />
             <div className="flex py-4">
-                <section className="w-1/3 bg-purple-300">
-                    <p>Infos do personagem</p>
+                <section className="w-1/3 bg-purple-300 p-2 flex flex-col gap-1">
+                    <CharacterStory />
                 </section>
                 <section className="w-2/3 bg-pink-200 flex flex-col items-center">
                     <HealthBar currentHealth={20} maxHealth={60}/>
@@ -113,12 +115,13 @@ export default async function Page({ params }: Props){
                         inspiration={data.inspiration}
                         proficiency={data.proficiency}
                         perception={data.perception}
+                        armor={data.armor}
                     />
                     <div className="w-full flex justify-center items-center">
                         <Backpack characterId={data.id} characterItens={data.characterItens} itens={ITENS}/>
                     </div>
-                    <p>CA, Iniciativa, deslocament, inspiração</p>
                     <p>Inventario e magias e dinheiro</p>
+
                 </section>
             </div>
         </main>
