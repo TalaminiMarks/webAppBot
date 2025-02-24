@@ -18,10 +18,11 @@ interface CharacterStatsProps {
     initiative: number;
     inspiration: number;
     perception: number;
+    armor: number;
 }
 
 export default function CharacterStats({ 
-    characterAttributes, characterExpertise, attributes, expertise, initiative, inspiration, perception, proficiency
+    characterAttributes, characterExpertise, attributes, expertise, initiative, inspiration, perception, proficiency, armor
 }: CharacterStatsProps){
     const modalRef = useRef<HTMLDivElement>(null);
     const focusInputRef = useRef<HTMLInputElement>(null);
@@ -120,10 +121,10 @@ export default function CharacterStats({
             </button>
             <div ref={modalRef} className="fixed top-0 left-0 w-full h-full hidden bg-black bg-opacity-50 justify-center items-center z-50" onClick={handleClickOutside} onKeyDown={handleKeyDown} aria-modal="true">
                 <input type="text" className="sr-only" ref={focusInputRef}/>
-                <div className="w-[95%] h-[95%] bg-red-400">
+                <div className="w-[70%] h-[95%] bg-red-400">
                     <button 
                         onClick={closeModal}
-                        className="absolute top-6 right-12 h-10 w-10 flex justify-center items-center rounded bg-black text-white hover:bg-white hover:text-black transition"
+                        className="absolute right-[15%] h-10 w-10 flex justify-center items-center rounded bg-black text-white hover:bg-white hover:text-black transition"
                     >
                         <XMarkIcon width={32} height={32}/>
                     </button>
@@ -155,6 +156,7 @@ export default function CharacterStats({
                             }
                         </div>
                         <div>
+                            <p>Classe Armadura: {armor}</p>
                             <p>iniciativa: {initiative}</p>
                             <p>proficiencia bonus: {proficiency}</p>
                             <p>inspiração: {inspiration}</p>
