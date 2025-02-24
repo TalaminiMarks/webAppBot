@@ -46,6 +46,8 @@ model Character {
   displacement  Int      @default(0)
   initiative    Int      @default(0)
   inspiration   Int      @default(0)
+  level         Int      @default(1)
+  levelUp       Boolean  @default(false)
   xp            Int      @default(0)
   gold          Int      @default(50)
   createdAt     DateTime @default(now())
