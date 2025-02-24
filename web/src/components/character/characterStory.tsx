@@ -28,35 +28,45 @@ function TextField({ title, children }: TextFieldProps){
     )
 }
 
-export default function CharacterStory(){
+interface CharacterStoryProps {
+    affiliation: string;
+    previous: string;
+    defect: string;
+    ideas: string;
+    personality: string;
+    story: string;
+    tendency: string;   
+}
+
+export default function CharacterStory({ affiliation, defect, story, ideas, personality, previous, tendency}: CharacterStoryProps){
     return (
         <>
             <TextField title="Tendencia">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores blanditiis earum provident et labore unde, illo rerum dolorum nisi aut rem? Aspernatur dolor esse cumque accusamus hic maxime iste quas?</p>
+                <p>{tendency}</p>
             </TextField>
 
             <TextField title="Personalidade">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores blanditiis earum provident et labore unde, illo rerum dolorum nisi aut rem? Aspernatur dolor esse cumque ac
-                    cusamus hic maxime iste quas?</p>
+                <p>{personality}</p>
             </TextField>
+
             <TextField title="Ideais">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores blanditiis earum provident et labore unde, illo rerum dolorum nisi aut rem? Aspernatur dolor esse cumque accusamus hic maxime iste quas?</p>
+                <p>{ideas}</p>
             </TextField>
 
             <TextField title="Ligações">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores blanditiis earum provident et labore unde, illo rerum dolorum nisi aut rem? Aspernatur dolor esse cumque accusamus hic maxime iste quas?</p>
+                <p>{affiliation}</p>
             </TextField>
 
             <TextField title="Defeitos">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores blanditiis earum provident et labore unde, illo rerum dolorum nisi aut rem? Aspernatur dolor esse cumque accusamus hic maxime iste quas?</p>
+                <p>{defect}</p>
             </TextField>
 
             <TextField title="Antecedentes">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores blanditiis earum provident et labore unde, illo rerum dolorum nisi aut rem? Aspernatur dolor esse cumque accusamus hic maxime iste quas?</p>
+                <p>{previous}</p>
             </TextField>
 
             <TextField title="Historia">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores blanditiis earum provident et labore unde, illo rerum dolorum nisi aut rem? Aspernatur dolor esse cumque accusamus hic maxime iste quas?</p>
+                <p>{story}</p>
             </TextField>
         </>
     )

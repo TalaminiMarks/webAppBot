@@ -34,7 +34,8 @@ interface MainCharacterInfo {
     defect: string;
     ideas: string;
     personality: string;
-    history: string;
+    story: string;
+    tendency: string;
     proficiency: number;
     perception: number;
     displacement: number;
@@ -102,7 +103,15 @@ export default async function Page({ params }: Props){
             />
             <div className="flex py-4">
                 <section className="w-1/3 bg-purple-300 p-2 flex flex-col gap-1">
-                    <CharacterStory />
+                    <CharacterStory 
+                        affiliation={data.affiliation}
+                        defect={data.defect}
+                        ideas={data.ideas}
+                        personality={data.personality}
+                        previous={data.previous}
+                        story={data.story}
+                        tendency={data.tendency}
+                    />
                 </section>
                 <section className="w-2/3 bg-pink-200 flex flex-col items-center">
                     <HealthBar currentHealth={20} maxHealth={60}/>
