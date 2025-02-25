@@ -15,8 +15,10 @@ interface BackpackProps {
 }
 
 export default function Backpack({characterId, characterItens, itens}: BackpackProps ){
-    const modalRef = useRef<HTMLDivElement>(null);
-    const firstInputRef = useRef<HTMLSelectElement>(null);
+    const backpackModalRef = useRef<HTMLDivElement>(null);
+    const [isOpenBackpack, setIsOpenBackpack] = useState(false)
+
+    const [isOpenWindowAddItem, setIsOpenWindowAddItem] = useState(false)
 
     const [newItem, setNewItem] = useState<characterItens>({
         id: "", 
@@ -33,28 +35,27 @@ export default function Backpack({characterId, characterItens, itens}: BackpackP
         }
     }, [newItem])
     
-    function openModal(){
-        if (modalRef.current !== null){
-            modalRef.current.style.display = "flex";
-            firstInputRef.current?.focus();
-        }
+    function openBackpackModal(){
+        setIsOpenBackpack(true)
+    
+    }
+    function closeBackpackModal(){
+        setIsOpenBackpack(false)
     }
 
-    function closeModal(){
-        if (modalRef.current !== null){
-            modalRef.current.style.display = "none";
-        }
+    function stateWindowAddItem(){
+        setIsOpenWindowAddItem(!isOpenWindowAddItem)
     }
 
     function handleClickOutside(event: MouseEvent<HTMLDivElement>){
-        if (event.target === modalRef.current) {
-            closeModal();
+        if (event.target === backpackModalRef.current) {
+            closeBackpackModal();
         }
     }
 
     function handleKeyDown(event: KeyboardEvent<HTMLDivElement>){
         if (event.key === "Escape"){
-            closeModal();
+            closeBackpackModal();
         }
     }
 
@@ -67,7 +68,7 @@ export default function Backpack({characterId, characterItens, itens}: BackpackP
             if(response.status === 200){
                 alert(response.data.message);
                 setNewItem(response.data.item);
-                closeModal();
+                closeBackpackModal();
             }
             else{
                 alert("Erro ao adicionar item");
@@ -76,63 +77,80 @@ export default function Backpack({characterId, characterItens, itens}: BackpackP
     }
 
     return (
-        <div className="w-full h-72 p-2 flex flex-col items-center gap-2 bg-slate-400 overflow-auto">
-            {
-                characterItensList.map(item => {
-                    const filter = itens.filter(i => i.id === item.itemsId)
-                    return (
-                        <ItemField 
-                            id={item.id} 
-                            key={item.id} 
-                            name={filter[0].name} 
-                            description={filter[0].description}
-                            damage={filter[0].damage}
-                            typeDamage={filter[0].typeDamage}
-                            additionalDescription={item.additionalDescription}
-                            bonusDamage={item.bonusDamage}
-                            typeBonusDamage={item.typeBonusDamage}
-                        />
-                    )
-                })
-            }
-            
-            <button className="w-8 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={openModal}>
-                <PlusIcon />
-            </button>
-            <div ref={modalRef} className="fixed top-0 left-0 w-full h-full hidden bg-black bg-opacity-50 justify-center items-center z-50" onClick={handleClickOutside} onKeyDown={handleKeyDown} aria-modal="true">
-                <button className="absolute top-1/4 right-1/4 my-2 mx-4 h-10 w-10 bg-black text-white hover:bg-white hover:text-black transition rounded" onClick={closeModal}>
-                    <XMarkIcon />
-                </button>
-                <form className="w-1/2 h-1/2 p-4 flex flex-col items-center gap-4 bg-blue-300" onSubmit={handleFormData}>
-                    <h2>Adicionar um item no inventário</h2>
-                    <select name="itemId" id="itemId" className="w-full rounded p-2" ref={firstInputRef} defaultValue="#">
-                        <option disabled value="#">Selecione um item...</option>
+        <div>
+            <button className="bg-gray-400 rounded" onClick={openBackpackModal}>Mochila</button>
+            <div ref={backpackModalRef} className={`${isOpenBackpack ? "flex" : "hidden"} fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 justify-center items-center z-50`} onClick={handleClickOutside} onKeyDown={handleKeyDown} aria-modal="true">
+                <div className="relative w-1/2 h-1/2 p-8 bg-yellow-300">
+                    <button className="absolute top-0 right-0 h-10 w-10 bg-black text-white hover:bg-white hover:text-black transition rounded" onClick={closeBackpackModal}>
+                        <XMarkIcon />
+                    </button>
+
+                    <div className="w-1/2 h-full flex flex-col items-center gap-2 p-2 bg-slate-400 overflow-auto">
                         {
-                            itens.map(item => {
+                            characterItensList.map(item => {
+                                const filter = itens.filter(i => i.id === item.itemsId)
                                 return (
-                                    <option key={item.id} value={item.id}>{item.name}</option>
+                                    <ItemField 
+                                        id={item.id} 
+                                        key={item.id} 
+                                        name={filter[0].name} 
+                                        description={filter[0].description}
+                                        damage={filter[0].damage}
+                                        typeDamage={filter[0].typeDamage}
+                                        additionalDescription={item.additionalDescription}
+                                        bonusDamage={item.bonusDamage}
+                                        typeBonusDamage={item.typeBonusDamage}
+                                    />
                                 )
                             })
                         }
-                    </select>
-                    <div className="w-full flex justify-center items-center gap-4">
-                        <div className="w-1/4 flex flex-col">
-                            <label htmlFor="bonusDamage">Dano Bônus?</label>
-                            <input type="text" name="bonusDamage" id="bonusDamage" />
-                        </div>
-                        <div className="w-1/4 flex flex-col">
-                            <label htmlFor="bonusTypeDamage">Tipo do dano Bônus?</label>
-                            <input type="text" name="bonusTypeDamage" id="bonusTypeDamage" />
-                        </div>
-                        <div className="w-1/4 flex flex-col">
-                            <label htmlFor="additionalDescription">Complementar descrição?</label>
-                            <input type="text" name="additionalDescription" id="additionalDescription" />
+                        <button className="w-8 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={stateWindowAddItem}>
+                            <PlusIcon />
+                        </button>
+                        <div className={`${isOpenWindowAddItem ? "block" : "hidden"} w-20 h-20 bg-purple-300`}>
+                            
                         </div>
                     </div>
-                    
-                    <button type="submit" className="bg-zinc-400 p-4">Adicionar</button>
-                </form>
+                </div>
             </div>
         </div>
     )
 }
+
+
+
+                
+                
+
+                {/* <form className="w-1/2 h-1/2 p-4 flex flex-col items-center gap-4 bg-blue-300" onSubmit={handleFormData}>
+                        <h2>Adicionar um item no inventário</h2>
+                        <select name="itemId" id="itemId" className="w-full rounded p-2" ref={firstInputRef} defaultValue="#">
+                            <option disabled value="#">Selecione um item...</option>
+                            {
+                                itens.map(item => {
+                                    return (
+                                        <option key={item.id} value={item.id}>{item.name}</option>
+                                    )
+                                })
+                            }
+                        </select>
+                        <div className="w-full flex justify-center items-center gap-4">
+                            <div className="w-1/4 flex flex-col">
+                                <label htmlFor="bonusDamage">Dano Bônus?</label>
+                                <input type="text" name="bonusDamage" id="bonusDamage" />
+                            </div>
+                            <div className="w-1/4 flex flex-col">
+                                <label htmlFor="bonusTypeDamage">Tipo do dano Bônus?</label>
+                                <input type="text" name="bonusTypeDamage" id="bonusTypeDamage" />
+                            </div>
+                            <div className="w-1/4 flex flex-col">
+                                <label htmlFor="additionalDescription">Complementar descrição?</label>
+                                <input type="text" name="additionalDescription" id="additionalDescription" />
+                            </div>
+                        </div>
+                        
+                        <button type="submit" className="bg-zinc-400 p-4">Adicionar</button>
+                    </form> */}
+
+
+                
