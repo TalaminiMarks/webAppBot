@@ -7,3 +7,7 @@ export const api = axios.create({
 export function getModAttr(value: number){
     return Math.floor((value - 10) / 2);
 }
+
+export function capitalize(s: string){
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}
