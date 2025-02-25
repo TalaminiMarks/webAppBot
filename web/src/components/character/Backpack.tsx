@@ -1,25 +1,27 @@
 "use client"
 
 import { useRef, useState, useEffect, MouseEvent, KeyboardEvent, FormEvent } from "react";
-import { XMarkIcon, PlusIcon, MinusIcon } from "@heroicons/react/20/solid"
+import { PlusIcon, MinusIcon } from "@heroicons/react/20/solid"
 
 
 import { api } from "@/utils/utils";
 import { ItensTable, characterItens } from "@/utils/interfaces";
 import ItemField from "./inventoryComponents/ItemField";
+import { CloseBtn } from "./geral/Buttons";
 
 interface BackpackProps {
     characterId: string;
     characterItens: characterItens[];
     itens: ItensTable[];
+    gold: number;
 }
 
-export default function Backpack({characterId, characterItens, itens}: BackpackProps ){
+export default function Backpack({characterId, characterItens, itens, gold}: BackpackProps ){
     const backpackModalRef = useRef<HTMLDivElement>(null);
+    const focusInputRef = useRef<HTMLInputElement>(null);
+
     const [isOpenBackpack, setIsOpenBackpack] = useState(false)
-
     const [isOpenWindowAddItem, setIsOpenWindowAddItem] = useState(false)
-
     const [newItem, setNewItem] = useState<characterItens>({
         id: "", 
         itemsId: 0, 
@@ -59,6 +61,10 @@ export default function Backpack({characterId, characterItens, itens}: BackpackP
         }
     }
 
+    function handleMouseEnter(){
+        focusInputRef.current?.focus();
+    }
+
     function handleFormData(e: FormEvent<HTMLFormElement>){
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -79,11 +85,16 @@ export default function Backpack({characterId, characterItens, itens}: BackpackP
     return (
         <div>
             <button className="bg-gray-400 rounded" onClick={openBackpackModal}>Mochila</button>
-            <div ref={backpackModalRef} className={`${isOpenBackpack ? "flex" : "hidden"} fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 justify-center items-center z-50`} onClick={handleClickOutside} onKeyDown={handleKeyDown} aria-modal="true">
-                <div className="relative w-1/2 h-1/2 p-8 bg-yellow-300">
-                    <button className="absolute top-0 right-0 h-10 w-10 bg-black text-white hover:bg-white hover:text-black transition rounded" onClick={closeBackpackModal}>
-                        <XMarkIcon />
-                    </button>
+            <div ref={backpackModalRef} 
+                className={`${isOpenBackpack ? "flex" : "hidden"} fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 justify-center items-center z-50`} 
+                onClick={handleClickOutside} 
+                onKeyDown={handleKeyDown} 
+                onMouseEnter={handleMouseEnter} 
+                aria-modal="true"
+            >
+                <input ref={focusInputRef} className="sr-only" />
+                <div className="relative flex w-1/2 h-1/2 p-8 bg-yellow-300">
+                    <CloseBtn onClick={closeBackpackModal} />
                     <div className="w-1/2 h-full flex flex-col items-center">
                         <div className="w-full h-[90%] flex flex-col items-center gap-2 p-2 bg-slate-400 overflow-y-auto">
                             {
@@ -147,6 +158,9 @@ export default function Backpack({characterId, characterItens, itens}: BackpackP
                                 <button type="submit" className="bg-zinc-400 p-4">Adicionar</button>
                             </form>
                         </div>
+                    </div>
+                    <div className="w-1/2 flex flex-col justify-center items-center">
+                        <p>Ouro: {gold}</p>
                     </div>
                 </div>
             </div>
