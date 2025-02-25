@@ -17,6 +17,7 @@ import {
 } from "@/utils/interfaces";
 import Backpack from "@/components/character/Backpack";
 import CharacterStory from "@/components/character/characterStory";
+import Spells from "@/components/character/Spells";
 
 
 interface MainCharacterInfo {
@@ -111,9 +112,14 @@ export default async function Page({ params }: Props){
                         story={data.story}
                         tendency={data.tendency}
                     />
-                    <div className="w-full flex justify-center items-center">
-                        <Backpack characterId={data.id} characterItens={data.characterItens} itens={ITENS}/>
-
+                    <div className="w-full flex justify-center items-center gap-4">
+                        <Backpack 
+                            characterId={data.id} 
+                            characterItens={data.characterItens} 
+                            itens={ITENS}
+                            gold={data.gold}
+                        />
+                        <Spells />
                     </div>
                 </section>
                 <section className="w-2/3 bg-pink-200 flex flex-col items-center">
