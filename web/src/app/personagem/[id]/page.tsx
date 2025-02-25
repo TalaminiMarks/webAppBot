@@ -42,6 +42,7 @@ interface MainCharacterInfo {
     initiative: number;
     inspiration: number;
     xp: number;
+    level: number;
     gold: number;
     characterAttributes: characterAttributes[];
     characterExpertise: characterExpertise[];
@@ -95,13 +96,11 @@ export default async function Page({ params }: Props){
             <Header 
                 name={data.name} 
                 role={data.role} 
-                previous={data.previous}
                 race={data.baseRace}
                 xp={data.xp}
-                tendency="algo"
-                userName="Maricock"
+                level={data.level}
             />
-            <div className="flex py-4">
+            <div className="flex">
                 <section className="w-1/3 bg-purple-300 p-2 flex flex-col gap-1">
                     <CharacterStory 
                         affiliation={data.affiliation}
@@ -112,6 +111,10 @@ export default async function Page({ params }: Props){
                         story={data.story}
                         tendency={data.tendency}
                     />
+                    <div className="w-full flex justify-center items-center">
+                        <Backpack characterId={data.id} characterItens={data.characterItens} itens={ITENS}/>
+
+                    </div>
                 </section>
                 <section className="w-2/3 bg-pink-200 flex flex-col items-center">
                     <HealthBar currentHealth={20} maxHealth={60}/>
@@ -126,11 +129,6 @@ export default async function Page({ params }: Props){
                         perception={data.perception}
                         armor={data.armor}
                     />
-                    <div className="w-full flex justify-center items-center">
-                        <Backpack characterId={data.id} characterItens={data.characterItens} itens={ITENS}/>
-                    </div>
-                    <p>Inventario e magias e dinheiro</p>
-
                 </section>
             </div>
         </main>
