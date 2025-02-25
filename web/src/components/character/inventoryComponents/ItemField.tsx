@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { MinusIcon } from "@heroicons/react/24/solid";
 import { api } from "@/utils/utils";
 import { ItensTable } from "@/utils/interfaces";
@@ -14,19 +14,17 @@ interface ItemFieldProps extends ItensTable {
 export default function ItemField({
     id, name, description, damage, typeDamage, additionalDescription, bonusDamage, typeBonusDamage
 }: ItemFieldProps){
-    const descriptionRef = useRef<HTMLDivElement>(null);
+    const [isMouseEnter, setIsMouseEnter] = useState(false);
+
     const itemRef = useRef<HTMLDivElement>(null);
 
     function handleMouseEnter(){
-        if(descriptionRef.current !== null){
-            descriptionRef.current.style.display = "block";
-        }
+        setIsMouseEnter(true)
     }
 
+
     function handleMouseLeave(){
-        if(descriptionRef.current !== null){
-            descriptionRef.current.style.display = "none";
-        }
+        setIsMouseEnter(false)
     }
 
     async function deleteRecord(){
@@ -37,12 +35,12 @@ export default function ItemField({
         }
     }
     return (
-        <div className="w-full flex justify-between items-center p-2 relative" ref={itemRef}>
+        <div className="w-full p-2 flex justify-between items-center" ref={itemRef}>
             <span onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>{name}</span>
             <button className="w-6 h-6 rounded bg-black text-white hover:bg-white hover:text-black transition" onClick={deleteRecord}>
                 <MinusIcon />
             </button>
-            <div ref={descriptionRef} className="hidden absolute top-10 left-0 w-full rounded-xl p-2 bg-yellow-200 z-10">
+            <div className={`${isMouseEnter ? "block" : "hidden"} absolute top-24 right-14 w-[40%] rounded-xl p-2 bg-blue-400 z-10`}>
                 <p>{description}</p>
                 <p className={`${additionalDescription ? "block" : "hidden"} mb-2`}>{additionalDescription}</p>
                 <p>Dano: {damage} - {typeDamage}</p>
