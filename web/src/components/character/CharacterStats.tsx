@@ -1,7 +1,6 @@
 "use client"
 
-import { useState, useRef, MouseEvent, KeyboardEvent, useEffect } from "react";
-import { XMarkIcon } from "@heroicons/react/20/solid"
+import { useState, useEffect } from "react";
 
 import { api, getModAttr } from "@/utils/utils";
 import { characterAttributes, characterExpertise, Attribute, Expertise } from "@/utils/interfaces";
@@ -24,8 +23,6 @@ interface CharacterStatsProps {
 export default function CharacterStats({ 
     characterAttributes, characterExpertise, attributes, expertise, initiative, inspiration, perception, proficiency, armor
 }: CharacterStatsProps){
-    const modalRef = useRef<HTMLDivElement>(null);
-    const focusInputRef = useRef<HTMLInputElement>(null);
 
     const [originalValue, setOriginalValue] = useState(0);
     const [characterAttributesList, setCharacterAttributesList] = useState(characterAttributes)
@@ -90,81 +87,58 @@ export default function CharacterStats({
         }
     }
 
-    function openModal(){
-        if(modalRef.current !== null){
-            modalRef.current.style.display = "flex";
-            focusInputRef.current?.focus();
-        }
-    }
-
-    function closeModal(){
-        if (modalRef.current !== null){
-            modalRef.current.style.display = "none";
-        }
-    }
-    
-    function handleClickOutside(event: MouseEvent<HTMLDivElement>){
-        if (event.target === modalRef.current) {
-            closeModal();
-        }
-    }
-
-    function handleKeyDown(event: KeyboardEvent<HTMLDivElement>){
-        if (event.key === "Escape"){
-            closeModal();
-        }
-    }
     return (
-        <div>
-            <button className="px-4 py-2 bg-zinc-400 rounded-lg border-2 border-stone-500" onClick={openModal}>
-                Stats
-            </button>
-            <div ref={modalRef} className="fixed top-0 left-0 w-full h-full hidden bg-black bg-opacity-50 justify-center items-center z-50" onClick={handleClickOutside} onKeyDown={handleKeyDown} aria-modal="true">
-                <input type="text" className="sr-only" ref={focusInputRef}/>
-                <div className="w-[70%] h-[95%] bg-red-400">
-                    <button 
-                        onClick={closeModal}
-                        className="absolute right-[15%] h-10 w-10 flex justify-center items-center rounded bg-black text-white hover:bg-white hover:text-black transition"
-                    >
-                        <XMarkIcon width={32} height={32}/>
-                    </button>
-                    <div className="w-full h-full px-12 flex justify-center items-center gap-16 ">
-                        <div className="flex flex-col gap-2">
-                            {
-                                attributes.map(attr => {
-                                    const filter = characterAttributesList.find(i => i.attributesId === attr.id);
-                                    if (!filter) throw new Error("Erro nos attributos");
-                                    return(
-                                        <div key={attr.id} className="flex items-center gap-2">
-                                            <MinusBtn onClick={() => removePoint(attr.id)} levelUp/>
-                                            <AttrField attribute={attr.name} value={filter.value} modValue={filter.modValue}/>
-                                            <PlusBtn onClick={() => addPoint(attr.id)} levelUp/>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            {
-                                expertise.map(expertise => {
-                                    const filter = characterExpertiseList.find(i => i.expertiseId === expertise.id);
-                                    if(!filter) throw new Error("Erro nas pericias");
-                                    return (
-                                        <ExptField key={expertise.id} id={`${expertise.id}`} expertise={expertise.name} value={filter.value}/>
-                                    )
-                                })
-                            }
-                        </div>
-                        <div>
-                            <p>Classe Armadura: {armor}</p>
-                            <p>iniciativa: {initiative}</p>
-                            <p>proficiencia bonus: {proficiency}</p>
-                            <p>inspiração: {inspiration}</p>
-                            <p>percepção: {perception}</p>
-                        </div>
-                    </div>
+        <div className="w-full h-full px-12 py-8 flex flex-col justify-center items-center bg-red-400 gap-10">
+            <div className="flex justify-center items-center gap-4">
+                <div className="flex flex-col justify-center items-center">
+                    <p>Classe Armadura:</p>
+                    <p>{armor}</p>
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                    <p>iniciativa:</p>
+                    <p>{initiative}</p>
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                    <p>proficiencia bonus:</p>
+                    <p>{proficiency}</p>
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                    <p>inspiração:</p>
+                    <p>{inspiration}</p>
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                    <p>percepção:</p>
+                    <p>{perception}</p>
                 </div>
             </div>
+            <div className="w-full flex justify-center items-center gap-24 ">
+                <div className="grid grid-cols-2 gap-16">
+                    {
+                        attributes.map(attr => {
+                            const filter = characterAttributesList.find(i => i.attributesId === attr.id);
+                            if (!filter) throw new Error("Erro nos attributos");
+                            return(
+                                <div key={attr.id} className="flex items-center gap-2">
+                                    <MinusBtn onClick={() => removePoint(attr.id)} levelUp/>
+                                    <AttrField attribute={attr.name} value={filter.value} modValue={filter.modValue}/>
+                                    <PlusBtn onClick={() => addPoint(attr.id)} levelUp/>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <div className="flex flex-col gap-2">
+                    {
+                        expertise.map(expertise => {
+                            const filter = characterExpertiseList.find(i => i.expertiseId === expertise.id);
+                            if(!filter) throw new Error("Erro nas pericias");
+                            return (
+                                <ExptField key={expertise.id} id={`${expertise.id}`} expertise={expertise.name} value={filter.value}/>
+                            )
+                        })
+                    }
+                </div>
+            </div>            
         </div>
     )
 }
