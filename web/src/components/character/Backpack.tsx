@@ -95,7 +95,18 @@ export default function Backpack({characterId, characterItens, itens, gold}: Bac
                 <input ref={focusInputRef} className="sr-only" />
                 <div className="relative flex w-1/2 h-1/2 p-8 bg-yellow-300">
                     <CloseBtn onClick={closeBackpackModal} />
-                    <div className="w-1/2 h-full flex flex-col items-center">
+                    <div className="w-[80%] h-full flex flex-col items-center">
+                        <button className="px-4 mb-2 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={stateWindowAddItem}>
+                            {isOpenWindowAddItem ? 
+                            <div className="flex items-center justify-center gap-2">
+                                <MinusIcon width={35} height={35}/>
+                                <span>Fechar janela</span>
+                            </div> : 
+                            <div className="flex items-center justify-center gap-2">
+                                <PlusIcon width={35} height={35}/>
+                                <span>Adicionar item</span>
+                            </div>}
+                        </button>
                         <div className="w-full h-[90%] flex flex-col items-center gap-2 p-2 bg-slate-400 overflow-y-auto">
                             {
                                 characterItensList.map(item => {
@@ -116,18 +127,8 @@ export default function Backpack({characterId, characterItens, itens, gold}: Bac
                                 })
                             }
                         </div>
-                        <button className="px-4 mt-2 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={stateWindowAddItem}>
-                            {isOpenWindowAddItem ? 
-                            <div className="flex items-center justify-center gap-2">
-                                <MinusIcon width={35} height={35}/>
-                                <span>Fechar janela</span>
-                            </div> : 
-                            <div className="flex items-center justify-center gap-2">
-                                <PlusIcon width={35} height={35}/>
-                                <span>Adicionar item</span>
-                            </div>}
-                        </button>
-                        <div className={`${isOpenWindowAddItem ? "block" : "hidden"} absolute w-2/3 -bottom-20 -right-10 bg-purple-300 z-99`}>
+                        
+                        <div className={`${isOpenWindowAddItem ? "block" : "hidden"} absolute w-2/3 top-20 bg-purple-300 z-99`}>
                             <form className="w-full p-4 flex flex-col items-center gap-4 bg-blue-300" onSubmit={handleFormData}>
                                 <h2>Adicionar um item no inventário</h2>
                                 <select name="itemId" id="itemId" className="w-full rounded p-2" defaultValue="#">
@@ -159,7 +160,7 @@ export default function Backpack({characterId, characterItens, itens, gold}: Bac
                             </form>
                         </div>
                     </div>
-                    <div className="w-1/2 flex flex-col justify-center items-center">
+                    <div className="w-[20%] flex flex-col justify-center items-center">
                         <p>Ouro: {gold}</p>
                     </div>
                 </div>

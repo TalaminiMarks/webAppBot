@@ -35,12 +35,12 @@ export default function ItemField({
         }
     }
     return (
-        <div className="w-full p-2 flex justify-between items-center" ref={itemRef}>
+        <div className="relative w-full p-2 flex justify-between items-center" ref={itemRef}>
             <span onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>{name}</span>
             <button className="w-6 h-6 rounded bg-black text-white hover:bg-white hover:text-black transition" onClick={deleteRecord}>
                 <MinusIcon />
             </button>
-            <div className={`${isMouseEnter ? "block" : "hidden"} absolute top-24 right-14 w-[40%] rounded-xl p-2 bg-blue-400 z-10`}>
+            <div className={`${isMouseEnter ? "block" : "hidden"} absolute right-1/4 w-[50%] rounded-xl p-2 bg-blue-400 z-10`}>
                 <p>{description}</p>
                 <p className={`${additionalDescription ? "block" : "hidden"} mb-2`}>{additionalDescription}</p>
                 <p>Dano: {damage} - {typeDamage}</p>
