@@ -40,7 +40,7 @@ interface CharacterStoryProps {
 
 export default function CharacterStory({ affiliation, defect, story, ideas, personality, previous, tendency}: CharacterStoryProps){
     return (
-        <>
+        <div className="w-full h-[55%] flex flex-col gap-2 overflow-y-auto">
             <TextField title="Tendencia">
                 <p>{tendency}</p>
             </TextField>
@@ -68,6 +68,6 @@ export default function CharacterStory({ affiliation, defect, story, ideas, pers
             <TextField title="Historia">
                 <p>{story}</p>
             </TextField>
-        </>
+        </div>
     )
 }
