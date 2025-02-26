@@ -22,7 +22,9 @@ function TextField({ title, children }: TextFieldProps){
                 {isOpen ? <ChevronLeftIcon width={30} height={30}/> : <ChevronDownIcon width={30} height={30}/>}
             </button>
             <div className={`${isOpen ? "h-full" : "h-0"} overflow-hidden transition-[height]`}>
-                {children}
+                <div className="py-2">
+                    {children}
+                </div>
             </div>
         </div>
     )
@@ -40,7 +42,7 @@ interface CharacterStoryProps {
 
 export default function CharacterStory({ affiliation, defect, story, ideas, personality, previous, tendency}: CharacterStoryProps){
     return (
-        <div className="w-full h-[55%] flex flex-col gap-2 overflow-y-auto">
+        <div className="w-full h-[70%] flex flex-col gap-2 overflow-y-auto">
             <TextField title="Tendencia">
                 <p>{tendency}</p>
             </TextField>
