@@ -13,7 +13,8 @@ import {
     characterSpells, 
     Attribute,
     Expertise, 
-    ItensTable
+    ItensTable,
+    SpellsTable
 } from "@/utils/interfaces";
 import Backpack from "@/components/character/Backpack";
 import CharacterStory from "@/components/character/characterStory";
@@ -92,6 +93,8 @@ export default async function Page({ params }: Props){
 
     const EXPERTISE: Expertise[] = (await api.get("/pericias")).data;
 
+    const SPELLS: SpellsTable[] = (await api.get("/magias")).data;
+
     return (
         <main className="w-full bg-slate-300">
             <Header 
@@ -102,7 +105,7 @@ export default async function Page({ params }: Props){
                 level={data.level}
             />
             <div className="flex">
-                <section className="w-1/3 bg-purple-300 p-2 flex flex-col gap-1">
+                <section className="w-1/3 bg-purple-300 p-2 flex flex-col gap-2">
                     <CharacterStory 
                         affiliation={data.affiliation}
                         defect={data.defect}
@@ -119,7 +122,10 @@ export default async function Page({ params }: Props){
                             itens={ITENS}
                             gold={data.gold}
                         />
-                        <Spells />
+                        <Spells 
+                            characterSpells={data.characterSpells}
+                            spells={SPELLS}
+                        />
                     </div>
                 </section>
                 <section className="w-2/3 bg-pink-200 flex flex-col items-center">

@@ -2,8 +2,15 @@
 
 import { useRef, useState, KeyboardEvent, MouseEvent } from "react"
 import { CloseBtn } from "./geral/Buttons";
+import { characterSpells, SpellsTable } from "@/utils/interfaces";
+import Spell from "./spellsComponents/Spell";
 
-export default function Spells(){
+interface SpellsProps {
+    characterSpells: characterSpells[];
+    spells: SpellsTable[]
+}
+
+export default function Spells({ characterSpells, spells }: SpellsProps){
     const modalRef = useRef<HTMLDivElement>(null)
     const focusInputRef = useRef<HTMLInputElement>(null)
 
@@ -43,9 +50,17 @@ export default function Spells(){
                 onMouseEnter={handleMouseEnter}
             >
                 <input ref={focusInputRef} className="sr-only" />
-                <div className="relative w-2/3 h-[70%] bg-yellow-200">
+                <div className="relative w-1/3 h-[90%] py-10 px-4 bg-yellow-200">
                     <CloseBtn onClick={closeModal} />
-
+                    <div className="w-full h-full flex flex-col flex-wrap bg-purple-300">
+                        {/* {
+                            spells.map(spell => {
+                                return (
+                                    <Spell key={spell.id} id={spell.id} name={spell.name} description={spell.description} damage={spell.damage} typeDamage={spell.typeDamage}/>
+                                )
+                            })
+                        } */}
+                    </div>
                 </div>
             </div>
         </div>
