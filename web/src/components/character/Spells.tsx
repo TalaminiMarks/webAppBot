@@ -50,16 +50,27 @@ export default function Spells({ characterSpells, spells }: SpellsProps){
                 onMouseEnter={handleMouseEnter}
             >
                 <input ref={focusInputRef} className="sr-only" />
-                <div className="relative w-1/3 h-[90%] py-10 px-4 bg-yellow-200">
+                <div className="relative w-1/3 h-[90%] py-12 px-4 bg-yellow-200 overflow-y-auto">
                     <CloseBtn onClick={closeModal} />
-                    <div className="w-full h-full flex flex-col flex-wrap bg-purple-300">
-                        {/* {
-                            spells.map(spell => {
+                    <div className="w-full h-full flex flex-col flex-wrap gap-2 bg-purple-300">
+                        {
+                            characterSpells.map(spell => {
+                                const filter = spells.filter(i => i.id === spell.spellsId)
                                 return (
-                                    <Spell key={spell.id} id={spell.id} name={spell.name} description={spell.description} damage={spell.damage} typeDamage={spell.typeDamage}/>
+                                    <Spell 
+                                        key={spell.id} 
+                                        id={spell.id} 
+                                        name={filter[0].name} 
+                                        description={filter[0].description} 
+                                        damage={filter[0].damage} 
+                                        typeDamage={filter[0].typeDamage}
+                                        additionalDamage={spell.bonusDamage}
+                                        additionalDescription={spell.additionalDescription}
+                                        additionalTypeDamage={spell.typeBonusDamage}
+                                    />
                                 )
                             })
-                        } */}
+                        }
                     </div>
                 </div>
             </div>
