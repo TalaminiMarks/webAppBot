@@ -21,7 +21,7 @@ function TextField({ title, children }: TextFieldProps){
                 <h2>{title}</h2>
                 {isOpen ? <ChevronLeftIcon width={30} height={30}/> : <ChevronDownIcon width={30} height={30}/>}
             </button>
-            <div className={`${isOpen ? "h-full" : "h-0"} overflow-hidden transition-[height]`}>
+            <div className={`${isOpen ? "h-full" : "h-0"} overflow-hidden transition-[height] border-t border-black`}>
                 <div className="py-2">
                     {children}
                 </div>
