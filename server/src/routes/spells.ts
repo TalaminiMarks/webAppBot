@@ -48,13 +48,31 @@ export default function route(fastify: FastifyInstance){
             characterId: z.string(),
             spellId: z.string().transform(val => Number(val)),
             bonusDamage: z.string(),
-            typeBonusDamage: z.string(),
+            bonusTypeDamage: z.string(),
             additionalDescription: z.string()
         })
 
         const body = schema.parse(req.body);
 
-        console.log(body);
+        const data = await prisma.characterSpells.create({
+            data: {
+                characterId: body.characterId,
+                spellsId: body.spellId,
+                additionalDescription: body.additionalDescription,
+                bonusDamage: body.bonusDamage,
+                typeBonusDamage: body.bonusTypeDamage
+            }
+        })
+
+        if(data){
+            res.send({
+                message: "Adicionado com sucesso",
+                spell: data
+            })
+        }
+        else{
+            res.send({message: "Erro ao adicionar"})
+        }
 
     })
 }
