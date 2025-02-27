@@ -11,6 +11,9 @@ export default function route(fastify: FastifyInstance){
                 description: true,
                 damage: true,
                 typeDamage: true
+            },
+            orderBy: {
+                name: "asc"
             }
         })
 
