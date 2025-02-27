@@ -96,7 +96,7 @@ export default function Backpack({characterId, characterItens, itens, gold}: Bac
                 <div className="relative flex w-1/2 h-1/2 p-8 bg-yellow-300">
                     <CloseBtn onClick={closeBackpackModal} />
                     <div className="w-[80%] h-full flex flex-col items-center">
-                        <button className="px-4 mb-2 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={stateWindowAddItem}>
+                        <button className="w-full mb-2 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={stateWindowAddItem}>
                             {isOpenWindowAddItem ? 
                             <div className="flex items-center justify-center gap-2">
                                 <MinusIcon width={35} height={35}/>

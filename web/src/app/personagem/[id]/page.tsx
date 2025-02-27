@@ -123,6 +123,7 @@ export default async function Page({ params }: Props){
                             gold={data.gold}
                         />
                         <Spells 
+                            characterId={data.id}
                             characterSpells={data.characterSpells}
                             spells={SPELLS}
                         />
