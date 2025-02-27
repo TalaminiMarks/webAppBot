@@ -11,6 +11,9 @@ export default function route(fastify: FastifyInstance){
                 description: true,
                 damage: true,
                 typeDamage: true
+            },
+            orderBy: {
+                name: "asc"
             }
         })
 
@@ -38,5 +41,20 @@ export default function route(fastify: FastifyInstance){
         })
 
         res.send(data);
+    })
+
+    fastify.post("/magias/adicionar", async (req, res) =>{
+        const schema = z.object({
+            characterId: z.string(),
+            spellId: z.string().transform(val => Number(val)),
+            bonusDamage: z.string(),
+            typeBonusDamage: z.string(),
+            additionalDescription: z.string()
+        })
+
+        const body = schema.parse(req.body);
+
+        console.log(body);
+
     })
 }
