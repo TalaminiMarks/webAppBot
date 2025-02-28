@@ -96,7 +96,7 @@ export default async function Page({ params }: Props){
     const SPELLS: SpellsTable[] = (await api.get("/magias")).data;
 
     return (
-        <main className="w-full bg-slate-300">
+        <main className="w-full h-full bg-slate-300">
             <Header 
                 name={data.name} 
                 role={data.role} 
@@ -104,7 +104,7 @@ export default async function Page({ params }: Props){
                 xp={data.xp}
                 level={data.level}
             />
-            <div className="flex">
+            <div className="w-full h-[90%] flex">
                 <section className="w-1/3 bg-purple-300 p-2 flex flex-col gap-2">
                     <CharacterStory 
                         affiliation={data.affiliation}
