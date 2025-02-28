@@ -90,26 +90,11 @@ export default function CharacterStats({
     return (
         <div className="w-full h-full px-12 py-8 flex flex-col justify-center items-center bg-red-400 gap-10">
             <div className="flex justify-center items-center gap-4">
-                <div className="flex flex-col justify-center items-center">
-                    <p>Classe Armadura:</p>
-                    <p>{armor}</p>
-                </div>
-                <div className="flex flex-col justify-center items-center">
-                    <p>iniciativa:</p>
-                    <p>{initiative}</p>
-                </div>
-                <div className="flex flex-col justify-center items-center">
-                    <p>proficiencia bonus:</p>
-                    <p>{proficiency}</p>
-                </div>
-                <div className="flex flex-col justify-center items-center">
-                    <p>inspiração:</p>
-                    <p>{inspiration}</p>
-                </div>
-                <div className="flex flex-col justify-center items-center">
-                    <p>percepção:</p>
-                    <p>{perception}</p>
-                </div>
+                <SquareField name="armadura" value={armor}/>
+                <SquareField name="iniciativa" value={initiative}/>
+                <SquareField name="proficiencia" value={proficiency}/>
+                <SquareField name="inspiração" value={inspiration}/>
+                <SquareField name="percepção" value={perception}/>
             </div>
             <div className="w-full flex justify-center items-center gap-24 ">
                 <div className="grid grid-cols-2 gap-16">
@@ -139,6 +124,20 @@ export default function CharacterStats({
                     }
                 </div>
             </div>            
+        </div>
+    )
+}
+
+interface SquareFieldProps {
+    name: string
+    value: number;
+}
+
+function SquareField({ name, value }: SquareFieldProps){
+    return (
+        <div className="flex flex-col justify-center items-center bg-stone-200 p-4">
+            <p className="capitalize">{name}:</p>
+            <p className="text-xl">{value}</p>
         </div>
     )
 }
