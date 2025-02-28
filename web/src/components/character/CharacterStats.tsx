@@ -88,7 +88,7 @@ export default function CharacterStats({
     }
 
     return (
-        <div className="w-full h-full px-12 py-8 flex flex-col justify-center items-center bg-red-400 gap-10">
+        <div className="w-full h-full px-12 py-8 flex flex-col items-center bg-red-400 gap-10">
             <div className="flex justify-center items-center gap-4">
                 <SquareField name="armadura" value={armor}/>
                 <SquareField name="iniciativa" value={initiative}/>
