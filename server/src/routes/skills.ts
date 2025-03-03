@@ -42,4 +42,37 @@ export default function route(fastify: FastifyInstance){
 
         res.send(data);
     })
+
+    fastify.post("/habilidades/adicionar", async (req, res) =>{
+        const schema = z.object({
+            characterId: z.string(),
+            skillId: z.string().transform(val => Number(val)),
+            bonusDamage: z.string(),
+            bonusTypeDamage: z.string(),
+            additionalDescription: z.string()
+        })
+
+        const body = schema.parse(req.body);
+
+        const data = await prisma.characterSkills.create({
+            data: {
+                characterId: body.characterId,
+                skillsId: body.skillId,
+                additionalDescription: body.additionalDescription,
+                bonusDamage: body.bonusDamage,
+                typeBonusDamage: body.bonusTypeDamage
+            }
+        })
+
+        if(data){
+            res.send({
+                message: "Adicionado com sucesso",
+                spell: data
+            })
+        }
+        else{
+            res.send({message: "Erro ao adicionar"})
+        }
+
+    })
 }
