@@ -14,11 +14,13 @@ import {
     Attribute,
     Expertise, 
     ItensTable,
-    SpellsTable
+    SpellsTable,
+    SkillsTable
 } from "@/utils/interfaces";
 import Backpack from "@/components/character/Backpack";
 import CharacterStory from "@/components/character/characterStory";
 import Spells from "@/components/character/Spells";
+import Skills from "@/components/character/Skills";
 
 
 interface MainCharacterInfo {
@@ -95,6 +97,8 @@ export default async function Page({ params }: Props){
 
     const SPELLS: SpellsTable[] = (await api.get("/magias")).data;
 
+    const SKILLS: SkillsTable[] = (await api.get("/habilidades")).data;
+
     return (
         <main className="w-full h-full bg-slate-300">
             <Header 
@@ -126,6 +130,11 @@ export default async function Page({ params }: Props){
                             characterId={data.id}
                             characterSpells={data.characterSpells}
                             spells={SPELLS}
+                        />
+                        <Skills 
+                            characterId={data.id}
+                            characterSkills={data.characterSkills}
+                            skills={SKILLS}
                         />
                     </div>
                 </section>
