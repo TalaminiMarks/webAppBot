@@ -63,22 +63,22 @@ export default function Spells({ characterSpells, spells, characterId }: SpellsP
     }
 
     function handleFormData(e: FormEvent<HTMLFormElement>){
-            e.preventDefault();
-            const formData = new FormData(e.currentTarget);
-            formData.append("characterId", characterId);
-            const data = Object.fromEntries(formData.entries());
-            console.log(data);
-            api.post("/magias/adicionar", data).then(response => {
-                if(response.status === 200){
-                    alert(response.data.message);
-                    setNewSpell(response.data.spell);
-                    setIsOpenAddSpellWindow(false);
-                }
-                else{
-                    alert("Erro ao adicionar item");
-                }
-            })
-        }
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        formData.append("characterId", characterId);
+        const data = Object.fromEntries(formData.entries());
+        console.log(data);
+        api.post("/magias/adicionar", data).then(response => {
+            if(response.status === 200){
+                alert(response.data.message);
+                setNewSpell(response.data.spell);
+                setIsOpenAddSpellWindow(false);
+            }
+            else{
+                alert("Erro ao adicionar item");
+            }
+        })
+    }
 
     return(
         <div>
