@@ -25,34 +25,45 @@ model User {
 }
 
 model Character {
-  id            String   @id @unique
+  id            String @id @unique
   name          String
   role          String
-  maxHealth     Int      @default(30)
-  currentHealth Int      @default(10)
+  maxHealth     Int    @default(30)
+  currentHealth Int    @default(10)
   age           String
   baseRace      String
   subRace       String
-  armor         Int      @default(0)
-  languages     String   @default("Nenhum Registro")
-  affiliation   String   @default("Nenhum Registro")
-  previous      String   @default("Nenhum Registro")
-  defect        String   @default("Nenhum Registro")
-  ideas         String   @default("Nenhum Registro")
-  personality   String   @default("Nenhum Registro")
-  story         String   @default("Nenhum Registro")
-  tendency      String   @default("Nenhum Registro")
-  proficiency   Int      @default(0)
-  perception    Int      @default(0)
-  displacement  Int      @default(0)
-  initiative    Int      @default(0)
-  inspiration   Int      @default(0)
-  level         Int      @default(1)
-  levelUp       Boolean  @default(false)
-  xp            Int      @default(0)
-  gold          Int      @default(50)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  armor         Int    @default(0)
+  proficiency   Int    @default(0)
+  perception    Int    @default(0)
+  displacement  Int    @default(0)
+  initiative    Int    @default(0)
+  inspiration   Int    @default(0)
+
+  // Story
+  languages   String @default("Nenhum Registro")
+  affiliation String @default("Nenhum Registro")
+  previous    String @default("Nenhum Registro")
+  defect      String @default("Nenhum Registro")
+  ideas       String @default("Nenhum Registro")
+  personality String @default("Nenhum Registro")
+  story       String @default("Nenhum Registro")
+  tendency    String @default("Nenhum Registro")
+
+  // Level
+  level   Int     @default(1)
+  levelUp Boolean @default(false)
+  xp      Int     @default(0)
+
+  // Money
+  cooper   Int @default(0)
+  silver   Int @default(0)
+  gold     Int @default(50)
+  electro  Int @default(0)
+  platinum Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
@@ -68,7 +79,7 @@ model Character {
 model Attributes {
   id        Int      @id @unique @default(autoincrement())
   name      String   @unique
-  createdAt DateTime @default(now()) @ignore
+  createdAt DateTime @default(now())
 
   Expertise           Expertise[]
   characterAttributes CharacterAttributes[]
@@ -78,7 +89,7 @@ model Expertise {
   id           Int      @id @unique @default(autoincrement())
   name         String   @unique
   attributesId Int
-  createdAt    DateTime @default(now()) @ignore
+  createdAt    DateTime @default(now())
 
   attributes Attributes @relation(fields: [attributesId], references: [id])
 
@@ -91,7 +102,7 @@ model Skills {
   damage      String?
   typeDamage  String?
   description String
-  createdAt   DateTime @default(now()) @ignore
+  createdAt   DateTime @default(now())
 
   characterSkills CharacterSkills[]
 }
@@ -102,7 +113,7 @@ model Spells {
   damage      String?
   typeDamage  String?
   description String
-  createdAt   DateTime @default(now()) @ignore
+  createdAt   DateTime @default(now())
 
   characterSpells CharacterSpells[]
 }
@@ -113,7 +124,7 @@ model Items {
   damage      String?
   typeDamage  String?
   description String
-  createdAt   DateTime @default(now()) @ignore
+  createdAt   DateTime @default(now())
 
   characterItens CharacterItens[]
 }
@@ -125,7 +136,7 @@ model CharacterSkills {
   bonusDamage           String?
   typeBonusDamage       String?
   additionalDescription String?
-  createdAt             DateTime @default(now()) @ignore
+  createdAt             DateTime @default(now())
 
   character Character @relation(fields: [characterId], references: [id])
   skills    Skills    @relation(fields: [skillsId], references: [id])
@@ -138,7 +149,7 @@ model CharacterSpells {
   bonusDamage           String?
   typeBonusDamage       String?
   additionalDescription String?
-  createdAt             DateTime @default(now()) @ignore
+  createdAt             DateTime @default(now())
 
   character Character @relation(fields: [characterId], references: [id])
   spells    Spells    @relation(fields: [spellsId], references: [id])
@@ -150,7 +161,7 @@ model CharacterAttributes {
   attributesId Int
   value        Int      @default(0)
   modValue     Int
-  createdAt    DateTime @default(now()) @ignore
+  createdAt    DateTime @default(now())
 
   character Character  @relation(fields: [characterId], references: [id])
   attribute Attributes @relation(fields: [attributesId], references: [id])
@@ -161,7 +172,7 @@ model CharacterExpertise {
   characterId String
   expertiseId Int
   value       Int      @default(0)
-  createdAt   DateTime @default(now()) @ignore
+  createdAt   DateTime @default(now())
 
   character Character @relation(fields: [characterId], references: [id])
   expertise Expertise @relation(fields: [expertiseId], references: [id])
@@ -174,7 +185,7 @@ model CharacterItens {
   bonusDamage           String?
   typeBonusDamage       String?
   additionalDescription String?
-  createdAt             DateTime @default(now()) @ignore
+  createdAt             DateTime @default(now())
 
   character Character @relation(fields: [characterId], references: [id])
   item      Items     @relation(fields: [itemsId], references: [id])
