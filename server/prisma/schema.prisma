@@ -56,7 +56,7 @@ model Character {
   xp      Int     @default(0)
 
   // Money
-  cooper   Int @default(0)
+  copper   Int @default(0)
   silver   Int @default(0)
   gold     Int @default(50)
   electro  Int @default(0)
