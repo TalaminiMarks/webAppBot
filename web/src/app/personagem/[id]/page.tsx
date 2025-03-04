@@ -32,6 +32,7 @@ interface MainCharacterInfo {
     age: number;
     baseRace: string;
     subRace: string;
+
     languages: string;
     affiliation: string;
     previous: string;
@@ -40,14 +41,23 @@ interface MainCharacterInfo {
     personality: string;
     story: string;
     tendency: string;
-    proficiency: number;
     perception: number;
     displacement: number;
+    
+    proficiency: number;
     initiative: number;
     inspiration: number;
+
     xp: number;
     level: number;
+    levelUp: boolean;
+
+    copper: number;
+    silver: number;
     gold: number;
+    electro: number;
+    platinum: number;
+
     characterAttributes: characterAttributes[];
     characterExpertise: characterExpertise[];
     characterItens: characterItens[];
@@ -99,6 +109,14 @@ export default async function Page({ params }: Props){
 
     const SKILLS: SkillsTable[] = (await api.get("/habilidades")).data;
 
+    const money = {
+        copper: data.copper,
+        silver: data.silver,
+        gold: data.gold,
+        electro: data.electro,
+        platinum: data.platinum
+    }
+
     return (
         <main className="w-full h-full bg-slate-300">
             <Header 
@@ -124,7 +142,7 @@ export default async function Page({ params }: Props){
                             characterId={data.id} 
                             characterItens={data.characterItens} 
                             itens={ITENS}
-                            gold={data.gold}
+                            money={money}
                         />
                         <Spells 
                             characterId={data.id}

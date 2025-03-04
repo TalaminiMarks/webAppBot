@@ -13,10 +13,16 @@ interface BackpackProps {
     characterId: string;
     characterItens: characterItens[];
     itens: ItensTable[];
-    gold: number;
+    money: {
+        gold: number,
+        silver: number,
+        copper: number,
+        electro: number,
+        platinum: number
+    }
 }
 
-export default function Backpack({characterId, characterItens, itens, gold}: BackpackProps ){
+export default function Backpack({characterId, characterItens, itens, money}: BackpackProps ){
     const backpackModalRef = useRef<HTMLDivElement>(null);
     const focusInputRef = useRef<HTMLInputElement>(null);
 
@@ -161,7 +167,11 @@ export default function Backpack({characterId, characterItens, itens, gold}: Bac
                         </div>
                     </div>
                     <div className="w-[20%] flex flex-col justify-center items-center">
-                        <p>Ouro: {gold}</p>
+                        <p>Cobre: {money.copper}</p>
+                        <p>Silver: {money.silver}</p>
+                        <p>Ouro: {money.gold}</p>
+                        <p>Electro: {money.electro}</p>
+                        <p>Platina: {money.platinum}</p>
                     </div>
                 </div>
             </div>
