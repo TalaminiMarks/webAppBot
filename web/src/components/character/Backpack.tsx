@@ -101,7 +101,7 @@ export default function Backpack({characterId, characterItens, itens, money}: Ba
                 <input ref={focusInputRef} className="sr-only" />
                 <div className="relative flex w-1/2 h-1/2 p-8 bg-yellow-300">
                     <CloseBtn onClick={closeBackpackModal} />
-                    <div className="w-[80%] h-full flex flex-col items-center">
+                    <div className="relative w-[80%] h-full flex flex-col items-center">
                         <button className="w-full mb-2 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={stateWindowAddItem}>
                             {isOpenWindowAddItem ? 
                             <div className="flex items-center justify-center gap-2">
@@ -134,7 +134,7 @@ export default function Backpack({characterId, characterItens, itens, money}: Ba
                             }
                         </div>
                         
-                        <div className={`${isOpenWindowAddItem ? "block" : "hidden"} absolute w-2/3 top-20 bg-purple-300 z-99`}>
+                        <div className={`${isOpenWindowAddItem ? "block" : "hidden"} absolute w-full top-11 bg-purple-300 z-99`}>
                             <form className="w-full p-4 flex flex-col items-center gap-4 bg-blue-300" onSubmit={handleFormData}>
                                 <h2>Adicionar um item no inventário</h2>
                                 <select name="itemId" id="itemId" className="w-full rounded p-2" defaultValue="#">
