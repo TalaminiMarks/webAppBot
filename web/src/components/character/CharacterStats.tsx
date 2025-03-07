@@ -24,17 +24,23 @@ export default function CharacterStats({
     characterAttributes, characterExpertise, attributes, expertise, initiative, inspiration, perception, proficiency, armor
 }: CharacterStatsProps){
 
-    const [originalValue, setOriginalValue] = useState(0);
-    const [characterAttributesList, setCharacterAttributesList] = useState(characterAttributes)
-    const [characterExpertiseList, setCharacterExpertiseList] = useState(characterExpertise)
+    // Character can't have an attribute less then 8
+    const [originalValue, setOriginalValue] = useState(8);
 
-    function checkFirstValue(target: characterAttributes, index: number){
-        setOriginalValue(characterAttributes[index].value);
-        if(target.value === originalValue){
-            return false;
-        }
-        else{
-            return true;
+    const [characterAttributesList, setCharacterAttributesList] = useState(characterAttributes);
+    const [characterExpertiseList, setCharacterExpertiseList] = useState(characterExpertise);
+    const [levelUpData, setLevelUpData] = useState(false);
+
+    function checkFirstValue(target: characterAttributes){
+        const filter = characterAttributes.find(v => v.attributesId === target.attributesId);
+        if(filter){
+            setOriginalValue(filter.value);
+            if(target.value <= originalValue){
+                return false;
+            }
+            else{
+                return true;
+            }
         }
     }
 
@@ -74,7 +80,7 @@ export default function CharacterStats({
         for(let i = 0; i < characterAttributesList.length; i++){
             if(characterAttributesList[i].attributesId === key){
                 const target = characterAttributesList[i];
-                if (checkFirstValue(target, i)){
+                if (checkFirstValue(target)){
                     target.value += -1;
                     target.modValue = getModAttr(target.value);
                     setCharacterAttributesList(prev => {
@@ -87,6 +93,18 @@ export default function CharacterStats({
         }
     }
 
+    function confirmUpdate(){
+        setLevelUpData(true)
+    }
+
+    useEffect(()=>{
+        if(levelUpData){
+            console.log(characterAttributesList)
+            console.log(characterExpertiseList)
+            setLevelUpData(false);
+        }
+    }, [levelUpData, characterAttributesList, characterExpertiseList])
+
     return (
         <div className="w-full h-full px-12 py-8 flex flex-col items-center bg-red-400 gap-10">
             <div className="flex justify-center items-center gap-4">
@@ -96,7 +114,7 @@ export default function CharacterStats({
                 <SquareField name="inspiração" value={inspiration}/>
                 <SquareField name="percepção" value={perception}/>
             </div>
-            <div className="w-full flex justify-center items-center gap-24 ">
+            <div className="w-full flex justify-center items-center gap-24">
                 <div className="grid grid-cols-2 gap-16">
                     {
                         attributes.map(attr => {
@@ -111,6 +129,9 @@ export default function CharacterStats({
                             )
                         })
                     }
+                    <div className="w-full flex justify-center items-center col-span-2">
+                        <button onClick={confirmUpdate} className="px-4 py-2 bg-blue-500">Salvar</button>
+                    </div>
                 </div>
                 <div className="flex flex-col gap-2">
                     {
