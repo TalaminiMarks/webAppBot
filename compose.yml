@@ -1,0 +1,26 @@
+services:
+
+  web:
+    build: 
+      context: ./
+      target: web
+    develop:
+      watch:
+      - path: ./web
+        action: sync
+        target: ./app
+      - path: ./web/package.json
+        action: rebuild
+
+  server:
+    build: 
+      context: ./
+      target: server
+    develop:
+      watch: 
+        - path: ./server
+          action: sync
+          target: ./app
+        - path: ./server/package.json
+          action: rebuild
+    
