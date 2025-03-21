@@ -8,6 +8,11 @@ import AttrField from "./characterStatsComponents/AttrField";
 import { MinusBtn, PlusBtn } from "./geral/Buttons";
 import ExptField from "./characterStatsComponents/ExptField";
 
+interface originalValues {
+    id: number;
+    value: number;
+}
+
 interface CharacterStatsProps {
     characterAttributes: characterAttributes[];
     characterExpertise: characterExpertise[];
@@ -18,92 +23,73 @@ interface CharacterStatsProps {
     inspiration: number;
     perception: number;
     armor: number;
+    originalValues: originalValues[];
 }
 
 export default function CharacterStats({ 
-    characterAttributes, characterExpertise, attributes, expertise, initiative, inspiration, perception, proficiency, armor
+    characterAttributes, characterExpertise, attributes, expertise, initiative, inspiration, perception, proficiency, armor, originalValues
 }: CharacterStatsProps){
-
-    // Character can't have an attribute less then 8
-    const [originalValue, setOriginalValue] = useState(8);
 
     const [characterAttributesList, setCharacterAttributesList] = useState(characterAttributes);
     const [characterExpertiseList, setCharacterExpertiseList] = useState(characterExpertise);
     const [levelUpData, setLevelUpData] = useState(false);
-
-    function checkFirstValue(target: characterAttributes){
-        const filter = characterAttributes.find(v => v.attributesId === target.attributesId);
-        if(filter){
-            setOriginalValue(filter.value);
-            if(target.value <= originalValue){
-                return false;
-            }
-            else{
-                return true;
-            }
+    
+    function checkOriginalValue(target: characterAttributes){
+        const originalValue = originalValues.find(v => v.id === target.attributesId);
+        if(originalValue?.value === target.value){
+            return false
+        }
+        else{
+            return true
         }
     }
 
-    function updateModAttribute(attribute: characterAttributes){
-        const expertiseFilter = expertise.filter(i => i.attributesId === attribute.attributesId)
-        for(let i = 0; i < expertiseFilter.length; i++){
-            const { id } = expertiseFilter[i]
-            const target = characterExpertiseList.find(i => i.expertiseId === id);
-            if (!target) throw new Error("Erro em atualizar o valor da pericia");
-            target.value = attribute.modValue;
-            setCharacterExpertiseList(prev => {
-                const filter = prev.filter(i => i.expertiseId !== id)
-                return [...filter, target]
-            })
+    // function updateModAttribute(attribute: characterAttributes){
+    //     const expertiseFilter = expertise.filter(i => i.attributesId === attribute.attributesId)
+    //     for(let i = 0; i < expertiseFilter.length; i++){
+    //         const { id } = expertiseFilter[i]
+    //         const target = characterExpertiseList.find(i => i.expertiseId === id);
+    //         if (!target) throw new Error("Erro em atualizar o valor da pericia");
+    //         target.value = attribute.modValue;
+    //         setCharacterExpertiseList(prev => {
+    //             const filter = prev.filter(i => i.expertiseId !== id)
+    //             return [...filter, target]
+    //         })
 
-        }
-    }
+    //     }
+    // }
 
     function addPoint(key: number){
-        for(let i = 0; i < characterAttributesList.length; i++){
-            if(characterAttributesList[i].attributesId === key){
-                const target = characterAttributesList[i];
-                if (target.value < 30){
-                    target.value += 1;
-                    target.modValue = getModAttr(target.value);
-                    setCharacterAttributesList(prev => {
-                        const filter = prev.filter(i => i.attributesId !== key)
-                        return [...filter, target]
-                    });
-                    updateModAttribute(target);
-                }
-            }
-        }            
+        const target = characterAttributesList.find(v => v.attributesId === key)
+        if(!target){
+            throw new Error("Something go wrong")
+        }
+        if(target.value < 30){
+            target.value++
+        }
+        setCharacterAttributesList(prev => {
+            const filter = prev.filter((v)=> v.attributesId !== key)
+            return [...filter, target]
+        })
     }
 
     function removePoint(key: number){
-        for(let i = 0; i < characterAttributesList.length; i++){
-            if(characterAttributesList[i].attributesId === key){
-                const target = characterAttributesList[i];
-                if (checkFirstValue(target)){
-                    target.value += -1;
-                    target.modValue = getModAttr(target.value);
-                    setCharacterAttributesList(prev => {
-                        const filter = prev.filter(i => i.attributesId !== key)
-                        return [...filter, target]
-                    });
-                    updateModAttribute(target);
-                }
-            }
+        const target = characterAttributesList.find(v => v.attributesId === key)
+        if(!target){
+            throw new Error("Something go wrong")
         }
+        if(checkOriginalValue(target)){
+            target.value--
+        }
+        setCharacterAttributesList(prev => {
+            const filter = prev.filter((v)=> v.attributesId !== key)
+            return [...filter, target]
+        })
     }
 
     function confirmUpdate(){
         setLevelUpData(true)
     }
-
-    useEffect(()=>{
-        if(levelUpData){
-            console.log(characterAttributesList)
-            console.log(characterExpertiseList)
-            setLevelUpData(false);
-        }
-    }, [levelUpData, characterAttributesList, characterExpertiseList])
 
     return (
         <div className="w-full h-full px-12 py-8 flex flex-col items-center bg-red-400 gap-10">
@@ -118,7 +104,7 @@ export default function CharacterStats({
                 <div className="grid grid-cols-2 gap-16">
                     {
                         attributes.map(attr => {
-                            const filter = characterAttributesList.find(i => i.attributesId === attr.id);
+                            const filter = characterAttributesList.find(v => v.attributesId === attr.id);
                             if (!filter) throw new Error("Erro nos attributos");
                             return(
                                 <div key={attr.id} className="flex items-center gap-2">
@@ -136,7 +122,7 @@ export default function CharacterStats({
                 <div className="flex flex-col gap-2">
                     {
                         expertise.map(expertise => {
-                            const filter = characterExpertiseList.find(i => i.expertiseId === expertise.id);
+                            const filter = characterExpertiseList.find(v => v.expertiseId === expertise.id);
                             if(!filter) throw new Error("Erro nas pericias");
                             return (
                                 <ExptField key={expertise.id} id={`${expertise.id}`} expertise={expertise.name} value={filter.value}/>

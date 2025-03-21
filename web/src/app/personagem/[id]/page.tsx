@@ -27,7 +27,8 @@ interface MainCharacterInfo {
     id: string;
     name: string;
     role: string;
-    health: number;
+    maxHealth: number;
+    currentHealth: number;
     armor: number;
     age: number;
     baseRace: string;
@@ -117,6 +118,14 @@ export default async function Page({ params }: Props){
         platinum: data.platinum
     }
 
+    const originalValues = data.characterAttributes.map(v => {
+        const filter = {
+            id: v.attributesId,
+            value: v.value
+        }
+        return filter
+    })
+
     return (
         <main className="w-full h-full bg-slate-300">
             <Header 
@@ -126,7 +135,7 @@ export default async function Page({ params }: Props){
                 xp={data.xp}
                 level={data.level}
             />
-            <div className="w-full h-[90%] flex">
+            <div className="w-full min-h-[90%] flex">
                 <section className="w-1/3 bg-purple-300 p-2 flex flex-col gap-2">
                     <CharacterStory 
                         affiliation={data.affiliation}
@@ -157,7 +166,7 @@ export default async function Page({ params }: Props){
                     </div>
                 </section>
                 <section className="w-2/3 bg-pink-200 flex flex-col items-center">
-                    <HealthBar currentHealth={20} maxHealth={60}/>
+                    <HealthBar currentHealth={data.currentHealth} maxHealth={data.maxHealth}/>
                     <CharacterStats 
                         characterAttributes={data.characterAttributes} 
                         characterExpertise={data.characterExpertise}
@@ -168,6 +177,7 @@ export default async function Page({ params }: Props){
                         proficiency={data.proficiency}
                         perception={data.perception}
                         armor={data.armor}
+                        originalValues={originalValues}
                     />
                 </section>
             </div>
