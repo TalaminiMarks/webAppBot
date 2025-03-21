@@ -44,20 +44,19 @@ export default function CharacterStats({
         }
     }
 
-    // function updateModAttribute(attribute: characterAttributes){
-    //     const expertiseFilter = expertise.filter(i => i.attributesId === attribute.attributesId)
-    //     for(let i = 0; i < expertiseFilter.length; i++){
-    //         const { id } = expertiseFilter[i]
-    //         const target = characterExpertiseList.find(i => i.expertiseId === id);
-    //         if (!target) throw new Error("Erro em atualizar o valor da pericia");
-    //         target.value = attribute.modValue;
-    //         setCharacterExpertiseList(prev => {
-    //             const filter = prev.filter(i => i.expertiseId !== id)
-    //             return [...filter, target]
-    //         })
-
-    //     }
-    // }
+    function updateExpertise(attribute: characterAttributes){
+        const expertiseFilter = expertise.filter(i => i.attributesId === attribute.attributesId)
+        for(let i = 0; i < expertiseFilter.length; i++){
+            const { id } = expertiseFilter[i]
+            const target = characterExpertiseList.find(i => i.expertiseId === id);
+            if (!target) throw new Error("Something go wrong");
+            target.value = attribute.modValue;
+            setCharacterExpertiseList(prev => {
+                const filter = prev.filter(i => i.expertiseId !== id)
+                return [...filter, target]
+            })
+        }
+    }
 
     function addPoint(key: number){
         const target = characterAttributesList.find(v => v.attributesId === key)
@@ -66,11 +65,13 @@ export default function CharacterStats({
         }
         if(target.value < 30){
             target.value++
+            target.modValue = getModAttr(target.value)
         }
         setCharacterAttributesList(prev => {
             const filter = prev.filter((v)=> v.attributesId !== key)
             return [...filter, target]
         })
+        updateExpertise(target)
     }
 
     function removePoint(key: number){
@@ -80,11 +81,13 @@ export default function CharacterStats({
         }
         if(checkOriginalValue(target)){
             target.value--
+            target.modValue = getModAttr(target.value)
         }
         setCharacterAttributesList(prev => {
             const filter = prev.filter((v)=> v.attributesId !== key)
             return [...filter, target]
         })
+        updateExpertise(target)
     }
 
     function confirmUpdate(){
