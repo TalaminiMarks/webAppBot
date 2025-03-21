@@ -11,6 +11,7 @@ import spells from "./src/routes/spells";
 import login from "./src/routes/login";
 import logout from "./src/routes/logout";
 import createCharacter from "./src/routes/createCharacter";
+import levelUp from "./src/routes/levelUp";
 
 const app = fastify({
     logger: {
@@ -43,9 +44,11 @@ app.register(spells);
 app.register(equipament);
 app.register(character);
 app.register(createCharacter);
+app.register(levelUp)
 
 app.listen({
-    port: 3333
+    port: 3333,
+    host: "0.0.0.0"
 }, (err)=>{
     if (err){
         app.log.error(err);
