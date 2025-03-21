@@ -1,4 +1,5 @@
 FROM node:20-alpine AS base
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # web
@@ -9,6 +10,7 @@ RUN npm install
 COPY web/eslint.config.mjs web/next.config.ts web/postcss.config.mjs web/tailwind.config.ts web/tsconfig.json ./
 COPY web/src ./src
 COPY web/public ./public
+EXPOSE 3000
 CMD [ "npm", "dev" ]
 
 # server

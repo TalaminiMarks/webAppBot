@@ -1,26 +1,28 @@
+name: teste
 services:
-
   web:
     build: 
-      context: ./
+      context: ./app
       target: web
+    ports:
+      - "3000:3000"
     develop:
       watch:
-      - path: ./web
+      - path: ./
         action: sync
         target: ./app
-      - path: ./web/package.json
+      - path: ./package.json
         action: rebuild
 
   server:
     build: 
-      context: ./
+      context: ./app
       target: server
     develop:
-      watch: 
-        - path: ./server
-          action: sync
-          target: ./app
-        - path: ./server/package.json
-          action: rebuild
+      watch:
+      - path: ./server
+        action: sync
+        target: ./app
+      - path: ./server/package.json
+        action: rebuild
     
