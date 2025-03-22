@@ -5,14 +5,18 @@ import z from "zod";
 export default async function route(fastify: FastifyInstance){
     fastify.post("/upar-nivel", (req, res)=>{
         const schema = z.object({
-            characterId: z.number(),
-            attributes: z.object({
-                id: z.number(),
+            attributes: z.array(z.object({
+                id: z.string(),
+                characterId: z.string(),
+                attributesId: z.number(),
                 value: z.number(),
-                modValue: z.number(),
-            }),
+                modValue: z.number()
+
+            })),
             expertises: z.object({
-                id: z.number(),
+                id: z.string(),
+                characterId: z.string(),
+                expertiseId: z.number(),
                 value: z.number()
             })
         })

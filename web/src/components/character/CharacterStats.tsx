@@ -32,7 +32,10 @@ export default function CharacterStats({
 
     const [characterAttributesList, setCharacterAttributesList] = useState(characterAttributes);
     const [characterExpertiseList, setCharacterExpertiseList] = useState(characterExpertise);
-    const [levelUpData, setLevelUpData] = useState(false);
+    const [levelUpData, setLevelUpData] = useState<{
+        attributes: characterAttributes[],
+        expertises: characterExpertise[]
+    }>();
     
     function checkOriginalValue(target: characterAttributes){
         const originalValue = originalValues.find(v => v.id === target.attributesId);
@@ -91,8 +94,22 @@ export default function CharacterStats({
     }
 
     function confirmUpdate(){
-        setLevelUpData(true)
+        setLevelUpData({
+            attributes: characterAttributesList,
+            expertises: characterExpertiseList
+        })
     }
+
+    useEffect(()=>{
+        if(levelUpData !== undefined){
+            console.log(levelUpData)
+            // api.post("/upar-nivel", levelUpData)
+            // .then((response)=>{
+            //     console.log(response.data.message)
+            // })
+        }
+
+    }, [levelUpData])
 
     return (
         <div className="w-full h-full px-12 py-8 flex flex-col items-center bg-red-400 gap-10">
