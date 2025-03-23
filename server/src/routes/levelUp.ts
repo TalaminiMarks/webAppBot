@@ -3,7 +3,7 @@ import { prisma } from "../utils/utils";
 import z from "zod";
 
 export default async function route(fastify: FastifyInstance){
-    fastify.post("/upar-nivel", (req, res)=>{
+    fastify.post("/upar-nivel", async (req, res)=>{
         const schema = z.object({
             attributes: z.array(z.object({
                 id: z.string(),
@@ -11,24 +11,43 @@ export default async function route(fastify: FastifyInstance){
                 attributesId: z.number(),
                 value: z.number(),
                 modValue: z.number()
-
             })),
-            expertises: z.object({
+            expertises: z.array(z.object({
                 id: z.string(),
                 characterId: z.string(),
                 expertiseId: z.number(),
                 value: z.number()
-            })
+            }))
         })
 
         const data = schema.parse(req.body);
 
         if(data){
-            console.log(data)
-            res.send("Requisicao concluida")
+            for(let i = 0; i < data.attributes.length; i++){
+                await prisma.characterAttributes.update({
+                    where:{
+                        id: data.attributes[i].id
+                    },
+                    data:{
+                        value: data.attributes[i].value,
+                        modValue: data.attributes[i].modValue
+                    }
+                })
+            }
+            for(let i = 0; i < data.expertises.length; i++){
+                await prisma.characterExpertise.update({
+                    where: {
+                        id: data.expertises[i].id
+                    },
+                    data: {
+                        value: data.expertises[i].value
+                    }
+                })
+            }
+            res.send({message: "Atualizado com sucesso!"})
         }
         else{
-            res.send("Erro na requisição")
+            res.send({message: "Erro na requisição"})
         }
     })
 }
