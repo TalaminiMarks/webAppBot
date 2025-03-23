@@ -2,6 +2,53 @@ import { FastifyInstance } from "fastify";
 import { prisma } from "../utils/utils";
 import z from "zod";
 
+interface baseStatus {
+    id: string;
+    characterId: string;
+    value: number;
+}
+
+interface attributeData extends baseStatus {
+    attributesId: number;
+    modValue: number;
+}
+
+interface expertiseData extends baseStatus {    
+    expertiseId: number;
+}
+
+interface targetData {
+    attributes: attributeData[];
+    expertises: expertiseData[]
+}
+
+async function updateCharacterAttributes(target: targetData){
+    for(let i = 0; i < target.attributes.length; i++){
+        await prisma.characterAttributes.updateMany({
+            where:{
+                id: target.attributes[i].id
+            },
+            data:{
+                value: target.attributes[i].value,
+                modValue: target.attributes[i].modValue
+            }
+        })
+    }
+}
+
+async function updateCharacterExpertise(target: targetData){
+    for(let i = 0; i < target.expertises.length; i++){
+        await prisma.characterExpertise.updateMany({
+            where: {
+                id: target.expertises[i].id
+            },
+            data: {
+                value: target.expertises[i].value
+            }
+        })
+    }
+}
+
 export default async function route(fastify: FastifyInstance){
     fastify.post("/upar-nivel", async (req, res)=>{
         const schema = z.object({
@@ -23,27 +70,7 @@ export default async function route(fastify: FastifyInstance){
         const data = schema.parse(req.body);
 
         if(data){
-            for(let i = 0; i < data.attributes.length; i++){
-                await prisma.characterAttributes.update({
-                    where:{
-                        id: data.attributes[i].id
-                    },
-                    data:{
-                        value: data.attributes[i].value,
-                        modValue: data.attributes[i].modValue
-                    }
-                })
-            }
-            for(let i = 0; i < data.expertises.length; i++){
-                await prisma.characterExpertise.update({
-                    where: {
-                        id: data.expertises[i].id
-                    },
-                    data: {
-                        value: data.expertises[i].value
-                    }
-                })
-            }
+            await Promise.all([updateCharacterAttributes(data), updateCharacterExpertise(data)])
             res.send({message: "Atualizado com sucesso!"})
         }
         else{
