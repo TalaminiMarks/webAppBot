@@ -103,10 +103,12 @@ export default function CharacterStats({
     useEffect(()=>{
         if(levelUpData !== undefined){
             console.log(levelUpData)
-            // api.post("/upar-nivel", levelUpData)
-            // .then((response)=>{
-            //     console.log(response.data.message)
-            // })
+            api.post("/upar-nivel", levelUpData)
+            .then((response)=>{
+                alert(response.data.message)
+                location.reload()
+            })
+            .catch(console.error)
         }
 
     }, [levelUpData])
