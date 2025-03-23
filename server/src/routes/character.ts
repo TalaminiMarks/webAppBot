@@ -57,13 +57,34 @@ export default function route(fastify: FastifyInstance){
                 id: id
             },
             include: {
-                characterAttributes: true,
-                characterExpertise: true,
-                characterItens: true,
-                characterSkills: true,
-                characterSpells: true,
-                // characterDeath: true
-            }
+                characterAttributes: {
+                    omit: {
+                        createdAt: true,
+                        updatedAt: true
+                    }
+                },
+                characterExpertise: {
+                    omit: {
+                        updatedAt: true,
+                        createdAt: true
+                    }
+                },
+                characterItens: {
+                    omit: {
+                        createdAt: true
+                    }
+                },
+                characterSkills: {
+                    omit: {
+                        createdAt: true
+                    }
+                },
+                characterSpells: {
+                    omit: {
+                        createdAt: true
+                    }
+                },
+            },
         })
 
         res.send(data);
