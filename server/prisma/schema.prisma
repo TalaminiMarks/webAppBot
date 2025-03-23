@@ -162,6 +162,7 @@ model CharacterAttributes {
   value        Int      @default(0)
   modValue     Int
   createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
 
   character Character  @relation(fields: [characterId], references: [id])
   attribute Attributes @relation(fields: [attributesId], references: [id])
@@ -173,6 +174,7 @@ model CharacterExpertise {
   expertiseId Int
   value       Int      @default(0)
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 
   character Character @relation(fields: [characterId], references: [id])
   expertise Expertise @relation(fields: [expertiseId], references: [id])
