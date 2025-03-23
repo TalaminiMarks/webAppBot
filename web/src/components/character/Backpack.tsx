@@ -24,28 +24,24 @@ interface BackpackProps {
 
 export default function Backpack({characterId, characterItens, itens, money}: BackpackProps ){
     const backpackModalRef = useRef<HTMLDivElement>(null);
-    const focusInputRef = useRef<HTMLInputElement>(null);
+    const focusRef = useRef<HTMLButtonElement>(null);
 
     const [isOpenBackpack, setIsOpenBackpack] = useState(false)
     const [isOpenWindowAddItem, setIsOpenWindowAddItem] = useState(false)
-    const [newItem, setNewItem] = useState<characterItens>({
-        id: "", 
-        itemsId: 0, 
-        additionalDescription: "", 
-        bonusDamage: "", 
-        typeBonusDamage: "",
-    });
+    const [newItem, setNewItem] = useState<characterItens>();
     const [characterItensList, setCharacterItensList] = useState<characterItens[]>(characterItens);
 
     useEffect(()=>{
-        if(newItem.id !== ""){
+        if(newItem !== undefined){
             setCharacterItensList(prev => [...prev, newItem]);
         }
-    }, [newItem])
+        if(isOpenBackpack === true){
+            focusRef.current?.focus();
+        }
+    }, [newItem, isOpenBackpack])
     
     function openBackpackModal(){
         setIsOpenBackpack(true)
-    
     }
     function closeBackpackModal(){
         setIsOpenBackpack(false)
@@ -65,10 +61,6 @@ export default function Backpack({characterId, characterItens, itens, money}: Ba
         if (event.key === "Escape"){
             closeBackpackModal();
         }
-    }
-
-    function handleMouseEnter(){
-        focusInputRef.current?.focus();
     }
 
     function handleFormData(e: FormEvent<HTMLFormElement>){
@@ -95,12 +87,10 @@ export default function Backpack({characterId, characterItens, itens, money}: Ba
                 className={`${isOpenBackpack ? "flex" : "hidden"} fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 justify-center items-center z-50`} 
                 onClick={handleClickOutside} 
                 onKeyDown={handleKeyDown} 
-                onMouseEnter={handleMouseEnter} 
                 aria-modal="true"
             >
-                <input ref={focusInputRef} className="sr-only" />
                 <div className="relative flex w-1/2 h-1/2 p-8 bg-yellow-300">
-                    <CloseBtn onClick={closeBackpackModal} />
+                    <CloseBtn ref={focusRef} onClick={closeBackpackModal} />
                     <div className="relative w-[80%] h-full flex flex-col items-center">
                         <button className="w-full mb-2 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={stateWindowAddItem}>
                             {isOpenWindowAddItem ? 

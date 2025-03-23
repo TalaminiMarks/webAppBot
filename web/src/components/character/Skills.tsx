@@ -16,25 +16,22 @@ interface SkillsProps {
 
 export default function Skills({ characterId, characterSkills, skills }: SkillsProps){
     const modalRef = useRef<HTMLDivElement>(null);
-    const focusInputRef = useRef<HTMLInputElement>(null);
+    const focusRef = useRef<HTMLButtonElement>(null);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isOpenWindowAddSkill, setIsOpenWindowAddSkill] = useState(false);
     const [characterSkillsList, setCharacterSpellList] = useState(characterSkills);
 
-    const [newSkill, setNewSkill] = useState<characterSkills>({
-        id: "",
-        additionalDescription: "",
-        bonusDamage: "",
-        skillsId: 0,
-        typeBonusDamage: ""
-    })
+    const [newSkill, setNewSkill] = useState<characterSkills>()
     
     useEffect(()=>{
-        if(newSkill.id !== ""){
+        if(newSkill !== undefined){
             setCharacterSpellList(prev => [...prev, newSkill])
         }
-    }, [newSkill])
+        if(isModalOpen === true){
+            focusRef.current?.focus();
+        }
+    }, [newSkill, isModalOpen])
 
     function openModal(){
         setIsModalOpen(true);
@@ -54,10 +51,6 @@ export default function Skills({ characterId, characterSkills, skills }: SkillsP
         if (event.key === "Escape"){
             closeModal();
         }
-    }
-
-    function handleMouseEnter(){
-        focusInputRef.current?.focus();
     }
 
     function stateWindowAddItem(){
@@ -89,12 +82,10 @@ export default function Skills({ characterId, characterSkills, skills }: SkillsP
                 className={`${isModalOpen ? "flex" : "hidden"} fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 justify-center items-center z-50`} 
                 onClick={handleClickOutside} 
                 onKeyDown={handleKeyDown} 
-                onMouseEnter={handleMouseEnter} 
                 aria-modal="true"
             >
-                <input ref={focusInputRef} className="sr-only" />
                 <div className="relative w-1/3 h-[90%] flex flex-col py-12 px-4 bg-yellow-200 overflow-y-auto">
-                    <CloseBtn onClick={closeModal} />
+                    <CloseBtn ref={focusRef} onClick={closeModal} />
                     <button className="w-full mb-2 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={stateWindowAddItem}>
                         {
                             isOpenWindowAddSkill ? 

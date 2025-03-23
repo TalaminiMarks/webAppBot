@@ -15,24 +15,21 @@ interface SpellsProps {
 
 export default function Spells({ characterSpells, spells, characterId }: SpellsProps){
     const modalRef = useRef<HTMLDivElement>(null);
-    const focusInputRef = useRef<HTMLInputElement>(null);
+    const focusRef = useRef<HTMLButtonElement>(null);
 
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [isOpenAddSpellWindow, setIsOpenAddSpellWindow] = useState(false);
     const [characterSpellList, setCharacterSpellList] = useState(characterSpells);
-    const [newSpell, setNewSpell] = useState<characterSpells>({
-        id: "",
-        additionalDescription: "",
-        bonusDamage: "",
-        spellsId: 0,
-        typeBonusDamage: ""
-    })
+    const [newSpell, setNewSpell] = useState<characterSpells>()
 
     useEffect(()=>{
-        if(newSpell.id !== ""){
+        if(newSpell !== undefined){
             setCharacterSpellList(prev => [...prev, newSpell])
         }
-    }, [newSpell])
+        if(isOpenModal === true){
+            focusRef.current?.focus()
+        }
+    }, [newSpell, isOpenModal])
 
     function openModal(){
         setIsOpenModal(true);
@@ -56,10 +53,6 @@ export default function Spells({ characterSpells, spells, characterId }: SpellsP
         if (event.key === "Escape"){
             closeModal();
         }
-    }
-
-    function handleMouseEnter(){
-        focusInputRef.current?.focus();
     }
 
     function handleFormData(e: FormEvent<HTMLFormElement>){
@@ -87,11 +80,9 @@ export default function Spells({ characterSpells, spells, characterId }: SpellsP
                 className={`${isOpenModal ? "flex" : "hidden"} justify-center items-center fixed top-0 left-0 w-full h-full bg-opacity-70 bg-black z-50`} 
                 onClick={handleClickOutside} 
                 onKeyDown={handleKeyDown} 
-                onMouseEnter={handleMouseEnter}
             >
-                <input ref={focusInputRef} className="sr-only" />
                 <div className="relative w-1/3 h-[90%] flex flex-col py-12 px-4 bg-yellow-200 overflow-y-auto">
-                    <CloseBtn onClick={closeModal} />
+                    <CloseBtn ref={focusRef} onClick={closeModal} />
                     <button className="relative w-full mb-2 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={stateAddSpellWindow}>
                         {isOpenAddSpellWindow ? 
                         <div className="flex items-center justify-center gap-2">
