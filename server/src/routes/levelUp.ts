@@ -19,10 +19,11 @@ interface expertiseData extends baseStatus {
 
 interface targetData {
     attributes: attributeData[];
-    expertises: expertiseData[]
+    expertises: expertiseData[];
 }
 
 async function updateCharacterAttributes(target: targetData){
+
     for(let i = 0; i < target.attributes.length; i++){
         await prisma.characterAttributes.updateMany({
             where:{

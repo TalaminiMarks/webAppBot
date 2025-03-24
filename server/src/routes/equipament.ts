@@ -82,18 +82,31 @@ export default function route(fastify: FastifyInstance){
     });
 
     fastify.delete("/equipamentos/deletar/:id", async (req, res)=>{
-            const schema = z.object({
-                id: z.string()
-            })
-    
-            const { id } = schema.parse(req.params);
-    
-            await prisma.characterItens.delete({
-                where: {
-                    id: id
-                }
-            })
-    
-            res.send({ message: "Item deletado com sucesso" })
+        const schema = z.object({
+            id: z.string()
         })
+
+        const { id } = schema.parse(req.params);
+
+        await prisma.characterItens.delete({
+            where: {
+                id: id
+            }
+        })
+
+        res.send({ message: "Item deletado com sucesso" })
+    });
+
+    fastify.put("/equipamentos/atualizar:id:equipped", (req, res)=>{
+        const schema = z.object({
+            id: z.string(),
+            equipped: z.string().transform(v => Boolean(v))
+        })
+
+        const data = schema.parse(req.query)
+
+        console.log(data);
+
+        res.send("algo")
+    })
 }
