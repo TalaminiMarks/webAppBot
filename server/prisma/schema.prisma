@@ -39,6 +39,7 @@ model Character {
   displacement  Int    @default(0)
   initiative    Int    @default(0)
   inspiration   Int    @default(0)
+  equipLoad     Int
 
   // Story
   languages   String @default("Nenhum Registro")
@@ -119,12 +120,15 @@ model Spells {
 }
 
 model Items {
-  id          Int      @id @unique @default(autoincrement())
+  id          Int     @id @unique @default(autoincrement())
   name        String
   damage      String?
   typeDamage  String?
   description String
-  createdAt   DateTime @default(now())
+  weight      Int
+  equippable  Boolean @default(false)
+
+  createdAt DateTime @default(now())
 
   characterItens CharacterItens[]
 }
