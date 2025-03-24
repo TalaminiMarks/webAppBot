@@ -4,6 +4,7 @@ export interface ItensTable {
     description: string;
     damage: string;
     typeDamage: string;
+    equippable: boolean;
 }
 
 export interface SkillsTable {
@@ -41,6 +42,8 @@ export interface characterItens {
     bonusDamage: string;
     typeBonusDamage: string;
     additionalDescription: string;
+    weight: number;
+    equipped: boolean;
 }
 
 export interface characterSkills {
