@@ -29,10 +29,12 @@ interface MainCharacterInfo {
     role: string;
     maxHealth: number;
     currentHealth: number;
-    armor: number;
     age: number;
     baseRace: string;
     subRace: string;
+
+    armor: number;
+    equipLoad: number;
 
     languages: string;
     affiliation: string;
@@ -152,6 +154,7 @@ export default async function Page({ params }: Props){
                             characterItens={data.characterItens} 
                             itens={ITENS}
                             money={money}
+                            equipLoad={data.equipLoad}
                         />
                         <Spells 
                             characterId={data.id}

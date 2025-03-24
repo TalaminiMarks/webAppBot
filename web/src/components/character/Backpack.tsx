@@ -20,9 +20,10 @@ interface BackpackProps {
         electro: number,
         platinum: number
     }
+    equipLoad: number;
 }
 
-export default function Backpack({characterId, characterItens, itens, money}: BackpackProps ){
+export default function Backpack({characterId, characterItens, itens, money, equipLoad}: BackpackProps){
     const backpackModalRef = useRef<HTMLDivElement>(null);
     const focusRef = useRef<HTMLButtonElement>(null);
 
@@ -118,6 +119,8 @@ export default function Backpack({characterId, characterItens, itens, money}: Ba
                                             additionalDescription={item.additionalDescription}
                                             bonusDamage={item.bonusDamage}
                                             typeBonusDamage={item.typeBonusDamage}
+                                            equipped={item.equipped}
+                                            equippable={filter[0].equippable}
                                         />
                                     )
                                 })
@@ -156,12 +159,18 @@ export default function Backpack({characterId, characterItens, itens, money}: Ba
                             </form>
                         </div>
                     </div>
-                    <div className="w-[20%] flex flex-col justify-center items-center">
-                        <p>Cobre: {money.copper}</p>
-                        <p>Silver: {money.silver}</p>
-                        <p>Ouro: {money.gold}</p>
-                        <p>Electro: {money.electro}</p>
-                        <p>Platina: {money.platinum}</p>
+                    <div className="w-[20%] flex flex-col justify-between items-center py-10">
+                        <div className="w-full flex flex-col justify-center items-center">
+                            <p>Cobre: {money.copper}</p>
+                            <p>Silver: {money.silver}</p>
+                            <p>Ouro: {money.gold}</p>
+                            <p>Electro: {money.electro}</p>
+                            <p>Platina: {money.platinum}</p>
+                        </div>
+                        <div className="w-full flex flex-col justify-center items-center">
+                            <p>Capacidade de carga:</p>
+                            <span>0/{equipLoad}</span>
+                        </div>
                     </div>
                 </div>
             </div>
