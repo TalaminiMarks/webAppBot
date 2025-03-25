@@ -97,7 +97,7 @@ export default function route(fastify: FastifyInstance){
         res.send({ message: "Item deletado com sucesso" })
     });
 
-    fastify.put("/equipamentos/atualizar:id:equipped", (req, res)=>{
+    fastify.put("/equipamentos/atualizar:id:equipped", async (req, res)=>{
         const schema = z.object({
             id: z.string(),
             equipped: z.string().transform(v => Boolean(v))
@@ -105,8 +105,15 @@ export default function route(fastify: FastifyInstance){
 
         const data = schema.parse(req.query)
 
-        console.log(data);
+        await prisma.characterItens.update({
+            where: {
+                id: data.id
+            },
+            data: {
+                equipped: data.equipped
+            }
+        })
 
-        res.send("algo")
+        res.send({message: "atualizado"})
     })
 }
