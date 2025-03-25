@@ -26,7 +26,7 @@ export default function Spells({ characterSpells, spells, characterId }: SpellsP
         if(newSpell !== undefined){
             setCharacterSpellList(prev => [...prev, newSpell])
         }
-        if(isOpenModal === true){
+        if(isOpenModal){
             focusRef.current?.focus()
         }
     }, [newSpell, isOpenModal])

@@ -28,7 +28,7 @@ export default function Skills({ characterId, characterSkills, skills }: SkillsP
         if(newSkill !== undefined){
             setCharacterSpellList(prev => [...prev, newSkill])
         }
-        if(isModalOpen === true){
+        if(isModalOpen){
             focusRef.current?.focus();
         }
     }, [newSkill, isModalOpen])
