@@ -20,16 +20,12 @@ export default function Spells({ characterSpells, spells, characterId }: SpellsP
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [isOpenAddSpellWindow, setIsOpenAddSpellWindow] = useState(false);
     const [characterSpellList, setCharacterSpellList] = useState(characterSpells);
-    const [newSpell, setNewSpell] = useState<characterSpells>()
 
     useEffect(()=>{
-        if(newSpell !== undefined){
-            setCharacterSpellList(prev => [...prev, newSpell])
-        }
         if(isOpenModal){
             focusRef.current?.focus()
         }
-    }, [newSpell, isOpenModal])
+    }, [isOpenModal])
 
     function openModal(){
         setIsOpenModal(true);
@@ -64,7 +60,7 @@ export default function Spells({ characterSpells, spells, characterId }: SpellsP
         api.post("/magias/adicionar", data).then(response => {
             if(response.status === 200){
                 alert(response.data.message);
-                setNewSpell(response.data.spell);
+                setCharacterSpellList(prev => [...prev, response.data.spell]);
                 setIsOpenAddSpellWindow(false);
             }
             else{

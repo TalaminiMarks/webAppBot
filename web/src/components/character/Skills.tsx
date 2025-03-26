@@ -22,16 +22,12 @@ export default function Skills({ characterId, characterSkills, skills }: SkillsP
     const [isOpenWindowAddSkill, setIsOpenWindowAddSkill] = useState(false);
     const [characterSkillsList, setCharacterSpellList] = useState(characterSkills);
 
-    const [newSkill, setNewSkill] = useState<characterSkills>()
     
     useEffect(()=>{
-        if(newSkill !== undefined){
-            setCharacterSpellList(prev => [...prev, newSkill])
-        }
         if(isModalOpen){
             focusRef.current?.focus();
         }
-    }, [newSkill, isModalOpen])
+    }, [isModalOpen])
 
     function openModal(){
         setIsModalOpen(true);
@@ -66,7 +62,7 @@ export default function Skills({ characterId, characterSkills, skills }: SkillsP
         api.post("/habilidades/adicionar", data).then(response => {
             if(response.status === 200){
                 alert(response.data.message);
-                setNewSkill(response.data.spell);
+                setCharacterSpellList(prev => [...prev, response.data.spell])
                 setIsOpenWindowAddSkill(false);
             }
             else{
@@ -100,7 +96,7 @@ export default function Skills({ characterId, characterSkills, skills }: SkillsP
                         }
                     </button>
 
-                    <div className="relative w-full h-full flex flex-col flex-wrap bg-purple-200">
+                    <div className="relative w-full h-full flex flex-col flex-wrap gap-2 bg-purple-200">
                         {
                             characterSkillsList.map(skill => {
                                 const filter = skills.filter(i => i.id === skill.skillsId);
