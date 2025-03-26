@@ -29,17 +29,13 @@ export default function Backpack({characterId, characterItens, itens, money, equ
 
     const [isOpenBackpack, setIsOpenBackpack] = useState(false)
     const [isOpenWindowAddItem, setIsOpenWindowAddItem] = useState(false)
-    const [newItem, setNewItem] = useState<characterItens>();
     const [characterItensList, setCharacterItensList] = useState<characterItens[]>(characterItens);
 
     useEffect(()=>{
-        if(newItem !== undefined){
-            setCharacterItensList(prev => [...prev, newItem]);
-        }
-        if(isOpenBackpack === true){
+        if(isOpenBackpack){
             focusRef.current?.focus();
         }
-    }, [newItem, isOpenBackpack])
+    }, [isOpenBackpack])
     
     function openBackpackModal(){
         setIsOpenBackpack(true)
@@ -72,13 +68,35 @@ export default function Backpack({characterId, characterItens, itens, money, equ
         api.post("/equipamentos/adicionar", data).then(response => {
             if(response.status === 200){
                 alert(response.data.message);
-                setNewItem(response.data.item);
+                setCharacterItensList(prev => [...prev, response.data.item])
                 setIsOpenWindowAddItem(false);
             }
             else{
                 alert("Erro ao adicionar item");
             }
         })
+    }
+
+    function getEquipamentsWeight(){
+        let totalWeight = 0;
+        characterItensList.map(item => {
+            const filter = itens.find(v => v.id === item.itemsId)
+            if(filter){
+                totalWeight += filter.weight
+            }
+            else{
+                console.log("algo deu errado")
+            }
+        })
+        return totalWeight
+    }
+
+    async function deleteRecord(id: string | number){
+        const { data } = await api.delete(`/equipamentos/deletar/${id}`);
+        alert(data.message);
+        setCharacterItensList(prev => {
+            return prev.filter(item => item.id !== id)
+        });
     }
 
     return (
@@ -121,6 +139,8 @@ export default function Backpack({characterId, characterItens, itens, money, equ
                                             typeBonusDamage={item.typeBonusDamage}
                                             equipped={item.equipped}
                                             equippable={filter[0].equippable}
+                                            weight={filter[0].weight}
+                                            handleDeleteRecord={()=>{deleteRecord(item.id)}}
                                         />
                                     )
                                 })
@@ -169,7 +189,7 @@ export default function Backpack({characterId, characterItens, itens, money, equ
                         </div>
                         <div className="w-full flex flex-col justify-center items-center">
                             <p>Capacidade de carga:</p>
-                            <span>0/{equipLoad}</span>
+                            <span>{getEquipamentsWeight()}/{equipLoad}</span>
                         </div>
                     </div>
                 </div>
