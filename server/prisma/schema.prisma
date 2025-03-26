@@ -122,6 +122,7 @@ model Spells {
 model Items {
   id          Int     @id @unique @default(autoincrement())
   name        String
+  type        String
   damage      String?
   typeDamage  String?
   description String
