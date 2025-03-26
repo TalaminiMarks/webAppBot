@@ -141,6 +141,7 @@ export default function Backpack({characterId, characterItens, itens, money, equ
                                             equippable={filter[0].equippable}
                                             weight={filter[0].weight}
                                             handleDeleteRecord={()=>{deleteRecord(item.id)}}
+                                            type={filter[0].type}
                                         />
                                     )
                                 })

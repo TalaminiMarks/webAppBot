@@ -15,7 +15,7 @@ interface ItemFieldProps extends ItensTable {
 }
 
 export default function ItemField({
-    id, name, description, damage, typeDamage, additionalDescription, bonusDamage, typeBonusDamage, equipped, weight, equippable, handleDeleteRecord
+    id, name, description, damage, typeDamage, additionalDescription, bonusDamage, typeBonusDamage, equipped, weight, equippable, handleDeleteRecord, type
 }: ItemFieldProps){
     const [isMouseEnter, setIsMouseEnter] = useState(false);
     const [isEquipped, setIsEquipped] = useState(equipped);
@@ -56,9 +56,13 @@ export default function ItemField({
                 </div>
             </div>
             <div className="flex items-center gap-10">
-                <button className="bg-blue-400 text-black w-32 h-8 rounded-3xl hover:bg-blue-700 hover:text-white transition-colors" onClick={handleEquipItem}>
-                    {isEquipped ? "desequipar" : "equipar"}
-                </button>
+                {
+                    equippable ?
+                    <button className="bg-blue-400 text-black w-32 h-8 rounded-3xl hover:bg-blue-700 hover:text-white transition-colors" onClick={handleEquipItem}>
+                        {isEquipped ? "desequipar" : "equipar"}
+                    </button> :
+                    null
+                }
                 <button className="w-6 h-6 rounded bg-black text-white hover:bg-white hover:text-black transition" onClick={handleDeleteRecord}>
                     <MinusIcon />
                 </button>
@@ -69,7 +73,10 @@ export default function ItemField({
                 <p>Dano: {damage} - {typeDamage}</p>
                 <p className={`${bonusDamage && typeBonusDamage ? "block" : "hidden"}`}>Dano Bônus: {bonusDamage} - {typeBonusDamage}</p>
                 <p>Peso: {weight}</p>
-                <p className="font-bold">Equipavel? {equippable ? "Sim" : "Não"}</p>
+                <div className="flex justify-between items-center">
+                    <p>Tipo: {type}</p>
+                    <p className="font-bold">{equippable ? "Equipavel" : "Não Equipavel"}</p>
+                </div>
             </div>
         </div>
     )
