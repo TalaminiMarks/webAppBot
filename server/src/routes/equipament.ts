@@ -12,7 +12,8 @@ export default function route(fastify: FastifyInstance){
                 damage: true,
                 typeDamage: true,
                 equippable: true,
-                weight: true
+                weight: true,
+                type: true
             },
             orderBy: {
                 name: "asc"
