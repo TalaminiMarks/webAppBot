@@ -10,7 +10,9 @@ export default function route(fastify: FastifyInstance){
                 name: true,
                 description: true,
                 damage: true,
-                typeDamage: true
+                typeDamage: true,
+                equippable: true,
+                weight: true
             },
             orderBy: {
                 name: "asc"
