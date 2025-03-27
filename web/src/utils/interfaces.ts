@@ -6,6 +6,7 @@ export interface ItensTable {
     typeDamage: string;
     equippable: boolean;
     weight: number;
+    type: string
 }
 
 export interface SkillsTable {
