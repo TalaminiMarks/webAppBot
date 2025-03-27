@@ -6,7 +6,7 @@ import { MinusIcon } from "@heroicons/react/24/solid";
 import { api } from "@/utils/utils";
 import { ItensTable } from "@/utils/interfaces";
 
-interface ItemFieldProps extends ItensTable {
+interface ItemProps extends ItensTable {
     bonusDamage?: string;
     typeBonusDamage?: string;
     additionalDescription?: string;
@@ -14,9 +14,9 @@ interface ItemFieldProps extends ItensTable {
     handleDeleteRecord: MouseEventHandler<HTMLButtonElement>;
 }
 
-export default function ItemField({
+export default function Item({
     id, name, description, damage, typeDamage, additionalDescription, bonusDamage, typeBonusDamage, equipped, weight, equippable, handleDeleteRecord, type
-}: ItemFieldProps){
+}: ItemProps){
     const [isMouseEnter, setIsMouseEnter] = useState(false);
     const [isEquipped, setIsEquipped] = useState(equipped);
     const [isEquippedId, setIsEquippedId] = useState<string | number>();
