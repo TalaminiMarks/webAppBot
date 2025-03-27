@@ -6,7 +6,7 @@ import { PlusIcon, MinusIcon } from "@heroicons/react/20/solid"
 
 import { api } from "@/utils/utils";
 import { ItensTable, characterItens } from "@/utils/interfaces";
-import ItemField from "./inventoryComponents/ItemField";
+import Item from "./inventoryComponents/Item";
 import { CloseBtn } from "./geral/Buttons";
 
 interface BackpackProps {
@@ -108,9 +108,9 @@ export default function Backpack({characterId, characterItens, itens, money, equ
                 onKeyDown={handleKeyDown} 
                 aria-modal="true"
             >
-                <div className="relative flex w-1/2 h-1/2 p-8 bg-yellow-300">
+                <div className="relative flex flex-col w-1/3 h-[90%] py-12 px-8 bg-yellow-300">
                     <CloseBtn ref={focusRef} onClick={closeBackpackModal} />
-                    <div className="relative w-[80%] h-full flex flex-col items-center">
+                    <div className="relative w-full max-h-[70%] h-[70%] flex flex-col items-center">
                         <button className="w-full mb-2 shadow rounded-full bg-black text-white hover:bg-white hover:text-black transition" onClick={stateWindowAddItem}>
                             {isOpenWindowAddItem ? 
                             <div className="flex items-center justify-center gap-2">
@@ -122,12 +122,12 @@ export default function Backpack({characterId, characterItens, itens, money, equ
                                 <span>Adicionar item</span>
                             </div>}
                         </button>
-                        <div className="w-full h-[90%] flex flex-col items-center gap-2 p-2 bg-slate-400 overflow-y-auto">
+                        <div className="w-full h-full flex flex-col items-center gap-2 bg-slate-400 overflow-y-auto">
                             {
                                 characterItensList.map(item => {
                                     const filter = itens.filter(i => i.id === item.itemsId)
                                     return (
-                                        <ItemField 
+                                        <Item 
                                             id={item.id} 
                                             key={item.id} 
                                             name={filter[0].name} 
@@ -148,7 +148,7 @@ export default function Backpack({characterId, characterItens, itens, money, equ
                             }
                         </div>
                         
-                        <div className={`${isOpenWindowAddItem ? "block" : "hidden"} absolute w-full top-11 bg-purple-300 z-99`}>
+                        <div className={`${isOpenWindowAddItem ? "block" : "hidden"} absolute w-full top-10 bg-purple-300 z-99`}>
                             <form className="w-full p-4 flex flex-col items-center gap-4 bg-blue-300" onSubmit={handleFormData}>
                                 <h2>Adicionar um item no inventário</h2>
                                 <select name="itemId" id="itemId" className="w-full rounded p-2" defaultValue="#">
@@ -180,7 +180,7 @@ export default function Backpack({characterId, characterItens, itens, money, equ
                             </form>
                         </div>
                     </div>
-                    <div className="w-[20%] flex flex-col justify-between items-center py-10">
+                    <div className="w-full flex justify-between items-center mt-14">
                         <div className="w-full flex flex-col justify-center items-center">
                             <p>Cobre: {money.copper}</p>
                             <p>Silver: {money.silver}</p>
