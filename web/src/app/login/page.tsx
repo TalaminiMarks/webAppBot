@@ -1,4 +1,4 @@
-import DiscordBtn from "@/components/DiscordBtn";
+import DiscordBtn from "./assets/disc-icon-white.svg";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
