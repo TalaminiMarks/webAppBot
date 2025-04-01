@@ -14,9 +14,8 @@ export default function CharacterCard({id, name, role, baseRace, subRace}: Chara
             <div className="w-52 h-52 bg-slate-400 flex justify-center items-center flex-col gap-4">
                 <h2 className="text-3xl">{name}</h2>
                 <p className="text-xl">{role}</p>
-                <div className="w-full flex justify-center items-center gap-2">
+                <div className="w-full flex flex-col justify-center items-center">
                     <p>{baseRace}</p>
-                    <span>-</span>
                     <p>{subRace}</p>
                 </div>
             </div>

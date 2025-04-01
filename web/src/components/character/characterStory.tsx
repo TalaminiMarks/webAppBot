@@ -16,7 +16,7 @@ function TextField({ title, children }: TextFieldProps){
     }
 
     return (
-        <div className="flex flex-col bg-blue-200 p-2">
+        <div className="w-full h-full flex flex-col bg-blue-200 p-2">
             <button onClick={showText} className="w-full flex justify-between items-center">
                 <h2>{title}</h2>
                 {isOpen ? <ChevronLeftIcon width={30} height={30}/> : <ChevronDownIcon width={30} height={30}/>}
@@ -42,7 +42,7 @@ interface CharacterStoryProps {
 
 export default function CharacterStory({ affiliation, defect, story, ideas, personality, previous, tendency}: CharacterStoryProps){
     return (
-        <div className="w-full max-h-[50%] flex flex-col gap-2 overflow-y-auto">
+        <div className="w-full max-h-[50%] h-[50%] flex flex-col gap-2 overflow-y-auto">
             <TextField title="Tendencia">
                 <p>{tendency}</p>
             </TextField>
