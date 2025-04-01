@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState, useEffect, MouseEvent, KeyboardEvent, FormEvent } from "react";
+import { useRef, useState, useEffect, MouseEvent, KeyboardEvent, FormEvent, ChangeEvent } from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/20/solid"
 
 
@@ -99,6 +99,14 @@ export default function Backpack({characterId, characterItens, itens, money, equ
         });
     }
 
+    function handleSearchName(e: ChangeEvent<HTMLInputElement>){
+        console.log(e.target.value);
+    }
+
+    function handleSearchType(e: ChangeEvent<HTMLInputElement>){
+        console.log(e.target.value);
+    }
+
     return (
         <div>
             <button className="bg-gray-400 rounded" onClick={openBackpackModal}>Mochila</button>
@@ -123,6 +131,19 @@ export default function Backpack({characterId, characterItens, itens, money, equ
                             </div>}
                         </button>
                         <div className="w-full h-full flex flex-col items-center gap-2 bg-slate-400 overflow-y-auto">
+                            <div className="w-full flex flex-col justify-center items-center bg-stone-300 py-2">
+                                <span>Pesquisar Item</span>
+                                <form className="flex w-full justify-between items-center px-2">
+                                    <div className="flex justify-center items-center gap-1">
+                                        <label htmlFor="item-name">Nome:</label>
+                                        <input id="item-name" name="item-name" type="text" onChange={handleSearchName} className="px-2" />
+                                    </div>
+                                    <div className="flex justify-center items-center gap-1">
+                                        <label htmlFor="type">Tipo:</label>
+                                        <input id="type" name="type" type="text" onChange={handleSearchType} className="px-2" />
+                                    </div>
+                                </form>
+                            </div>
                             {
                                 characterItensList.map(item => {
                                     const filter = itens.filter(i => i.id === item.itemsId)
