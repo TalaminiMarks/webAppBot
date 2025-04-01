@@ -1,18 +1,39 @@
 FROM node:20-alpine AS base
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
 
 # web
 
-FROM base AS web
-COPY web/package*.json ./
-RUN npm install
-COPY web/eslint.config.mjs web/next.config.ts web/postcss.config.mjs web/tailwind.config.ts web/tsconfig.json ./
-COPY web/src ./src
-COPY web/public ./public
-EXPOSE 3000
-CMD [ "npm", "dev" ]
+FROM base AS web-deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
 
+COPY web/package*.json ./
+RUN npm ci
+
+FROM base AS web-builder
+WORKDIR /app
+COPY --from=web-deps /app/node_modules ./node_modules
+COPY . .
+COPY .env.production.sample .env.production
+RUN npm run build
+
+FROM base AS web-runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+COPY --from=web-builder /app/public ./public
+
+COPY --from=web-builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=web-builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0" 
+
+CMD ["node", "server.js"]
 # server
 
 FROM base AS server
