@@ -33,7 +33,7 @@ export default function route(fastify: FastifyInstance){
             const expertise = await prisma.expertise.findMany();
             const expertiseData = [];
             for(let i = 0; i < expertise.length; i++){
-                const obj = {expertiseId: expertise[i].id, value: 0};
+                const obj = {expertiseId: expertise[i].id, value: getModAttr(baseValue)};
                 expertiseData.push(obj);
             };
 
@@ -48,6 +48,7 @@ export default function route(fastify: FastifyInstance){
                         baseRace: character.baseRace,
                         subRace: character.subRace,
                         userId: user.id,
+                        equipLoad: 30,
                         characterAttributes: {
                             createMany: {
                                 data: attributesData
