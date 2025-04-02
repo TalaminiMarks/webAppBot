@@ -21,9 +21,10 @@ interface HeaderCharacterInfoProps {
     race: string;
     xp: number;
     level: number;
+    user: string | undefined;
 }
 
-export default function Header({name, role, race, xp, level}: HeaderCharacterInfoProps){
+export default function Header({name, role, race, xp, level, user}: HeaderCharacterInfoProps){
     return (
         <header className="py-4 flex justify-between items-center">
             <div className="px-4">
@@ -34,6 +35,7 @@ export default function Header({name, role, race, xp, level}: HeaderCharacterInf
                 <Field description="Raça" value={race}/>
                 <Field description="Nivel" value={level}/>
                 <Field description="XP" value={xp}/>
+                <Field description="Jogador" value={user}/>
             </div>
             <Link href={"/"} className="flex items-center px-4 py-2 mr-4 gap-1 rounded-xl bg-stone-400">
                 <HomeIcon width={24} height={24}/>

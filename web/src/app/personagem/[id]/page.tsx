@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { cookies } from "next/headers";
+import { jwtDecode } from "jwt-decode";
 
 import { api } from "@/utils/utils";
 import Header from "@/components/character/Header";
@@ -15,7 +16,8 @@ import {
     Expertise, 
     ItensTable,
     SpellsTable,
-    SkillsTable
+    SkillsTable,
+    JwtPayloadCustom
 } from "@/utils/interfaces";
 import Backpack from "@/components/character/Backpack";
 import CharacterStory from "@/components/character/characterStory";
@@ -100,6 +102,9 @@ export default async function Page({ params }: Props){
             Authorization: `Bearer ${token.value}`
         }
     });
+
+    const user = jwtDecode<JwtPayloadCustom>(token.value);
+
     const data: MainCharacterInfo = response.data;
 
     const ITENS: ItensTable[] = (await api.get("/equipamentos")).data;
@@ -136,6 +141,7 @@ export default async function Page({ params }: Props){
                 race={data.baseRace}
                 xp={data.xp}
                 level={data.level}
+                user={user.name}
             />
             <div className="w-full min-h-[90%] flex">
                 <section className="w-1/3 bg-purple-300 p-2 flex flex-col gap-2">

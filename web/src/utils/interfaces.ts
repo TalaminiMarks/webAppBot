@@ -1,3 +1,5 @@
+import { JwtPayload } from "jwt-decode";
+
 export interface ItensTable {
     id: number | string;
     name: string;
@@ -71,4 +73,8 @@ export interface Attribute {
 
 export interface Expertise extends Attribute {
     attributesId: number;
+}
+
+export interface JwtPayloadCustom extends JwtPayload {
+    name?: string;
 }
